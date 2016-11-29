@@ -1,0 +1,18 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "^6.2",
+        "vlucas/phpdotenv": "^2.2",
+        "fabpot/goutte": "^3.1",
+        "nesbot/carbon": "^1.21",
+        "illuminate/support": "^5.2",
+        "fzaninotto/faker": "^1.6",
+        "symfony/console": "^3.1",
+        "symfony/finder": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "webParser\\": "app/webParser/",
+            "core\\":"core/"
+        }
+    }
+}
