@@ -145,12 +145,14 @@ class Movies extends \core\myModel
             'created_at'=>'获取时间',
             'youtubeUrl' => 'YouTube',
             'fileName'=>'文件名',
+            'downloadLink' => '下载链接',
         ];
     }
 
     public function getFileKey()
     {
-        return preg_replace('/:|—|–/im', '-', $this->title);
+        $filename = preg_replace('/:|—|–|-|\(|\)|"|&|•/im', '.*', $this->title);
+        return $filename;
     }
 
     public function getVideoFile()

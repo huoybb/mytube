@@ -39,6 +39,12 @@ class MoviesPresenter extends \core\myPresenter
     {
         return $this->entity->getFileKey();
     }
+    public function downloadLink()
+    {
+        $url =  'http://en.savefrom.net/#url=' . $this->entity->getMovieUrl();
+        return $this->createLink($url,'En.SaveFrom.Net');
+    }
+
 
 
 

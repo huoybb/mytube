@@ -16,7 +16,7 @@ class IndexController extends ControllerBase
     public function getYoutubeAction($key)
     {
         $movie = Movies::findOrDownloadByKey($key);
-        return $this->response->redirect($this->url->get(['for'=>'home']));
+        return $this->response->redirect($this->url->get(['for'=>'movies.show','movie'=>$movie->id]));
     }
 
 }
