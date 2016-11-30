@@ -1,3 +1,7 @@
+{% if file %}
+    {{ partial('layouts/videojsBody') }}
+    {{ partial('layouts/videojsHeader') }}
+{% endif %}
 <div class="page-header">
     <h1>视频：{{ movie.title }}</h1>
 </div>

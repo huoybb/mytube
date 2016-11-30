@@ -10,6 +10,7 @@ class MoviesController extends \Phalcon\Mvc\Controller
     public function showAction(Movies $movie)
     {
         $this->view->movie = $movie;
+        $this->view->file = $movie->getVideoFile();
     }
 
 

@@ -142,11 +142,25 @@ class Movies extends \core\myModel
             'description'=>'描述',
             'channel'=>'频道',
             'uploader'=>'上传者',
-            'created_at'=>'获取时间'
+            'created_at'=>'获取时间',
+            'youtubeUrl' => 'YouTube',
+            'fileName'=>'文件名',
         ];
     }
 
+    public function getFileKey()
+    {
+        return preg_replace('/:|—|–/im', '-', $this->title);
+    }
 
-
+    public function getVideoFile()
+    {
+        if($file = FileInfo::findFirstFile($this->getFileKey())) {
+            $file = str_replace('H:\\YouTubes\\','http://movies.mytube.zhaobing/',$file->getRealPath());
+        }else{
+            $file = null;
+        }
+        return $file;
+    }
 
 }

@@ -31,6 +31,16 @@ class MoviesPresenter extends \core\myPresenter
     {
         return $this->entity->created_at->diffForHumans();
     }
+    public function youtubeUrl()
+    {
+        return $this->createLink($this->entity->getMovieUrl(),'链接');
+    }
+    public function fileName()
+    {
+        return $this->entity->getFileKey();
+    }
+
+
 
     private function youtubePrefix($url)
     {
