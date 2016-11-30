@@ -4,6 +4,9 @@ use Phalcon\Di\FactoryDefault;
 error_reporting(E_ALL);
 
 define('APP_PATH', realpath('..'));
+function getMyEnv(){
+    return 'web';
+}
 
 try {
     /*

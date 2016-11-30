@@ -60,10 +60,4 @@ abstract class myModel extends Model{
         return $instance;
     }
 
-    public function present()
-    {
-        $className = '\\presenters\\'.strtolower(get_class($this)).'Presenter';
-        return new $className($this);
-    }
-
 } 

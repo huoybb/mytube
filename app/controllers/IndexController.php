@@ -5,12 +5,11 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-       $this->view->movies = Movies::find();
+       $this->view->movies = Movies::getLatest();
     }
     public function notFoundAction()
     {
         dd('没有找到路由');
-
 
     }
 

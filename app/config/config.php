@@ -19,6 +19,7 @@ return new \Phalcon\Config([
         'pluginsDir'     => APP_PATH . '/app/plugins/',
         'libraryDir'     => APP_PATH . '/app/library/',
         'cacheDir'       => APP_PATH . '/app/cache/',
+        'presentersDir'       => APP_PATH . '/app/presenters/',
         'baseUri'        => '/',
     ]
 ]);

@@ -7,6 +7,11 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Phalcon PHP Framework</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <style type="text/css">
+            pre {
+                white-space: pre-wrap;       /* css-3 */
+            }
+        </style>
     </head>
     <body>
         <div class="container">

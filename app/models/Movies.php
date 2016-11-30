@@ -5,6 +5,7 @@ use webParser\youtube;
 
 class Movies extends \core\myModel
 {
+    use \core\myPresenterTrait;
 
     /**
      *
@@ -87,6 +88,14 @@ class Movies extends \core\myModel
             ->execute()->getFirst();
     }
 
+    public static function getLatest()
+    {
+        return static ::query()
+            ->orderBy('id DESC')
+            ->limit(50)
+            ->execute();
+    }
+
     /**
      * Returns table name mapped in the model.
      *
@@ -126,6 +135,17 @@ class Movies extends \core\myModel
     {
         return 'https://www.youtube.com/watch?v='.$this->key;
     }
+
+    public function infoArray()
+    {
+        return [
+            'description'=>'描述',
+            'channel'=>'频道',
+            'uploader'=>'上传者',
+            'created_at'=>'获取时间'
+        ];
+    }
+
 
 
 

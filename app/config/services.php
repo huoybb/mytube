@@ -1,5 +1,6 @@
 <?php
 
+use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
@@ -34,8 +35,19 @@ $di->setShared('loader', function () {
 $di->set("router",function () {
     $router = require APP_PATH . "/app/config/routes.php";
     return $router;
-}
-);
+});
+
+$di->setShared('dispatcher',function(){
+    /** @var Phalcon\Events\Manager $eventsManager */
+    $eventsManager = $this->getEventsManager();
+    $eventsManager->attach("dispatch:beforeDispatchLoop", function(Phalcon\Events\Event $event, Phalcon\Mvc\Dispatcher $dispatcher){
+        return $this->getRouter()->executeModelBinding($dispatcher);
+    });
+
+    $dispatcher = new Dispatcher();
+    $dispatcher->setEventsManager($eventsManager);
+    return $dispatcher;
+});
 
 /**
  * The URL component is used to generate all kind of urls in the application
