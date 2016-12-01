@@ -85,7 +85,7 @@ $di->setShared('view', function () {
         },
         '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
     ]);
-
+    $view->search = $this->get('request')->get('search');//设置每个页面的search变量，这个应该是一个全局的变量
     return $view;
 });
 

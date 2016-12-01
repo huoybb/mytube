@@ -15,5 +15,7 @@ $router->addGet('/','index::index')->setName('home');
 $router->addGet('/getYoutube/{key}','index::getYoutube')->setName('youtube.getMovie');
 
 $router->addGet('/movies/{movie:[0-9]+}','movies::show')->setName('movies.show');
+
+$router->add('/login','index::login')->setName('login');
 return $router;
 

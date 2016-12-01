@@ -1,7 +1,4 @@
-<div class="page-header">
-    <h1>我的视频首页</h1>
-</div>
-
+<h1>我的视频首页</h1>
 <table class="table table-hover">
     <tr>
         <td>id</td>
@@ -18,5 +15,3 @@
         </tr>
     {% endfor %}
 </table>
-
-
