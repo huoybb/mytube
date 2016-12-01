@@ -10,6 +10,7 @@ class FileInfo
 {
     public static function findFirstFile($fileKeyWords)
     {
+        $fileKeyWords = static::getFileKey($fileKeyWords);
         $files = \Symfony\Component\Finder\Finder::create()
             ->files()
             ->in('H:\YouTubes\*')
@@ -20,5 +21,11 @@ class FileInfo
             }
         }
         return null;
+    }
+
+    public static function getFileKey($keywords)
+    {
+        $filename = preg_replace('/:|—|–|-|\(|\)|"|&|•|\/|,/im', '.*', $keywords);
+        return $filename;
     }
 }

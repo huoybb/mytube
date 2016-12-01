@@ -34,7 +34,8 @@ class MoviesPresenter extends \core\myPresenter
     }
     public function fileName()
     {
-        return "<pre>{$this->entity->getFileKey()}</pre>";
+        $filename = FileInfo::getFileKey($this->entity->title);
+        return "<pre>{$filename}</pre>";
     }
     public function downloadLink()
     {

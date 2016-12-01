@@ -181,15 +181,11 @@ class Movies extends \core\myModel
         ];
     }
 
-    public function getFileKey()
-    {
-        $filename = preg_replace('/:|—|–|-|\(|\)|"|&|•/im', '.*', $this->title);
-        return $filename;
-    }
+
 
     public function getVideoFile()
     {
-        if($file = FileInfo::findFirstFile($this->getFileKey())) {
+        if($file = FileInfo::findFirstFile($this->title)) {
             $file = str_replace('H:\\YouTubes\\','http://movies.mytube.zhaobing/',$file->getRealPath());
         }else{
             $file = null;
