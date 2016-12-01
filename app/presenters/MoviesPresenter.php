@@ -18,18 +18,15 @@ class MoviesPresenter extends \core\myPresenter
     }
     public function channel()
     {
-        $url = $this->youtubePrefix($this->entity->channel_url);
+        $url = $this->url->get(['for'=>'channels.show','channel'=>$this->entity->channel_id]);
         $title = $this->entity->channel_title;
-        return "<a href='{$url}' target='_blank'>{$title}</a>";
+//        return "<a href='{$url}' target='_blank'>{$title}</a>";
+        return $this->createLink($url,$title);
     }
     public function uploader()
     {
         $url = $this->youtubePrefix($this->entity->uploader_url);
         return "<a href='{$url}' target='_blank'>上传者</a>";
-    }
-    public function created_at()
-    {
-        return $this->entity->created_at->diffForHumans();
     }
     public function youtubeUrl()
     {

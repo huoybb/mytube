@@ -21,4 +21,3 @@ $router->addGet('/channels','channels::index')->setName('channels.index');
 $router->addGet('/channels/{channel:[0-9]+}','channels::show')->setName('channels.show');
 $router->add('/login','index::login')->setName('login');
 return $router;
-

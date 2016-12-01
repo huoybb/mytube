@@ -8,5 +8,5 @@
     </div>
 </div>
 
-<h2>视频</h2>
+<h2>视频 <span class="badge">{{ channel.movies().count() }}</span></h2>
 {% include 'index/partials/movielist' with ['movies':channel.movies()]  %}
