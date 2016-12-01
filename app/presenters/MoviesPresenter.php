@@ -37,7 +37,7 @@ class MoviesPresenter extends \core\myPresenter
     }
     public function fileName()
     {
-        return $this->entity->getFileKey();
+        return "<pre>{$this->entity->getFileKey()}</pre>";
     }
     public function downloadLink()
     {
@@ -50,7 +50,7 @@ class MoviesPresenter extends \core\myPresenter
 
     private function youtubePrefix($url)
     {
-        return 'https://www.youtube.com/'.$url;
+        return 'https://www.youtube.com'.$url;
     }
 
 

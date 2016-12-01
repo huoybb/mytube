@@ -19,4 +19,11 @@ class IndexController extends ControllerBase
         return $this->response->redirect($this->url->get(['for'=>'movies.show','movie'=>$movie->id]));
     }
 
+    public function searchAction($search)
+    {
+        $this->view->movies = Movies::search($search);
+        $this->view->search = $search;
+    }
+
+
 }

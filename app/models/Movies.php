@@ -96,6 +96,22 @@ class Movies extends \core\myModel
             ->execute();
     }
 
+    public static function search($keywords)
+    {
+        $query = static::query();
+        $bits = static::splitKeyWords($keywords);
+        foreach($bits as $key=>$bit){
+            $query->andWhere("title like :word{$key}:",["word{$key}"=>"%{$bit}%"]);
+        }
+        $query->orderBy('created_at DESC');
+        return $query->execute();
+    }
+
+    private static function splitKeyWords($keywords)
+    {
+        return preg_split('|\s+|', $keywords);
+    }
+
     /**
      * Returns table name mapped in the model.
      *

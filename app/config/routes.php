@@ -13,6 +13,7 @@ $router->notFound('index::notFound');
 
 $router->addGet('/','index::index')->setName('home');
 $router->addGet('/getYoutube/{key}','index::getYoutube')->setName('youtube.getMovie');
+$router->add('/search/{search}','index::search')->setName('search');
 
 $router->addGet('/movies/{movie:[0-9]+}','movies::show')->setName('movies.show');
 

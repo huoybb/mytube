@@ -8,7 +8,7 @@
       if (keywords === '') {
         return false;
       }
-      location.href = "http://" + location.host + ("/search/" + keywords);
+      location.href = "http://" + location.host + "/search/" + keywords;
       return false;
     });
   });
