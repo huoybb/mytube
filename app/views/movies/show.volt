@@ -9,7 +9,7 @@
     <div class="row">
         {% for key,value in movie.infoArray() %}
             <div class="col-md-2" align="right">
-                {{ value }}
+                {{ value }}:
             </div>
             <div class="col-md-10">
                 {{ movie.present(key) }}

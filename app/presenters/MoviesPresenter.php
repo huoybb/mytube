@@ -46,12 +46,4 @@ class MoviesPresenter extends \core\myPresenter
     }
 
 
-
-
-    private function youtubePrefix($url)
-    {
-        return 'https://www.youtube.com'.$url;
-    }
-
-
 }

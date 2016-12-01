@@ -56,4 +56,9 @@ abstract class myPresenter
     {
         return "<a href='{$url}'>$title</a>";
     }
+
+    protected function youtubePrefix($url)
+    {
+        return 'https://www.youtube.com' . $url;
+    }
 }

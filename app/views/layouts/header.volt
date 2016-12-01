@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
-                <li><a href="/series">系列</a></li>
+                <li><a href="{{ url(['for':'channels.index']) }}">频道</a></li>
                 <li><a href="/tags">标签</a></li>
 
             </ul>

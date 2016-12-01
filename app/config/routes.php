@@ -17,7 +17,8 @@ $router->add('/search/{search}','index::search')->setName('search');
 
 $router->addGet('/movies/{movie:[0-9]+}','movies::show')->setName('movies.show');
 
-$router->addGet('/channels/{channel}','index::showChannel')->setName('channels.show');
+$router->addGet('/channels','channels::index')->setName('channels.index');
+$router->addGet('/channels/{channel:[0-9]+}','channels::show')->setName('channels.show');
 $router->add('/login','index::login')->setName('login');
 return $router;
 

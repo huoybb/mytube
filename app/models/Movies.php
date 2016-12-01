@@ -60,6 +60,13 @@ class Movies extends \core\myModel
 
     /**
      *
+     * @var integer
+     * @Column(type="integer", length=10, nullable=true)
+     */
+    public $channel_id;
+
+    /**
+     *
      * @var Carbon
      */
     public $created_at;
@@ -187,5 +194,10 @@ class Movies extends \core\myModel
         }
         return $file;
     }
+    public function channel()
+    {
+        return Channels::findFirst($this->channel_id);
+    }
+
 
 }

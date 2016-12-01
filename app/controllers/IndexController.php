@@ -5,7 +5,17 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-       $this->view->movies = Movies::getLatest();
+//        foreach(Movies::find() as $movie){
+//            if(!$movie->channel_id){
+//                $channel = Channels::findByUrl($movie->channel_url);
+//                if(!$channel) {
+//                    $channel = new Channels(['title'=>$movie->channel_title,'url'=>$movie->channel_url]);
+//                    $channel->save();
+//                }
+//                $movie->save(['channel_id'=>$channel->id]);
+//            }
+//        }
+        $this->view->movies = Movies::getlatest();
     }
     public function notFoundAction()
     {
