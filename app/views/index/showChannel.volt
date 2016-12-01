@@ -1,2 +1,2 @@
-<h1>搜索：{{ search }}</h1>
+<h1>频道：{{ channel }}</h1>
 {% include "index/partials/movielist.volt" %}

@@ -25,5 +25,12 @@ class IndexController extends ControllerBase
         $this->view->search = $search;
     }
 
+    public function showChannelAction($channel)
+    {
+        $this->view->movies = Movies::findByChannel($channel);
+        $this->view->channel = $channel;
+    }
+
+
 
 }

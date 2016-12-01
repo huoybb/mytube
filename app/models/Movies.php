@@ -112,6 +112,13 @@ class Movies extends \core\myModel
         return preg_split('|\s+|', $keywords);
     }
 
+    public static function findByChannel($channel)
+    {
+        return static::query()
+            ->where('channel_title like :channel:',['channel'=>$channel])
+            ->execute();
+    }
+
     /**
      * Returns table name mapped in the model.
      *
