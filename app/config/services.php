@@ -78,7 +78,8 @@ $di->setShared('view', function () {
 
             $volt->setOptions([
                 'compiledPath' => $config->application->cacheDir,
-                'compiledSeparator' => '_'
+                'compiledSeparator' => '_',
+                'compileAlways'=> true,//修改view的时候用这个
             ]);
 
             return $volt;
