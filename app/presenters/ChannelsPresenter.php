@@ -16,5 +16,10 @@ class ChannelsPresenter extends \core\myPresenter
     {
         return $this->youtubePrefix($this->entity->url);
     }
+    public function moviesCount()
+    {
+        return $this->entity->movies()->count();
+    }
+
 
 }
