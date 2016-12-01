@@ -82,8 +82,10 @@ class Movies extends \core\myModel
         $instance = static::findByKey($key);
         if(!$instance){
             $data =  youtube::getMovieInfo($key);
-            $instance = new static();
-            $instance->save($data);
+            $instance = new static($data);
+            $channel = Channels::findOrNewByData(['title'=>$data['channel_title'],'url'=>$data['channel_url']]);
+            $instance->channel_id = $channel->id;
+            $instance->save();
         }
         return $instance;
     }

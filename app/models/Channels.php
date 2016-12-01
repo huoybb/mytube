@@ -48,6 +48,18 @@ class Channels extends \core\myModel
             ->execute()->getFirst();
     }
 
+    public static function findOrNewByData(array $data)
+    {
+        $instance = static::query()
+            ->where('url = :url:',['url'=>$data['url']])
+            ->execute()->getFirst();
+        if(!$instance){
+            $instance = new static($data);
+            $instance->save();
+        }
+        return $instance;
+    }
+
     /**
      * Returns table name mapped in the model.
      *
