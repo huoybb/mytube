@@ -1,8 +1,7 @@
 <?php
 
-class Channels extends \core\myModel
+class Users extends \core\myModel
 {
-    use \core\myPresenterTrait;
 
     /**
      *
@@ -18,14 +17,21 @@ class Channels extends \core\myModel
      * @var string
      * @Column(type="string", length=50, nullable=true)
      */
-    public $title;
+    public $name;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=50, nullable=true)
+     */
+    public $password;
 
     /**
      *
      * @var string
      * @Column(type="string", length=100, nullable=true)
      */
-    public $url;
+    public $remember_token;
 
     /**
      *
@@ -41,24 +47,12 @@ class Channels extends \core\myModel
      */
     public $updated_at;
 
-    public static function findByUrl($channel_url)
-    {
-        return static::query()
-            ->where('url = :url:',['url'=>$channel_url])
-            ->execute()->getFirst();
-    }
-
-    public static function findOrNewByData(array $data)
-    {
-        $instance = static::query()
-            ->where('url = :url:',['url'=>$data['url']])
-            ->execute()->getFirst();
-        if(!$instance){
-            $instance = new static($data);
-            $instance->save();
-        }
-        return $instance;
-    }
+    /**
+     *
+     * @var string
+     * @Column(type="string", nullable=true)
+     */
+    public $notes;
 
     /**
      * Returns table name mapped in the model.
@@ -67,14 +61,14 @@ class Channels extends \core\myModel
      */
     public function getSource()
     {
-        return 'channels';
+        return 'users';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Channels[]
+     * @return Users[]
      */
     public static function find($parameters = null)
     {
@@ -85,19 +79,11 @@ class Channels extends \core\myModel
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Channels
+     * @return Users
      */
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
     }
-    public function movies()
-    {
-        return Movies::query()
-            ->where('channel_id = :id:',['id'=>$this->id])
-            ->orderBy('created_at DESC')
-            ->execute();
-    }
-
 
 }

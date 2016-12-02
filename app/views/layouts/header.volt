@@ -26,7 +26,7 @@
                     </li>
                 {% else %}
                     <li><a href="{{ url(['for':'login']) }}">登录</a></li>
-                    <li><a href="#">注册</a></li>
+                    <li><a href="{{ url(['for':'register']) }}">注册</a></li>
                 {% endif %}
 
 

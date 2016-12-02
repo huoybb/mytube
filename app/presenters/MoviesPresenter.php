@@ -30,7 +30,8 @@ class MoviesPresenter extends \core\myPresenter
     }
     public function youtubeUrl()
     {
-        return $this->createLink($this->entity->getMovieUrl(),'链接');
+        $searchUrl = 'https://www.youtube.com/results?search_query='.urlencode($this->entity->title);
+        return $this->createLink($this->entity->getMovieUrl(),'视频链接').' '.$this->createLink($searchUrl,'相似搜索');
     }
     public function fileName()
     {

@@ -14,7 +14,7 @@ class FileInfo
         $files = \Symfony\Component\Finder\Finder::create()
             ->files()
             ->in('H:\YouTubes\*')
-            ->name('/'.$fileKeyWords.'.+/im');
+            ->name('/'.$fileKeyWords.'.+?/im');
         if($files->count() > 0){
             foreach ($files as $file){
                 return $file;
@@ -25,7 +25,7 @@ class FileInfo
 
     public static function getFileKey($keywords)
     {
-        $filename = preg_replace('/:|—|–|-|\(|\)|"|&|•|\/|,/im', '.*', $keywords);
+        $filename = preg_replace('/:|—|–|-|\(|\)|"|&|•|\/|,|\|/im', '.*', $keywords);
         return $filename;
     }
 }
