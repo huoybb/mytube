@@ -133,3 +133,8 @@ $di->setShared('session', function () {
     $session->start();
     return $session;
 });
+
+$di->setShared('auth',function(){
+    $auth = (new \core\myAuth())->setDI($this)->init();
+    return $auth;
+});

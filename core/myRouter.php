@@ -72,6 +72,7 @@ class myRouter extends Router{
         return $this->addx($pattern,$path,$middleware,'GET');
     }
 
+
     public function group(array $middleware,$callback)
     {
         $this->addMiddlewareToStack($middleware);

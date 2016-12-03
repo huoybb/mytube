@@ -22,6 +22,7 @@ class AuthController extends ControllerBase
     }
     public function loginAction()
     {
+        if($this->auth->isLogin()) return $this->redirect(['for'=>'home']);
         if($this->request->isPost()){
             $data = $this->request->getPost();
             $user = Users::findByEmail($data['email']);
@@ -30,9 +31,8 @@ class AuthController extends ControllerBase
                 return $this->redirectBack();
             }
             $this->flash->success("欢迎{$user->name}回来！");
-            //登录用户
+            $this->auth->login($user);
             return $this->redirect(['for'=>'home']);
-
         }
     }
     public function logoutAction()
