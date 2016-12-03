@@ -17,3 +17,10 @@
         {% endfor %}
     </div>
 </div>
+<div class="row">
+    <h2>评论</h2>
+    {{ form(url(['for':'movies.addComment','movie':movie.id]),'method':'post') }}
+        {{ commentForm.render('content',['class':'form-control','rows':6]) }}
+        {{ commentForm.render('增加',['class':'btn btn-primary form-control']) }}
+    {{ endform() }}
+</div>

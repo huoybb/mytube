@@ -1,6 +1,6 @@
 <?php
 
-class MoviesController extends \Phalcon\Mvc\Controller
+class MoviesController extends ControllerBase
 {
 
     public function indexAction()
@@ -11,7 +11,14 @@ class MoviesController extends \Phalcon\Mvc\Controller
     {
         $this->view->movie = $movie;
         $this->view->file = $movie->getVideoFile();
+        $this->view->commentForm = new commentForm(new Comments());
     }
+    public function addCommentAction(Movies $movie)
+    {
+        $movie->addComment($this->request->getPost());
+        return $this->redirect(['for'=>'movies.show','movie'=>$movie->id]);
+    }
+
 
 
 }

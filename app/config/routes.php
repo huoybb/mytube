@@ -16,12 +16,15 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/search/{search}','index::search')->setName('search');
 
     $router->addGet('/movies/{movie:[0-9]+}','movies::show')->setName('movies.show');
+    $router->addx('/movies/{movie:[0-9]+}/addComment','movies::addComment',[isCommentValid::class])->setName('movies.addComment');
 
     $router->addGet('/channels','channels::index')->setName('channels.index');
     $router->addGet('/channels/{channel:[0-9]+}','channels::show')->setName('channels.show');
 
     $router->addx('/register','auth::register')->setName('register');
     $router->addx('/logout','auth::logout')->setName('logout');
+
+
 });
 $router->addx('/login','auth::login')->setName('login');
 

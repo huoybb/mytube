@@ -1,11 +1,13 @@
 <?php
 
 use Carbon\Carbon;
+use core\myPresenterTrait;
 use webParser\youtube;
 
 class Movies extends \core\myModel
 {
-    use \core\myPresenterTrait;
+    use myPresenterTrait;
+    use CommentableTrait;
 
     /**
      *

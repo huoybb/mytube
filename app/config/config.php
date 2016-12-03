@@ -21,6 +21,7 @@ return new \Phalcon\Config([
         'cacheDir'       => APP_PATH . '/app/cache/',
         'presentersDir'       => APP_PATH . '/app/presenters/',
         'middlewaresDir'       => APP_PATH . '/app/middlewares/',
+        'formsDir'       => APP_PATH . '/app/forms/',
         'baseUri'        => '/',
     ]
 ]);
