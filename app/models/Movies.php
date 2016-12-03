@@ -8,6 +8,7 @@ class Movies extends \core\myModel
 {
     use myPresenterTrait;
     use CommentableTrait;
+    use taggableTrait;
 
     /**
      *
@@ -180,6 +181,7 @@ class Movies extends \core\myModel
             'youtubeUrl' => 'YouTube',
             'fileName'=>'文件名',
             'downloadLink' => '下载链接',
+            'tags'=>'所属标签',
         ];
     }
 

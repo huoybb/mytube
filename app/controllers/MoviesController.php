@@ -3,10 +3,6 @@
 class MoviesController extends ControllerBase
 {
 
-    public function indexAction()
-    {
-
-    }
     public function showAction(Movies $movie)
     {
         $this->view->movie = $movie;
@@ -17,7 +13,11 @@ class MoviesController extends ControllerBase
         return $this->redirect(['for'=>'movies.show','movie'=>$movie->id]);
     }
 
-
+    public function addTagAction(Movies $movie)
+    {
+        $movie->addTag($this->request->getPost('name'));
+        return $this->redirect(['for'=>'movies.show','movie'=>$movie->id]);
+    }
 
 }
 

@@ -43,6 +43,16 @@ class MoviesPresenter extends \core\myPresenter
         $url =  'http://en.savefrom.net/#url=' . $this->entity->getMovieUrl();
         return $this->createLink($url,'En.SaveFrom.Net');
     }
+    public function tags()
+    {
+        $result = '';
+        foreach($this->entity->getTags() as $tag){
+            $url = $this->url->get(['for'=>'tags.show','tag'=>$tag->id]);
+            $result .= ' '.$this->createLink($url,$tag->name,'btn btn-primary btn-xs');
+        }
+        return $result;
+    }
+
 
 
 }

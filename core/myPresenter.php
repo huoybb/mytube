@@ -52,8 +52,11 @@ abstract class myPresenter
      * @param $title
      * @return string
      */
-    protected function createLink($url, $title):string
+    protected function createLink($url, $title,$class = null):string
     {
+        if($class) {
+            return "<a href='{$url}' class='{$class}'>$title</a>";
+        }
         return "<a href='{$url}'>$title</a>";
     }
 

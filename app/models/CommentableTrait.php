@@ -27,7 +27,7 @@ trait CommentableTrait
     {
         return $this->getComments()->count();
     }
-    public function addComment($data)
+    public function addComment(array $data)
     {
         /** @var \core\myModel $this */
         $user = Di::getDefault()->get('auth')->user();

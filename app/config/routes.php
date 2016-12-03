@@ -17,6 +17,7 @@ $router->group([isLogin::class],function() use($router){
 
     $router->addGet('/movies/{movie:[0-9]+}','movies::show')->setName('movies.show');
     $router->addx('/movies/{movie:[0-9]+}/addComment','movies::addComment',[isCommentValid::class])->setName('movies.addComment');
+    $router->addx('/movies/{movie:[0-9]+}/addTag','movies::addTag',[isTagValid::class])->setName('movies.addTag');
 
     $router->addGet('/channels','channels::index')->setName('channels.index');
     $router->addGet('/channels/{channel:[0-9]+}','channels::show')->setName('channels.show');
@@ -26,6 +27,8 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/logout','auth::logout')->setName('logout');
 
     $router->addx('/comments/{comment:[0-9]+}/delete','comments::delete')->setName('comments.delete');
+
+    $router->addGet('/tags/{tag:[0-9]+}','tags::show')->setName('tags.show');
 });
 $router->addx('/login','auth::login')->setName('login');
 
