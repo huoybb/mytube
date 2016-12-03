@@ -3,7 +3,7 @@
 class AuthController extends ControllerBase
 {
 
-    public function registerAction(Users $user)
+    public function registerAction()
     {
         if($this->request->isPost()){
             $data = $this->request->getPost();
@@ -16,7 +16,8 @@ class AuthController extends ControllerBase
                 return $this->redirectBack();
             }
             $data['password'] = $this->security->hash($data['password']);
-            $user->save($data);
+            Users::saveNew($data);
+            $this->flash->notice('成功注册为用户，请登录');
             return $this->redirect(['for'=>'login']);
         }
     }
