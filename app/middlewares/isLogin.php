@@ -11,10 +11,11 @@ use core\myMiddleware;
 class isLogin extends myMiddleware
 {
 
-    public function isValid()
+
+    public function isValid(): bool
     {
         if($this->auth->isLogin()) return true;
-        
+
         $this->redirect(['for'=>'login']);
         return false;
     }

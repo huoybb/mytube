@@ -15,15 +15,15 @@ use Phalcon\Http\Response;
 abstract class myMiddleware
 {
 
+    /**
+     * @var \Phalcon\DiInterface
+     */
     protected $di;
     /**
      * @var myAuth
      */
     protected $auth;
 
-    /**
-     * myMiddleware constructor.
-     */
     public function __construct($Di = null)
     {
         $this->di = $Di ?: Di::getDefault();
@@ -35,6 +35,6 @@ abstract class myMiddleware
         return $this->di->get('response')->redirect($url);
     }
 
-    abstract  public function isValid();
+    abstract  public function isValid():bool;
 
 }
