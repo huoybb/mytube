@@ -183,21 +183,16 @@ class Movies extends \core\myModel
         ];
     }
 
-
-
+    protected $_file = null;
     public function getVideoFile()
     {
-        if($file = FileInfo::findFirstFile($this->title)) {
-            $file = str_replace('H:\\YouTubes\\','http://movies.mytube.zhaobing/',$file->getRealPath());
-        }else{
-            $file = null;
+        if(!$this->_file && $file = FileInfo::findFirstFile($this->title)){
+            $this->_file = str_replace('H:\\YouTubes\\','http://movies.mytube.zhaobing/',$file->getRealPath());
         }
-        return $file;
+        return $this->_file;
     }
     public function channel()
     {
         return Channels::findFirst($this->channel_id);
     }
-
-
 }

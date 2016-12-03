@@ -10,7 +10,6 @@ class ChannelsController extends ControllerBase
     public function showAction(Channels $channel)
     {
         $this->view->channel = $channel;
-        $this->view->commentForm = new commentForm(new Comments());
     }
 
     public function addCommentAction(Channels $channel)

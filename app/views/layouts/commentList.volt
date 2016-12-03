@@ -1,6 +1,6 @@
+<hr>
+<h2>Comments:</h2>
 {% if commentOwner.hasComments() %}
-    <hr>
-    <h2>Comments:</h2>
     <ul>
         {% for commentRow in commentOwner.getComments() %}
             <li>
@@ -17,3 +17,7 @@
         {% endfor %}
     </ul>
 {% endif %}
+{{ form(commentFormUrl,'method':'post') }}
+    {{ commentOwner.getcommentForm().render('content',['class':'form-control','rows':6]) }}
+    {{ commentOwner.getcommentForm().render('增加',['class':'btn btn-primary form-control']) }}
+{{ endform() }}

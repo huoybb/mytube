@@ -1,4 +1,4 @@
-{% if file %}
+{% if movie.getVideoFile() %}
     {% include 'layouts/videojsBody.volt' %}
     {% include 'layouts/videojsHeader.volt' %}
 {% endif %}
@@ -7,6 +7,5 @@
 </div>
 {% include 'layouts/info' with ['Owner':movie] %}
 <div class="row">
-    {% include 'layouts/commentList' with ['commentOwner':movie] %}
-    {% include 'layouts/commentForm' with ['commentFormUrl':url(['for':'movies.addComment','movie':movie.id])] %}
+    {% include 'layouts/commentList' with ['commentOwner':movie,'commentFormUrl':url(['for':'movies.addComment','movie':movie.id])] %}
 </div>
