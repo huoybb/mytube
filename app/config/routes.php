@@ -28,6 +28,7 @@ $router->group([isLogin::class],function() use($router){
 
     $router->addx('/comments/{comment:[0-9]+}/delete','comments::delete')->setName('comments.delete');
 
+    $router->addGet('/tags','tags::index')->setName('tags.index');
     $router->addGet('/tags/{tag:[0-9]+}','tags::show')->setName('tags.show');
 });
 $router->addx('/login','auth::login')->setName('login');

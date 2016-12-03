@@ -1,4 +1,4 @@
-<h1>我的频道首页</h1>
+<h1>频道首页</h1>
 <table class="table table-hover">
     <tr>
         <th>#</th>

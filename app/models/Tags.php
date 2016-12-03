@@ -2,7 +2,7 @@
 
 class Tags extends \core\myModel
 {
-
+    use \core\myPresenterTrait;
     /**
      *
      * @var integer
@@ -97,6 +97,16 @@ class Tags extends \core\myModel
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+    public function getTaggedObjects($tagged_class=null)
+    {
+        $tagged_class = $tagged_class ?: Movies::class;
+        $taggable_class = Taggables::class;
+        $condition = "{$taggable_class}.taggable_id = {$tagged_class}.id AND {$taggable_class}.taggable_type = '{$tagged_class}' ";
+        return $tagged_class::query()
+            ->rightJoin(Taggables::class,$condition)
+            ->where("{$taggable_class}.tag_id = :tag:",['tag'=>$this->id])
+            ->execute();
     }
 
 }
