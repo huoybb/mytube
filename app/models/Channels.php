@@ -3,6 +3,7 @@
 class Channels extends \core\myModel
 {
     use \core\myPresenterTrait;
+    use CommentableTrait;
 
     /**
      *

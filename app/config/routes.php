@@ -20,6 +20,7 @@ $router->group([isLogin::class],function() use($router){
 
     $router->addGet('/channels','channels::index')->setName('channels.index');
     $router->addGet('/channels/{channel:[0-9]+}','channels::show')->setName('channels.show');
+    $router->addx('/channels/{channel:[0-9]+}/addComment','channels::addComment',[isCommentValid::class])->setName('channels.addComment');
 
     $router->addx('/register','auth::register')->setName('register');
     $router->addx('/logout','auth::logout')->setName('logout');
