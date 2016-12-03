@@ -53,6 +53,16 @@ class MoviesPresenter extends \core\myPresenter
         return $result;
     }
 
+    public function showLink()
+    {
+        return $this->url->get(['for'=>'movies.show','movie'=>$this->entity->id]);
+    }
+    public function type()
+    {
+        return '视频';
+    }
+
+
 
 
 }

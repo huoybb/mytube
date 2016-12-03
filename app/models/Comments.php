@@ -54,6 +54,14 @@ class Comments extends \core\myModel
      */
     public $user_id;
 
+    public static function findByUser(Users $user)
+    {
+        return static::query()
+            ->where('user_id = :user:',['user'=>$user->id])
+            ->orderBy('created_at DESC')
+            ->execute();
+    }
+
     /**
      * Initialize method for model.
      */

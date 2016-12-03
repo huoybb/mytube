@@ -22,6 +22,15 @@ class ChannelsPresenter extends \core\myPresenter
         $url = $this->youtubePrefix($this->entity->url);
         return $this->createLink($url,'频道链接');
     }
+    public function showLink()
+    {
+        return $this->url->get(['for'=>'channels.show','channel'=>$this->entity->id]);
+    }
+    public function type()
+    {
+        return '频道';
+    }
+
 
 
 

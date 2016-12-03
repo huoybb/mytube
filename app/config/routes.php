@@ -25,11 +25,14 @@ $router->group([isLogin::class],function() use($router){
 
     $router->addx('/register','auth::register')->setName('register');
     $router->addx('/logout','auth::logout')->setName('logout');
+    $router->addGet('/myLatestComments','auth::latestComments')->setName('myLatestComments');
 
     $router->addx('/comments/{comment:[0-9]+}/delete','comments::delete')->setName('comments.delete');
+    $router->addx('/comments/{comment:[0-9]+}/edit','comments::edit')->setName('comments.edit');
 
     $router->addGet('/tags','tags::index')->setName('tags.index');
     $router->addGet('/tags/{tag:[0-9]+}','tags::show')->setName('tags.show');
+
 });
 $router->addx('/login','auth::login')->setName('login');
 

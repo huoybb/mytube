@@ -41,6 +41,13 @@ class AuthController extends ControllerBase
         $this->auth->logout();
         return $this->redirect(['for'=>'login']);
     }
+    public function latestCommentsAction()
+    {
+        $this->view->comments = Comments::findByUser($this->auth->user());
+    }
+
+
+
 
     private function isTwoPasswordSame($data)
     {
