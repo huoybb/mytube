@@ -13,7 +13,8 @@
         <script src="/js/bootstrap.min.js"></script>
     </head>
     <body>
-    {% include "layouts/header.volt" %}
+        {% include "layouts/header.volt" %}
+        {{ flash.output() }}
         <div class="container">
             {{ content() }}
         </div>

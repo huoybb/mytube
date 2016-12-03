@@ -1,5 +1,8 @@
 <?php
 
+use Phalcon\Validation;
+use Phalcon\Mvc\Model\Validator\Email as EmailValidator;
+
 class Users extends \core\myModel
 {
 
@@ -18,6 +21,13 @@ class Users extends \core\myModel
      * @Column(type="string", length=50, nullable=true)
      */
     public $name;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=100, nullable=true)
+     */
+    public $email;
 
     /**
      *
@@ -54,6 +64,30 @@ class Users extends \core\myModel
      */
     public $notes;
 
+    public static function IsUserExisted($email)
+    {
+        return is_null(static :: findByEmail($email));
+    }
+
+    /**
+     * @param $email
+     * @return Users
+     */
+    public static function findByEmail($email)
+    {
+        return static :: query()
+            ->where('email = :email:',['email'=>$email])
+            ->execute()->getFirst();
+    }
+
+    /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        $this->setSchema("mytube");
+    }
+
     /**
      * Returns table name mapped in the model.
      *
@@ -68,7 +102,7 @@ class Users extends \core\myModel
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Users[]
+     * @return Users[]|Users
      */
     public static function find($parameters = null)
     {
