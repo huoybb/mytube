@@ -14,11 +14,11 @@
 
 
             <ul class="nav navbar-nav navbar-right">
-                {% if false %}
+                {% if auth.isLogin() %}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ auth.user().name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ url(['for':'myComments']) }}">最新评论</a></li>
+                            <li><a href="#">最新评论</a></li>
                             <li><a href="#">统计数字</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ url(['for':'logout']) }}">退出登录</a></li>

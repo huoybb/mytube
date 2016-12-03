@@ -51,7 +51,7 @@ class myAuth implements \Phalcon\Di\InjectionAwareInterface
     public function login(Users $user)
     {
         $this->user = $user;
-        $this->registerSession($user);
+        $this->registerSession($user,true);
         return $this;
     }
     public function isLogin()

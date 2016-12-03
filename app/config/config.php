@@ -20,6 +20,7 @@ return new \Phalcon\Config([
         'libraryDir'     => APP_PATH . '/app/library/',
         'cacheDir'       => APP_PATH . '/app/cache/',
         'presentersDir'       => APP_PATH . '/app/presenters/',
+        'middlewaresDir'       => APP_PATH . '/app/middlewares/',
         'baseUri'        => '/',
     ]
 ]);

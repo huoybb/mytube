@@ -1,5 +1,6 @@
 <?php
 
+use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Url as UrlResolver;
@@ -41,8 +42,14 @@ $di->set("router",function () {
 $di->setShared('dispatcher',function(){
     /** @var Phalcon\Events\Manager $eventsManager */
     $eventsManager = $this->getEventsManager();
-    $eventsManager->attach("dispatch:beforeDispatchLoop", function(Phalcon\Events\Event $event, Phalcon\Mvc\Dispatcher $dispatcher){
+    $eventsManager->attach("dispatch:beforeDispatchLoop", function(Event $event, Dispatcher $dispatcher){
         return $this->getRouter()->executeModelBinding($dispatcher);
+    });
+    $eventsManager->attach('dispatch:beforeExecuteRoute',function(Event $event, Dispatcher $dispatcher){
+        /** @var \core\myRouter $router */
+        $router = $this->getRouter();
+        $router->handle();
+        return $router->executeMiddleWareChecking($this->getRequest(), $this->getResponse(),$dispatcher);
     });
 
     $dispatcher = new Dispatcher();

@@ -10,7 +10,7 @@ use core\myRouter;
 $router = new myRouter();
 $router->removeExtraSlashes(true);
 $router->notFound('index::notFound');
-$router->group(['test'],function() use($router){
+$router->group([isLogin::class],function() use($router){
     $router->addGet('/','index::index')->setName('home');
     $router->addGet('/getYoutube/{key}','index::getYoutube')->setName('youtube.getMovie');
     $router->addx('/search/{search}','index::search')->setName('search');

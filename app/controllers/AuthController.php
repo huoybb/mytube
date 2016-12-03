@@ -37,6 +37,8 @@ class AuthController extends ControllerBase
     }
     public function logoutAction()
     {
+        $this->auth->logout();
+        return $this->redirect(['for'=>'login']);
     }
 
     private function isTwoPasswordSame($data)
