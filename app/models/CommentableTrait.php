@@ -23,7 +23,7 @@ trait CommentableTrait
         });
     }
 
-    public function hasAnyComments()
+    public function hasComments()
     {
         return $this->getComments()->count();
     }

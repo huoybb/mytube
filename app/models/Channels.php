@@ -98,6 +98,12 @@ class Channels extends \core\myModel
             ->orderBy('created_at DESC')
             ->execute();
     }
+    public function infoArray()
+    {
+        return [
+            'youtube'=>'Youtube'
+        ];
+    }
 
 
 }

@@ -1,12 +1,6 @@
 <h1>频道：{{ channel.title }}</h1>
-<div class="row">
-    <div class="col-md-2" align="right">
-        Youtbue:
-    </div>
-    <div class="col-md-10">
-        <a href="{{ channel.present('YoutubeLink') }}">链接</a>
-    </div>
-</div>
+{% include 'layouts/info' with ['Owner':channel] %}
+
 
 <h2>视频 <span class="badge">{{ channel.movies().count() }}</span></h2>
 {% include 'index/partials/movielist' with ['movies':channel.movies()]  %}

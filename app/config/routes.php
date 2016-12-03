@@ -24,7 +24,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/register','auth::register')->setName('register');
     $router->addx('/logout','auth::logout')->setName('logout');
 
-
+    $router->addx('/comments/{comment:[0-9]+}/delete','comments::delete')->setName('comments.delete');
 });
 $router->addx('/login','auth::login')->setName('login');
 

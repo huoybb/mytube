@@ -12,14 +12,17 @@ class ChannelsPresenter extends \core\myPresenter
      * @var Channels
      */
     protected $entity;
-    public function YoutubeLink()
-    {
-        return $this->youtubePrefix($this->entity->url);
-    }
+
     public function moviesCount()
     {
         return $this->entity->movies()->count();
     }
+    public function youtube()
+    {
+        $url = $this->youtubePrefix($this->entity->url);
+        return $this->createLink($url,'频道链接');
+    }
+
 
 
 }
