@@ -79,6 +79,11 @@ class Movies extends \core\myModel
      * @var Carbon
      */
     public $updated_at;
+    /**
+     *
+     * @var string
+     */
+    public $playtime;
 
     public static function findOrDownloadByKey($key)
     {

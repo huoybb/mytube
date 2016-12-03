@@ -18,6 +18,12 @@ class MoviesController extends ControllerBase
         $movie->addTag($this->request->getPost('name'));
         return $this->redirect(['for'=>'movies.show','movie'=>$movie->id]);
     }
+    public function updatePlayTimeAction(Movies $movie)
+    {
+        $movie->save($this->request->getPost());
+        return false;
+    }
+
 
 }
 

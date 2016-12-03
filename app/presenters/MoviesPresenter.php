@@ -62,6 +62,14 @@ class MoviesPresenter extends \core\myPresenter
         return '视频';
     }
 
+    public function completed()
+    {
+        if(!$this->entity->duration) return '0%';
+        $num = floor($this->entity->playtime/$this->entity->duration * 100);
+        return $num.'%';
+    }
+
+
 
 
 

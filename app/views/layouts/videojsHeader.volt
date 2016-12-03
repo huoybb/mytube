@@ -1,6 +1,6 @@
 <link href="/videojs/video-js.min.css" rel="stylesheet">
 <script src="/videojs/video.min.js"></script>
 <script>
-    videojs.options.flash.swf = "/videojs/video-js.swf";
-    var video = videojs("my-video");
+    var movie = {{ movie | json_encode }};
 </script>
+<script src="/js/myVideo.js"></script>
