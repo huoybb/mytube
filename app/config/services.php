@@ -76,6 +76,11 @@ $di->setShared('view', function () {
     $config = $this->getConfig();
 
     $view = new View();
+    // Disable several levels，取消三级的模板渲染机制，这个将来也是可以利用一下的。
+    $view->disableLevel(array(
+        View::LEVEL_LAYOUT      => true,
+        View::LEVEL_MAIN_LAYOUT => true
+    ));
     $view->setViewsDir($config->application->viewsDir);
 
     $view->registerEngines([

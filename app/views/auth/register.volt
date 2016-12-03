@@ -1,6 +1,11 @@
-<h1>用户注册</h1>
+{% extends 'index.volt' %}
+{% block title %}
+    用户注册-我的视频
+{% endblock %}
+{% block content %}
+    <h1>用户注册</h1>
 
-{{ form(url(['for':'register','method':'post'])) }}
+    {{ form(url(['for':'register','method':'post'])) }}
     <div class="control-group">
         <label for="name">Username</label>
         {{ text_field('name', 'class': 'form-control') }}
@@ -22,4 +27,5 @@
     <div class="form-group">
         {{ submit_button('Register', 'class': 'btn btn-primary btn-large') }}
     </div>
-{{ end_form() }}
+    {{ end_form() }}
+{% endblock %}
