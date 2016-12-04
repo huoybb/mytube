@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     <h1>标签：{{ mytag.name }}</h1>
-    {#{% include 'layouts/info' with ['Owner':mytag] %}#}
+    {% include 'layouts/info' with ['Owner':mytag] %}
 
 
     <h2>视频 <span class="badge">{{ mytag.getTaggedObjects().count() }}</span></h2>

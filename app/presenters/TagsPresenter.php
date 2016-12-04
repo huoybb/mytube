@@ -31,5 +31,11 @@ class TagsPresenter extends \core\myPresenter
         $url = $this->url->get(['for'=>'tags.index']);
         return "<a href='{$url}' class='btn btn-info btn-xs'>标签</a>";
     }
+    public function operation()
+    {
+        $url = $this->url->get(['for'=>'tags.edit','tag'=>$this->entity->id]);
+        return $this->createLink($url,'编辑');
+    }
+
 
 }

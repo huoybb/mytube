@@ -4,11 +4,11 @@
  * Created by PhpStorm.
  * User: ThinkPad
  * Date: 2016/12/5
- * Time: 6:50
+ * Time: 7:20
  */
-class TagsForm extends \core\myForm
+class ChannelsForm extends \core\myForm
 {
     protected $exludedFields = [
-        'created_at','updated_at','id'
+        'created_at','updated_at'
     ];
 }

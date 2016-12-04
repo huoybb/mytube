@@ -23,10 +23,12 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/channels','channels::index')->setName('channels.index');
     $router->addGet('/channels/{channel:[0-9]+}','channels::show')->setName('channels.show');
     $router->addx('/channels/{channel:[0-9]+}/addComment','channels::addComment',[isCommentValid::class])->setName('channels.addComment');
+    $router->addx('/channels/{channel:[0-9]+}/edit','channels::edit')->setName('channels.edit');
 
     $router->addGet('/playlists','playlists::index')->setName('playlists.index');
     $router->addGet('/playlists/{playlist:[0-9]+}','playlists::show')->setName('playlists.show');
     $router->addx('/playlists/{playlist:[0-9]+}/addComment','playlists::addComment',[isCommentValid::class])->setName('playlists.addComment');
+    $router->addx('/playlists/{playlist:[0-9]+}/edit','playlists::edit')->setName('playlists.edit');
 
     $router->addx('/logout','auth::logout')->setName('logout');
     $router->addGet('/myLatestComments','auth::latestComments')->setName('myLatestComments');
@@ -37,6 +39,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/tags','tags::index')->setName('tags.index');
     $router->addGet('/tags/{tag:[0-9]+}','tags::show')->setName('tags.show');
     $router->addx('/tags/{tag:[0-9]+}/addComment','tags::addComment',[isCommentValid::class])->setName('tags.addComment');
+    $router->addx('/tags/{tag:[0-9]+}/edit','tags::edit')->setName('tags.edit');
 });
 
 $router->addGet('/getYoutube/{key}','youtube::getMovie')->setName('youtube.getMovie');

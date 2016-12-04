@@ -162,6 +162,7 @@ class Playlists extends \core\myModel
             'youtube'=>'Youtube',
             'channel'=>'所属频道',
             'lastUpdated'=>'更新时间',
+            'operation'=>'操作',
         ];
     }
 

@@ -9,6 +9,6 @@
 class MoviesForm extends \core\myForm
 {
     protected $exludedFields = [
-        'created_at','updated_at','key','id'
+        'created_at','updated_at','key','id','uploader_url','channel_title','channel_url'
     ];
 }

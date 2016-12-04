@@ -17,8 +17,13 @@ class TagsController extends ControllerBase
         $tag->addComment($this->request->getPost());
         return $this->redirect(['for'=>'tags.show','tag'=>$tag->id]);
     }
-
-
-
+    public function editAction(Tags $tag)
+    {
+        if($this->request->isPost()){
+            $tag->save($this->request->getPost());
+            return $this->redirect(['for'=>'tags.show','tag'=>$tag->id]);
+        }
+        $this->view->mytag = $tag;
+    }
 }
 

@@ -116,4 +116,13 @@ class Tags extends myModel
         return $tagged_class::findByTag($this);
     }
 
+    public function infoArray()
+    {
+        return [
+            'description'=>'描述',
+            'keywords'=>'关键词',
+            'operation'=>'操作',
+        ];
+    }
+
 }

@@ -32,6 +32,11 @@ class ChannelsPresenter extends \core\myPresenter
         $url = $this->url->get(['for'=>'channels.index']);
         return "<a href='{$url}' class='btn btn-warning btn-xs'>频道</a>";
     }
+    public function operation()
+    {
+        $url = $this->url->get(['for'=>'channels.edit','channel'=>$this->entity->id]);
+        return $this->createLink($url,'编辑');
+    }
 
 
 

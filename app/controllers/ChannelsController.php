@@ -17,6 +17,15 @@ class ChannelsController extends ControllerBase
         $channel->addComment($this->request->getPost());
         return $this->redirect(['for'=>'channels.show','channel'=>$channel->id]);
     }
+    public function editAction(Channels $channel)
+    {
+        if($this->request->isPost()){
+            $channel->save($this->request->getPost());
+            return $this->redirect(['for'=>'channels.show','channel'=>$channel->id]);
+        }
+        $this->view->channel = $channel;
+    }
+
 
 }
 

@@ -43,6 +43,11 @@ class PlaylistsPresenter extends \core\myPresenter
         $url = $this->youtubePrefix($url);
         return $this->createLink($url,'列表链接');
     }
+    public function operation()
+    {
+        $url = $this->url->get(['for'=>'playlists.edit','playlist'=>$this->entity->id]);
+        return $this->createLink($url,'编辑');
+    }
 
 
 

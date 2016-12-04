@@ -122,7 +122,8 @@ class Channels extends \core\myModel
     public function infoArray()
     {
         return [
-            'youtube'=>'Youtube'
+            'youtube'=>'Youtube',
+            'operation'=>'操作',
         ];
     }
 
