@@ -4,6 +4,8 @@ use webParser\youtube;
 
 class Playlists extends \core\myModel
 {
+    use \core\myPresenterTrait;
+    use CommentableTrait;
 
     /**
      *
@@ -140,6 +142,14 @@ class Playlists extends \core\myModel
             if(!$channel) $channel = Channels::downloadAndSaveByUrl($channelUrl);
         }
         return $channel;
+    }
+
+    public function movies()
+    {
+        return Movies::query()
+            ->rightJoin(Playlistables::class,'p2m.movie_id = Movies.id','p2m')
+            ->where('p2m.playlist_id = :id:',['id'=>$this->id])
+            ->execute();
     }
 
 }

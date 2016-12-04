@@ -8,7 +8,8 @@
             <ul class="nav navbar-nav">
 
                 <li><a href="{{ url(['for':'channels.index']) }}">频道</a></li>
-                <li><a href="/tags">标签</a></li>
+                <li><a href="{{ url(['for':'playlists.index']) }}">列表</a></li>
+                <li><a href="{{ url(['for':'tags.index']) }}">标签</a></li>
 
             </ul>
 

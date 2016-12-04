@@ -23,6 +23,10 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/channels/{channel:[0-9]+}','channels::show')->setName('channels.show');
     $router->addx('/channels/{channel:[0-9]+}/addComment','channels::addComment',[isCommentValid::class])->setName('channels.addComment');
 
+    $router->addGet('/playlists','playlists::index')->setName('playlists.index');
+    $router->addGet('/playlists/{playlist:[0-9]+}','playlists::show')->setName('playlists.show');
+    $router->addx('/playlists/{playlist:[0-9]+}/addComment','playlists::addComment',[isCommentValid::class])->setName('playlists.addComment');
+
     $router->addx('/logout','auth::logout')->setName('logout');
     $router->addGet('/myLatestComments','auth::latestComments')->setName('myLatestComments');
 

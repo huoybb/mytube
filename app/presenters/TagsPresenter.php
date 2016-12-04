@@ -23,7 +23,8 @@ class TagsPresenter extends \core\myPresenter
 
     public function showLink()
     {
-        return $this->url->get(['for'=>'tags.show','tag'=>$this->entity->id]);
+        $url = $this->url->get(['for'=>'tags.show','tag'=>$this->entity->id]);
+        return $this->createLink($url,$this->entity->name);
     }
     public function type()
     {

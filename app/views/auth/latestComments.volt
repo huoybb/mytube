@@ -12,9 +12,7 @@
                         <h4>
                             <span>To：</span>
                             {{ commentRow.commentable().present('type') }}
-                            <a href="{{ commentRow.commentable().present('showLink') }}">
-                                {{ commentRow.commentable().present('title') }}
-                            </a>
+                            {{ commentRow.commentable().present('showLink') }}
                             <span>@ {{ commentRow.updated_at.diffForHumans() }}</span>
                             {#{% if gate.allows('editAndDelete',commentRow) %}#}
                             <span><a href="{{ url(['for':'comments.edit','comment':commentRow.id]) }}">编辑</a></span>
