@@ -1,6 +1,8 @@
 <?php
 
-class Tags extends \core\myModel
+use core\myModel;
+
+class Tags extends myModel
 {
     use \core\myPresenterTrait;
     use CommentableTrait;
@@ -59,6 +61,15 @@ class Tags extends \core\myModel
         return $instance;
     }
 
+    public static function findByTaggedObject(myModel $object)
+    {
+        return static :: query()
+            ->leftJoin('Taggables','Tags.id = Taggables.tag_id')
+            ->where('taggable_type = :type:',['type'=>get_class($object)])
+            ->andWhere('taggable_id = :id:',['id'=>$object->id])
+            ->execute();
+    }
+
     /**
      * Initialize method for model.
      */
@@ -99,15 +110,10 @@ class Tags extends \core\myModel
     {
         return parent::findFirst($parameters);
     }
-    public function getTaggedObjects($tagged_class=null)
+    public function getTaggedObjects(string $tagged_class=null)
     {
         $tagged_class = $tagged_class ?: Movies::class;
-        $taggable_class = Taggables::class;
-        $condition = "{$taggable_class}.taggable_id = {$tagged_class}.id AND {$taggable_class}.taggable_type = '{$tagged_class}' ";
-        return $tagged_class::query()
-            ->rightJoin(Taggables::class,$condition)
-            ->where("{$taggable_class}.tag_id = :tag:",['tag'=>$this->id])
-            ->execute();
+        return $tagged_class::findByTag($this);
     }
 
 }

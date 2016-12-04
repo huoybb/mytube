@@ -1,6 +1,8 @@
 <?php
 
-class Comments extends \core\myModel
+use core\myModel;
+
+class Comments extends myModel
 {
 
     /**
@@ -58,6 +60,15 @@ class Comments extends \core\myModel
     {
         return static::query()
             ->where('user_id = :user:',['user'=>$user->id])
+            ->orderBy('created_at DESC')
+            ->execute();
+    }
+
+    public static function findByCommentedObject(myModel $object)
+    {
+        return static::query()
+            ->where('commentable_type = :type:',['type'=>get_class($object)])
+            ->andWhere('commentable_id = :id:',['id'=>$object->id])
             ->orderBy('created_at DESC')
             ->execute();
     }

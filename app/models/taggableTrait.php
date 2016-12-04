@@ -8,6 +8,19 @@
 use core\myModel;
 trait taggableTrait
 {
+
+    /**
+     * @param Tags $tag
+     * @return mixed
+     */
+    public static function findByTag(Tags $tag){
+        $tagged_class = static::class;
+        $condition = "taggable.taggable_id = {$tagged_class}.id AND taggable.taggable_type = '{$tagged_class}' ";
+        return static :: query()
+            ->rightJoin(Taggables::class,$condition,'taggable')
+            ->where("taggable.tag_id = :tag:",['tag'=>$tag->id])
+            ->execute();
+    }
     /**
      * @return \Phalcon\Mvc\Model\Resultset
      */
@@ -16,11 +29,7 @@ trait taggableTrait
         /** @var myModel $this */
         return $this->make('tags',function(){
             /** @var myModel $this */
-            return \Tags::query()
-                ->leftJoin('Taggables','Tags.id = Taggables.tag_id')
-                ->where('taggable_type = :type:',['type'=>get_class($this)])
-                ->andWhere('taggable_id = :id:',['id'=>$this->id])
-                ->execute();
+            return \Tags::findByTaggedObject($this);
         });
     }
     public function hasTags()
@@ -43,6 +52,8 @@ trait taggableTrait
         }
         return $this;
     }
+
+
 
     public function getTagForm()
     {

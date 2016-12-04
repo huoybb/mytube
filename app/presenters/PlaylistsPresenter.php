@@ -37,6 +37,14 @@ class PlaylistsPresenter extends \core\myPresenter
         return "<a href='{$url}' class='btn btn-primary btn-xs'>列表</a>";
     }
 
+    public function youtube()
+    {
+        $url = '/playlist?list='.$this->entity->key;
+        $url = $this->youtubePrefix($url);
+        return $this->createLink($url,'列表链接');
+    }
+
+
 
 
 

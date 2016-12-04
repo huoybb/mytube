@@ -129,10 +129,18 @@ class Movies extends \core\myModel
         return preg_split('|\s+|', $keywords);
     }
 
-    public static function findByChannel($channel)
+    public static function findByChannel(Channels $channel)
     {
         return static::query()
-            ->where('channel_title like :channel:',['channel'=>$channel])
+            ->where('channel_id like :channel:',['channel'=>$channel->id])
+            ->execute();
+    }
+
+    public static function findByPlaylist(Playlists $playlist)
+    {
+        return static::query()
+            ->rightJoin(Playlistables::class,'p2m.movie_id = Movies.id','p2m')
+            ->where('p2m.playlist_id = :id:',['id'=>$playlist->id])
             ->execute();
     }
 
@@ -202,4 +210,9 @@ class Movies extends \core\myModel
     {
         return Channels::findFirst($this->channel_id);
     }
+    public function playlists()
+    {
+        return Playlists::findByMovie($this);
+    }
+
 }

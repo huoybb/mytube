@@ -15,11 +15,7 @@ trait CommentableTrait
         /** @var \core\myModel $this */
         return $this->make('comments',function(){
             /** @var \core\myModel $this */
-            return Comments::query()
-                ->where('commentable_type = :type:',['type'=>get_class($this)])
-                ->andWhere('commentable_id = :id:',['id'=>$this->id])
-                ->orderBy('created_at DESC')
-                ->execute();
+            return Comments::findByCommentedObject($this);
         });
     }
 

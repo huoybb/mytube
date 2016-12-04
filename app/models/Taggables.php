@@ -1,6 +1,8 @@
 <?php
 
-class Taggables extends \core\myModel
+use core\myModel;
+
+class Taggables extends myModel
 {
 
     /**
@@ -54,15 +56,10 @@ class Taggables extends \core\myModel
      */
     public $updated_at;
 
-    public static function findOrCreateByObjects(Tags $tag,\core\myModel $object)
+    public static function findOrCreateByObjects(Tags $tag, myModel $object)
     {
         $user = \Phalcon\Di::getDefault()->get('auth')->user();
-        $instance = static::query()
-            ->where('tag_id = :tag:',['tag'=>$tag->id])
-            ->andWhere('taggable_type = :type:',['type'=>get_class($object)])
-            ->andWhere('taggable_id = :id:',['id'=>$object->id])
-            ->andWhere('user_id = :user:',['user'=>$user->id])
-            ->execute()->getFirst();
+        $instance = static :: findByTagAndObject($tag,$object);
         if(! $instance){
             $instance = static::saveNew([
                 'tag_id'        =>$tag->id,
@@ -112,6 +109,17 @@ class Taggables extends \core\myModel
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    public static function findByTagAndObject($tag, $object)
+    {
+        $user = \Phalcon\Di::getDefault()->get('auth')->user();
+        return static::query()
+            ->where('tag_id = :tag:',['tag'=>$tag->id])
+            ->andWhere('taggable_type = :type:',['type'=>get_class($object)])
+            ->andWhere('taggable_id = :id:',['id'=>$object->id])
+            ->andWhere('user_id = :user:',['user'=>$user->id])
+            ->execute()->getFirst();
     }
 
 }

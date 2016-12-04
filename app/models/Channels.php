@@ -117,10 +117,7 @@ class Channels extends \core\myModel
     }
     public function movies()
     {
-        return Movies::query()
-            ->where('channel_id = :id:',['id'=>$this->id])
-            ->orderBy('created_at DESC')
-            ->execute();
+        return Movies::findByChannel($this);
     }
     public function infoArray()
     {

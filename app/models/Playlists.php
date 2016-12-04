@@ -92,6 +92,14 @@ class Playlists extends \core\myModel
 
     }
 
+    public static function findByMovie(Movies $movie)
+    {
+        return static :: query()
+            ->rightJoin(Playlistables::class,'p2m.playlist_id = Playlists.id','p2m')
+            ->where('p2m.movie_id = :movie:',['movie'=>$movie->id])
+            ->execute();
+    }
+
     /**
      * Initialize method for model.
      */
@@ -146,10 +154,16 @@ class Playlists extends \core\myModel
 
     public function movies()
     {
-        return Movies::query()
-            ->rightJoin(Playlistables::class,'p2m.movie_id = Movies.id','p2m')
-            ->where('p2m.playlist_id = :id:',['id'=>$this->id])
-            ->execute();
+        return Movies::findByPlaylist($this);
     }
+    public function infoArray()
+    {
+        return [
+            'youtube'=>'Youtube',
+            'channel'=>'所属频道',
+            'lastUpdated'=>'更新时间',
+        ];
+    }
+
 
 }
