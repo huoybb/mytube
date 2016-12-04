@@ -57,7 +57,7 @@ trait taggableTrait
 
     public function getTagForm()
     {
-        return new tagForm(new Tags);
+        return (new Tags)->getForm();
     }
 
 

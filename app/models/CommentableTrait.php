@@ -37,7 +37,7 @@ trait CommentableTrait
     }
     public function getCommentForm()
     {
-        return new commentForm(new Comments());
+        return (new Comments)->getForm();
     }
 
 
