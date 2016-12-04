@@ -33,6 +33,7 @@ $router->group([isLogin::class],function() use($router){
 
     $router->addGet('/tags','tags::index')->setName('tags.index');
     $router->addGet('/tags/{tag:[0-9]+}','tags::show')->setName('tags.show');
+    $router->addx('/tags/{tag:[0-9]+}/addComment','tags::addComment',[isCommentValid::class])->setName('tags.addComment');
 
 });
 $router->addx('/login','auth::login')->setName('login');

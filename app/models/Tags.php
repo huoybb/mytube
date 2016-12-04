@@ -3,6 +3,7 @@
 class Tags extends \core\myModel
 {
     use \core\myPresenterTrait;
+    use CommentableTrait;
     /**
      *
      * @var integer

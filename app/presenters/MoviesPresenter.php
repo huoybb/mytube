@@ -59,7 +59,8 @@ class MoviesPresenter extends \core\myPresenter
     }
     public function type()
     {
-        return '视频';
+        $url = $this->url->get(['for'=>'home']);
+        return "<a href='{$url}' class='btn btn-danger btn-xs'>视频</a>";
     }
 
     public function completed()

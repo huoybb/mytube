@@ -11,7 +11,7 @@
                     <div>
                         <h4>
                             <span>To：</span>
-                            <button class="btn btn-primary btn-xs disabled">{{ commentRow.commentable().present('type') }}</button>
+                            {{ commentRow.commentable().present('type') }}
                             <a href="{{ commentRow.commentable().present('showLink') }}">
                                 {{ commentRow.commentable().present('title') }}
                             </a>

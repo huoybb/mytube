@@ -28,7 +28,8 @@ class ChannelsPresenter extends \core\myPresenter
     }
     public function type()
     {
-        return '频道';
+        $url = $this->url->get(['for'=>'channels.index']);
+        return "<a href='{$url}' class='btn btn-warning btn-xs'>频道</a>";
     }
 
 

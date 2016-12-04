@@ -1,6 +1,6 @@
 <?php
 
-class TagsController extends \Phalcon\Mvc\Controller
+class TagsController extends ControllerBase
 {
     public function indexAction()
     {
@@ -11,6 +11,13 @@ class TagsController extends \Phalcon\Mvc\Controller
     {
         $this->view->mytag = $tag;
     }
+
+    public function addCommentAction(Tags $tag)
+    {
+        $tag->addComment($this->request->getPost());
+        return $this->redirect(['for'=>'tags.show','tag'=>$tag->id]);
+    }
+
 
 
 }
