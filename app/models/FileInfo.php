@@ -25,7 +25,7 @@ class FileInfo
 
     public static function getFileKey($keywords)
     {
-        $filename = preg_replace('/:|—|–|-|\(|\)|"|&|•|\/|,|\|/im', '.*', $keywords);
+        $filename = preg_replace('/’|:|—|–|-|\(|\)|"|&|•|\/|,|\|/im', '.*', $keywords);
         return $filename;
     }
 }
