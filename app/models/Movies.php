@@ -195,6 +195,7 @@ class Movies extends \core\myModel
             'fileName'=>'文件名',
             'downloadLink' => '下载链接',
             'tags'=>'所属标签',
+            'operation'=>'操作',
         ];
     }
 
@@ -214,5 +215,4 @@ class Movies extends \core\myModel
     {
         return Playlists::findByMovie($this);
     }
-
 }

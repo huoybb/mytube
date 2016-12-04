@@ -59,5 +59,13 @@ abstract class myModel extends Model{
         $instance->save($data);
         return $instance;
     }
+    //增加每个模型的form对象，便于表单的生成
+    protected $_form = null;
+    public function getForm()
+    {
+        $formClass = get_class($this) . 'Form';
+        if (!$this->_form) $this->_form = new $formClass($this);
+        return $this->_form;
+    }
 
 } 

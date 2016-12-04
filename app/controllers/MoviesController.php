@@ -24,6 +24,14 @@ class MoviesController extends ControllerBase
         return false;
     }
 
+    public function editAction(Movies $movie)
+    {
+        if($this->request->isPost()){
+            $movie->save($this->request->getPost());
+            $this->redirect(['for'=>'movies.show','movie'=>$movie->id]);
+        }
+        $this->view->movie = $movie;
+    }
 
 }
 

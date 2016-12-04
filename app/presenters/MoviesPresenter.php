@@ -71,6 +71,15 @@ class MoviesPresenter extends \core\myPresenter
         return $num.'%';
     }
 
+    public function operation()
+    {
+        $result = '';
+        $url = $this->url->get(['for'=>'movies.edit','movie'=>$this->entity->id]);
+        $result .= $this->createLink($url,'编辑');
+        return $result;
+    }
+
+
 
 
 
