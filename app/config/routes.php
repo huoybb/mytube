@@ -12,7 +12,6 @@ $router->removeExtraSlashes(true);
 $router->notFound('index::notFound');
 $router->group([isLogin::class],function() use($router){
     $router->addGet('/','index::index')->setName('home');
-    $router->addGet('/getYoutube/{key}','index::getYoutube')->setName('youtube.getMovie');
     $router->addx('/search/{search}','index::search')->setName('search');
 
     $router->addGet('/movies/{movie:[0-9]+}','movies::show')->setName('movies.show');
@@ -34,8 +33,10 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/tags','tags::index')->setName('tags.index');
     $router->addGet('/tags/{tag:[0-9]+}','tags::show')->setName('tags.show');
     $router->addx('/tags/{tag:[0-9]+}/addComment','tags::addComment',[isCommentValid::class])->setName('tags.addComment');
-
 });
+
+$router->addGet('/getYoutube/{key}','index::getYoutube')->setName('youtube.getMovie');
+$router->addGet('/getYoutubeList/{key}','index::getYoutubeList')->setName('youtube.getList');
 $router->addx('/login','auth::login')->setName('login');
 
 return $router;

@@ -29,6 +29,13 @@ class IndexController extends ControllerBase
         return $this->response->redirect($this->url->get(['for'=>'movies.show','movie'=>$movie->id]));
     }
 
+    public function getYoutubeListAction($key)
+    {
+        $playlist = Playlists::findOrDownloadByKey($key);
+        dd($playlist);
+    }
+
+
     public function searchAction($search)
     {
         $this->view->movies = Movies::search($search);
@@ -41,6 +48,16 @@ class IndexController extends ControllerBase
         $this->view->channel = $channel;
     }
 
+    private function fixChannelsData()
+    {
+        foreach(Channels::find() as $channel){
+            $uploader_url = $channel->movies()->getFirst()->uploader_url;
+            if(preg_match('%/user/([^/]+)%sim', $uploader_url)){
+                $channel->save(['uploader_url'=>$uploader_url]);
+            }
+            var_dump($uploader_url);
+        }
+    }
 
 
 }

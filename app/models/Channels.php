@@ -48,6 +48,13 @@ class Channels extends \core\myModel
             ->where('url = :url:',['url'=>$channel_url])
             ->execute()->getFirst();
     }
+    public static function findByUploaderUrl($uploader_url)
+    {
+        return static::query()
+            ->where('uploader_url = :url:',['url'=>$uploader_url])
+            ->execute()->getFirst();
+    }
+
 
     public static function findOrNewByData(array $data)
     {
@@ -58,6 +65,22 @@ class Channels extends \core\myModel
             $instance = new static($data);
             $instance->save();
         }
+        return $instance;
+    }
+
+    public static function downloadAndSaveByUploaderUrl($channelUrl)
+    {
+        $data = \webParser\youtube::getChannelInfo($channelUrl);
+        $data['uploader_url'] = $channelUrl;
+        $instance = static::saveNew($data);
+        return $instance;
+    }
+
+    public static function downloadAndSaveByUrl($channelUrl)
+    {
+        $data = \webParser\youtube::getChannelInfo($channelUrl);
+        $data['url'] = $channelUrl;
+        $instance = static::saveNew($data);
         return $instance;
     }
 
