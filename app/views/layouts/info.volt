@@ -1,6 +1,6 @@
 <div id="info">
     <div class="row">
-        {% for key,value in Owner.infoArray() %}
+        {% for key,value in Owner.infoArray() if Owner.present(key) %}
             <div class="col-md-2" align="right">
                 {{ value }}:
             </div>
