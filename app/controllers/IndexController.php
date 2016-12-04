@@ -23,19 +23,6 @@ class IndexController extends ControllerBase
 
     }
 
-    public function getYoutubeAction($key)
-    {
-        $movie = Movies::findOrDownloadByKey($key);
-        return $this->response->redirect($this->url->get(['for'=>'movies.show','movie'=>$movie->id]));
-    }
-
-    public function getYoutubeListAction($key)
-    {
-        $playlist = Playlists::findOrDownloadByKey($key);
-        dd($playlist);
-    }
-
-
     public function searchAction($search)
     {
         $this->view->movies = Movies::search($search);

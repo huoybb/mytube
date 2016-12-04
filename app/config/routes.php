@@ -35,8 +35,8 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/tags/{tag:[0-9]+}/addComment','tags::addComment',[isCommentValid::class])->setName('tags.addComment');
 });
 
-$router->addGet('/getYoutube/{key}','index::getYoutube')->setName('youtube.getMovie');
-$router->addGet('/getYoutubeList/{key}','index::getYoutubeList')->setName('youtube.getList');
+$router->addGet('/getYoutube/{key}','youtube::getMovie')->setName('youtube.getMovie');
+$router->addGet('/getYoutubeList/{key}','youtube::getList')->setName('youtube.getList');
 $router->addx('/login','auth::login')->setName('login');
 
 return $router;
