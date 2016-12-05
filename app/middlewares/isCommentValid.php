@@ -9,7 +9,7 @@
 class isCommentValid extends \core\myMiddleware
 {
 
-    public function isValid(): bool
+    public function isValid($object): bool
     {
         $content = trim($this->request->getPost('content'));
         if(!$content){

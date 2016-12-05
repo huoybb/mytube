@@ -98,9 +98,9 @@ class myRouter extends Router{
 
         if($this->hasMatchedMiddleWares($route->getRouteId())){
             $middleWares = $this->getMiddleWares($route->getRouteId());
-            foreach($middleWares as $validator){
-                $validator = new $validator;
-                if(! $validator->isValid()) return false;
+            foreach($middleWares as $middleWareString){
+                list($data,$validator) = $this->getValidatorAndData($middleWareString,$dispatcher);
+                if(! $validator->isValid($data)) return false;
             }
         }
         return true;
@@ -249,6 +249,18 @@ class myRouter extends Router{
     {
         $this->middlewares[$route->getRouteId()]=$middleware;
         return $this;
+    }
+
+    private function getValidatorAndData($validator,Dispatcher $dispatcher)
+    {
+        $data = null;
+        if(preg_match('|.*:.*|',$validator)) {//此处设置了可以带中间件参数
+            list($validator,$data) = explode(':',$validator);
+            $data = $dispatcher->getParam($data);
+        }
+        /** @var myMiddleware $validator */
+        $validator = new $validator;
+        return [$data,$validator];
     }
 
 } 

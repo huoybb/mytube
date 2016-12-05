@@ -23,8 +23,10 @@ class myAuth implements \Phalcon\Di\InjectionAwareInterface
      * @var \Phalcon\Http\Response\Cookies
      */
     protected $cookies;
-
-    protected $user = null;
+    /**
+     * @var Users;
+     */
+    protected $user;
 
     /**
      * myAuth constructor.
@@ -65,6 +67,7 @@ class myAuth implements \Phalcon\Di\InjectionAwareInterface
         $this->distroySession();
         return $this;
     }
+
     public function user()
     {
         return $this->user;
@@ -112,4 +115,15 @@ class myAuth implements \Phalcon\Di\InjectionAwareInterface
     {
         return $this->di;
     }
+
+    /**
+     * 登录的前提下，判断是否拥有某对象
+     * @param myModel $object
+     * @return bool
+     */
+    public function owns(myModel $object)
+    {
+        return $object->user_id == $this->user()->id;
+    }
+
 }

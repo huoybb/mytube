@@ -12,7 +12,7 @@ class isLogin extends myMiddleware
 {
 
 
-    public function isValid(): bool
+    public function isValid($object): bool
     {
         if($this->auth->isLogin()) return true;
 

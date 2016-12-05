@@ -63,6 +63,6 @@ abstract class myMiddleware
     }
 
 
-    abstract  public function isValid():bool;
+    abstract  public function isValid($object):bool;
 
 }

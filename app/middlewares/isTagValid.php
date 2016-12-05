@@ -9,7 +9,7 @@
 class isTagValid extends \core\myMiddleware
 {
 
-    public function isValid(): bool
+    public function isValid($object): bool
     {
         $tag = trim($this->request->getPost('name'));
         if(!$tag) {
