@@ -1,5 +1,6 @@
 <?php
 
+use Phalcon\Crypt;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\View;
@@ -154,4 +155,10 @@ $di->setShared('auth',function(){
 $di->setShared('eventsManager',function(){
     $eventsManager = require APP_PATH . "/app/config/events.php";
     return $eventsManager;
+});
+
+$di->setShared("crypt",function () {
+    $crypt = new Crypt();
+    $crypt->setKey('%31.1e$i86e$f!8jz');
+    return $crypt;
 });
