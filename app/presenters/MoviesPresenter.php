@@ -75,7 +75,9 @@ class MoviesPresenter extends \core\myPresenter
     {
         $result = '';
         $url = $this->url->get(['for'=>'movies.edit','movie'=>$this->entity->id]);
-        $result .= $this->createLink($url,'编辑');
+        $result .= $this->createLink($url,'编辑',"btn btn-warning btn-xs");
+        $url = $this->url->get(['for'=>'movies.delete','movie'=>$this->entity->id]);
+        $result .= ' '.$this->createLink($url,'删除',"btn btn-danger btn-xs");
         return $result;
     }
 

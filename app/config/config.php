@@ -23,5 +23,8 @@ return new \Phalcon\Config([
         'middlewaresDir'       => APP_PATH . '/app/middlewares/',
         'formsDir'       => APP_PATH . '/app/forms/',
         'baseUri'        => '/',
+        'eventPrefix'    => 'my',
+        'events'         => APP_PATH . '/app/events/',
+        'eventsHandlers' => APP_PATH . '/app/eventsHandlers/',
     ]
 ]);

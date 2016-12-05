@@ -19,6 +19,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/movies/{movie:[0-9]+}/addTag','movies::addTag',[isTagValid::class])->setName('movies.addTag');
     $router->addx('/movies/{movie:[0-9]+}/updatePlayTime','movies::updatePlayTime')->setName('movies.updatePlayTime');
     $router->addx('/movies/{movie:[0-9]+}/edit','movies::edit')->setName('movies.edit');
+    $router->addx('/movies/{movie:[0-9]+}/delete','movies::delete')->setName('movies.delete');
 
     $router->addGet('/channels','channels::index')->setName('channels.index');
     $router->addGet('/channels/{channel:[0-9]+}','channels::show')->setName('channels.show');

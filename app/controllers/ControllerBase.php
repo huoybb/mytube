@@ -2,6 +2,11 @@
 
 use Phalcon\Mvc\Controller;
 
+/**
+ * Class ControllerBase
+ * * @property \core\myEventsManager $eventsManager
+ * * @property \core\myAuth $auth
+ */
 class ControllerBase extends Controller
 {
 

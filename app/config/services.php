@@ -150,3 +150,8 @@ $di->setShared('auth',function(){
     $auth = (new \core\myAuth())->setDI($this)->init();
     return $auth;
 });
+
+$di->setShared('eventsManager',function(){
+    $eventsManager = require APP_PATH . "/app/config/events.php";
+    return $eventsManager;
+});

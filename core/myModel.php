@@ -8,6 +8,7 @@ namespace core;
  */
 use Carbon\Carbon;
 use Closure;
+use Phalcon\Di;
 use Phalcon\Mvc\Model;
 
 abstract class myModel extends Model{
@@ -17,6 +18,7 @@ abstract class myModel extends Model{
      * @var Carbon
      */
     public $created_at = null;
+
     public function beforeSave()
     {
         if($this->created_at != null) {
@@ -66,6 +68,14 @@ abstract class myModel extends Model{
         $formClass = get_class($this) . 'Form';
         if (!$this->_form) $this->_form = new $formClass($this);
         return $this->_form;
+    }
+    /**
+     * Returns the custom events manager
+     *
+     * @return myEventsManager
+     */
+    protected function getEventsManager() {
+        return Di::getDefault()->get('eventsManager');
     }
 
 } 

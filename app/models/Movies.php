@@ -215,4 +215,10 @@ class Movies extends \core\myModel
     {
         return Playlists::findByMovie($this);
     }
+    public function delete()
+    {
+        $this->getEventsManager()->trigger(new MovieDeleted($this));
+        return parent::delete();
+    }
+
 }

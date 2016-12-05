@@ -32,6 +32,11 @@ class MoviesController extends ControllerBase
         }
         $this->view->movie = $movie;
     }
+    public function deleteAction(Movies $movie)
+    {
+        $movie->delete();
+        return $this->redirect(['for'=>'home']);
+    }
 
 }
 
