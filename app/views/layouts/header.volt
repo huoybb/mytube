@@ -12,7 +12,9 @@
                 <li><a href="{{ url(['for':'tags.index']) }}">标签</a></li>
 
             </ul>
-
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">标记</a></li>
+            </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 {% if auth.isLogin() %}
@@ -29,8 +31,6 @@
                     <li><a href="{{ url(['for':'login']) }}">登录</a></li>
                     <li><a href="{{ url(['for':'register']) }}">注册</a></li>
                 {% endif %}
-
-
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>

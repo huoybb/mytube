@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "videoControl.js",
+  "sourceRoot": "",
+  "sources": [
+    "videoControl.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA;AAAA"
+}
