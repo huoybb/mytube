@@ -4,6 +4,7 @@ use core\myModel;
 
 class Comments extends myModel
 {
+    use \core\myPresenterTrait;
 
     /**
      *
@@ -121,6 +122,14 @@ class Comments extends myModel
     public function user()
     {
         return Users::findFirst($this->user_id);
+    }
+    public function infoArray()
+    {
+        return [
+            'content'=>'内容',
+            'commentable'=>'评论对象',
+            'user'=>'评论者'
+        ];
     }
 
 

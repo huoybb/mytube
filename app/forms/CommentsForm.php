@@ -8,5 +8,5 @@
  */
 class CommentsForm extends \core\myForm
 {
-
+    protected $only = ['content'];
 }

@@ -6,7 +6,7 @@
             <li>
                 <div> <span>by <a href="#"> {{ commentRow.user().name }}</a></span>--<span>at: {{ commentRow.updated_at.diffForHumans() }}</span>
                     {#{% if gate.allows('editAndDelete',commentRow) %}#}
-                        <span><a href="#">edit</a></span>
+                        <span><a href="{{ url(['for':'comments.edit','comment':commentRow.id]) }}">edit</a></span>
                         <span><a href="{{ url(['for':'comments.delete','comment':commentRow.id]) }}" class="delete">delete</a></span>
                     {#{% endif %}#}
                 </div>

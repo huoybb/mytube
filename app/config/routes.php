@@ -33,6 +33,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/logout','auth::logout')->setName('logout');
     $router->addGet('/myLatestComments','auth::latestComments')->setName('myLatestComments');
 
+    $router->addx('/comments/{comment:[0-9]+}','comments::show')->setName('comments.show');
     $router->addx('/comments/{comment:[0-9]+}/delete','comments::delete')->setName('comments.delete');
     $router->addx('/comments/{comment:[0-9]+}/edit','comments::edit')->setName('comments.edit');
 
