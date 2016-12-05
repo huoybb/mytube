@@ -13,6 +13,7 @@ use Phalcon\Di;
 use Phalcon\FlashInterface;
 use Phalcon\Http\Request;
 use Phalcon\Http\Response;
+use Phalcon\Mvc\Url;
 
 abstract class myMiddleware
 {
@@ -30,6 +31,14 @@ abstract class myMiddleware
      */
     protected $request;
     /**
+     * @var Response
+     */
+    protected $response;
+    /**
+     * @var Url
+     */
+    protected $url;
+    /**
      * @var FlashInterface
      */
     protected $flash;
@@ -37,18 +46,20 @@ abstract class myMiddleware
     {
         $this->di = $Di ?: Di::getDefault();
         $this->auth = $this->di->get('auth');
+        $this->url = $this->di->get('url');
         $this->request = $this->di->get('request');
+        $this->response = $this->di->get('response');
         $this->flash = $this->di->get('flash');
     }
     public function redirect($routeArray)
     {
-        $url = $this->di->get('url')->get($routeArray);
-        return $this->di->get('response')->redirect($url);
+        $url = $this->url->get($routeArray);
+        return $this->response->redirect($url);
     }
     public function redirectBack()
     {
         $url = $this->request->getServer('HTTP_REFERER');
-        return $this->di->get('response')->redirect($url);
+        return $this->response->redirect($url);
     }
 
 
