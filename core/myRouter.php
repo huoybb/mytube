@@ -50,7 +50,7 @@ class myRouter extends Router{
      * @param $pattern
      * @param string $path
      * @param array $middleware
-     * @return \Phalcon\Mvc\Router\Route
+     * @return myRoute
      */
     public function addx($pattern,$path,array $middleware=[],$httpMethods = null)//给路由添加中间件
     {
@@ -58,8 +58,7 @@ class myRouter extends Router{
         if(!empty($this->stack)) $middleware = array_merge($middleware,$this->stack[0]);
 
         $this->setRouteMiddlewares($route,$middleware);
-
-        return $route;
+        return new myRoute($route,$this);
     }
 
     public function addPost($pattern, $path = null,$middleware=[] )
@@ -245,7 +244,7 @@ class myRouter extends Router{
         array_pop($this->stack);
     }
 
-    private function setRouteMiddlewares(Router\RouteInterface $route, $middleware)
+    public function setRouteMiddlewares(Router\RouteInterface $route, array $middleware)
     {
         $this->middlewares[$route->getRouteId()]=$middleware;
         return $this;

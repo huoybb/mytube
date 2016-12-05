@@ -13,8 +13,11 @@ class hasAuthority extends \core\myMiddleware
     {
         if($this->auth->owns($object)) return true;
 
-        $this->flash->error('你没有权限删除此视频');
+        $this->flash->error('你没有权限进行“修改或删除”操作');
         $this->redirectBack();
         return false;
+    }
+    public static function over($objectstring){
+        return static::class.':'.$objectstring;
     }
 }
