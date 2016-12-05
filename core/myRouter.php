@@ -52,23 +52,22 @@ class myRouter extends Router{
      * @param array $middleware
      * @return myRoute
      */
-    public function addx($pattern,$path,array $middleware=[],$httpMethods = null)//给路由添加中间件
+    public function addx($pattern,$path,$routeName=null,array $middleware=[],$httpMethods = null)//给路由添加中间件
     {
         $route = $this->add($pattern,$path,$httpMethods);
-        if(!empty($this->stack)) $middleware = array_merge($middleware,$this->stack[0]);
-
+        if($routeName) $route->setName($routeName);
         $this->setRouteMiddlewares($route,$middleware);
         return new myRoute($route,$this);
     }
 
-    public function addPost($pattern, $path = null,$middleware=[] )
+    public function addPost($pattern, $path = null,$routeName = null,$middleware=[] )
     {
-        return $this->addx($pattern,$path,$middleware,'POST');
+        return $this->addx($pattern,$path,$routeName,$middleware,'POST');
     }
 
-    public function addGet($pattern, $path = null,$middleware=[] )
+    public function addGet($pattern, $path = null,$routeName = null,$middleware=[] )
     {
-        return $this->addx($pattern,$path,$middleware,'GET');
+        return $this->addx($pattern,$path,$routeName,$middleware,'GET');
     }
 
 
@@ -246,6 +245,7 @@ class myRouter extends Router{
 
     public function setRouteMiddlewares(Router\RouteInterface $route, array $middleware)
     {
+        $middleware = $this->mergeStackedMiddlewares($middleware);
         $this->middlewares[$route->getRouteId()]=$middleware;
         return $this;
     }
@@ -260,6 +260,12 @@ class myRouter extends Router{
         /** @var myMiddleware $validator */
         $validator = new $validator;
         return [$data,$validator];
+    }
+
+    private function mergeStackedMiddlewares($middleware)
+    {
+        if(!empty($this->stack)) $middleware = array_merge($middleware,$this->stack[0]);
+        return $middleware;
     }
 
 } 

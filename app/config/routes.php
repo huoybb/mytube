@@ -14,20 +14,20 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/','index::index')->setName('home');
     $router->addx('/search/{search}','index::search')->setName('search');
 
-    $router->addGet('/movies/{movie:[0-9]+}','movies::show')->setName('movies.show');
-    $router->addPost('/movies/{movie:[0-9]+}/addComment','movies::addComment')->setName('movies.addComment')->setMiddlewares([isCommentValid::class]);
-    $router->addx('/movies/{movie:[0-9]+}/addTag','movies::addTag')->setName('movies.addTag')->setMiddlewares([isTagValid::class]);
-    $router->addx('/movies/{movie:[0-9]+}/updatePlayTime','movies::updatePlayTime')->setName('movies.updatePlayTime');
-    $router->addx('/movies/{movie:[0-9]+}/edit','movies::edit')->setName('movies.edit');
-    $router->addx('/movies/{movie:[0-9]+}/delete','movies::delete')->setName('movies.delete')->setMiddlewares([hasAuthority::over('movie')]);
+    $router->addGet('/movies/{movie:[0-9]+}','movies::show','movies.show');
+    $router->addPost('/movies/{movie:[0-9]+}/addComment','movies::addComment','movies.addComment')->setMiddlewares([isCommentValid::class]);
+    $router->addx('/movies/{movie:[0-9]+}/addTag','movies::addTag','movies.addTag')->setMiddlewares([isTagValid::class]);
+    $router->addx('/movies/{movie:[0-9]+}/updatePlayTime','movies::updatePlayTime','movies.updatePlayTime');
+    $router->addx('/movies/{movie:[0-9]+}/edit','movies::edit','movies.edit');
+    $router->addx('/movies/{movie:[0-9]+}/delete','movies::delete','movies.delete')->setMiddlewares([hasAuthority::over('movie')]);
 
-    $router->addGet('/channels','channels::index')->setName('channels.index');
-    $router->addGet('/channels/{channel:[0-9]+}','channels::show')->setName('channels.show');
-    $router->addPost('/channels/{channel:[0-9]+}/addComment','channels::addComment')->setName('channels.addComment')->setMiddlewares([isCommentValid::class]);
-    $router->addPost('/channels/{channel:[0-9]+}/edit','channels::edit')->setName('channels.edit');
+    $router->addGet('/channels','channels::index','channels.index');
+    $router->addGet('/channels/{channel:[0-9]+}','channels::show','channels.show');
+    $router->addPost('/channels/{channel:[0-9]+}/addComment','channels::addComment','channels.addComment')->setMiddlewares([isCommentValid::class]);
+    $router->addPost('/channels/{channel:[0-9]+}/edit','channels::edit','channels.edit');
 
-    $router->addGet('/playlists','playlists::index')->setName('playlists.index');
-    $router->addGet('/playlists/{playlist:[0-9]+}','playlists::show')->setName('playlists.show');
+    $router->addGet('/playlists','playlists::index','playlists.index');
+    $router->addGet('/playlists/{playlist:[0-9]+}','playlists::show','playlists.show');
     $router->addPost('/playlists/{playlist:[0-9]+}/addComment','playlists::addComment')->setName('playlists.addComment')->setMiddlewares([isCommentValid::class]);
     $router->addx('/playlists/{playlist:[0-9]+}/edit','playlists::edit')->setName('playlists.edit');
 
