@@ -71,6 +71,26 @@ class Taggables extends myModel
         return $instance;
     }
 
+    public static function findByObject(myModel $object)
+    {
+        return static :: query()
+            ->where('taggable_type = :type:',['type'=>get_class($object)])
+            ->andWhere('taggable_id = :id:',['id'=>$object->id])
+            ->execute();
+    }
+    public static function findByTag(Tags $tag)
+    {
+        return static :: query()
+            ->where('tag_id = :tag:',['tag'=>$tag->id])
+            ->execute();
+    }
+    public static function findByUser(Users $user){
+        return static :: query()
+            ->where('user_id = :user:',['user'=>$user->id])
+            ->execute();
+    }
+
+
     /**
      * Initialize method for model.
      */

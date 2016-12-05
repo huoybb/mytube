@@ -49,6 +49,18 @@ class Playlistables extends \Phalcon\Mvc\Model
         return $instance;
     }
 
+    public static function findByMovie(Movies $movie){
+        return static :: query()
+            ->where('movie_id = :movie:',['movie'=>$movie->id])
+            ->execute();
+    }
+
+    public static function findByPlaylist(Playlists $playlist){
+        return static :: query()
+            ->where('playlist_id = :playlist:',['playlist'=>$playlist->id])
+            ->execute();
+    }
+
     /**
      * Initialize method for model.
      */
