@@ -36,6 +36,11 @@ class TagsPresenter extends \core\myPresenter
         $url = $this->url->get(['for'=>'tags.edit','tag'=>$this->entity->id]);
         return $this->createLink($url,'编辑');
     }
+    public function description()
+    {
+        return "<pre>{$this->entity->description}</pre>";
+    }
+
 
 
 }
