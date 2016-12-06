@@ -12,4 +12,4 @@ video.ready ->
     url = location.href + '/updatePlayTime'
     data = {'playtime':this.currentTime(),'duration':this.duration()}
     $.post url,data if this.status is 'play'
-  , 2000
+  , 5000

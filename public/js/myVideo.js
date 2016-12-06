@@ -28,7 +28,7 @@
           return $.post(url, data);
         }
       };
-    })(this), 2000);
+    })(this), 5000);
   });
 
 }).call(this);
