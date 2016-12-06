@@ -63,11 +63,19 @@ class Tags extends myModel
 
     public static function findByTaggedObject(myModel $object)
     {
-        return static :: query()
+        $rowsets = static :: query()
             ->leftJoin('Taggables','Tags.id = Taggables.tag_id')
             ->where('taggable_type = :type:',['type'=>get_class($object)])
             ->andWhere('taggable_id = :id:',['id'=>$object->id])
+            ->groupBy('Tags.id')
+            ->columns(['Tags.*','count(Tags.id) as count'])
             ->execute();
+        $result = [];
+        foreach($rowsets as $row){
+            $row->tags->count = $row->count;
+            $result[]=$row->tags;
+        }
+        return $result;
     }
 
     public static function getLastesByUser(Users $user)

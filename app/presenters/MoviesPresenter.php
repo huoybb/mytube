@@ -48,7 +48,7 @@ class MoviesPresenter extends \core\myPresenter
         $result = '';
         foreach($this->entity->getTags() as $tag){
             $url = $this->url->get(['for'=>'tags.show','tag'=>$tag->id]);
-            $result .= ' '.$this->createLink($url,$tag->name,'btn btn-primary btn-xs');
+            $result .= ' '.$this->createLink($url,$tag->name."({$tag->count})",'btn btn-primary btn-xs');
         }
         return $result;
     }
