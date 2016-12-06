@@ -52,7 +52,7 @@ class myRouter extends Router{
      * @param array $middleware
      * @return myRoute
      */
-    public function addx($pattern,$path,$routeName=null,array $middleware=[],$httpMethods = null)//给路由添加中间件
+    public function addx(string $pattern,string $path,string $routeName=null,array $middleware=[],$httpMethods = null)//给路由添加中间件
     {
         $route = $this->add($pattern,$path,$httpMethods);
         if($routeName) $route->setName($routeName);

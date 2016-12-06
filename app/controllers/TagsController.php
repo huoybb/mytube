@@ -4,7 +4,7 @@ class TagsController extends ControllerBase
 {
     public function indexAction()
     {
-        $this->view->tags = Tags::find();
+        $this->view->tags = Tags::getLastesByUser($this->auth->user());
     }
 
     public function showAction(Tags $tag)

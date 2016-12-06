@@ -70,6 +70,23 @@ class Tags extends myModel
             ->execute();
     }
 
+    public static function getLastesByUser(Users $user)
+    {
+        $rowsets = static :: query()
+            ->rightJoin(Taggables::class,'taggable.tag_id = Tags.id','taggable')
+            ->where('taggable.user_id = :user:',['user'=>$user->id])
+            ->groupBy('Tags.id')
+            ->orderBy('Tags.created_at DESC')
+            ->columns(['Tags.*','count(Tags.id) AS count'])
+            ->execute();
+        $result = [];
+        foreach($rowsets as $row){
+            $row->tags->count = $row->count;
+            $result[] = $row->tags;
+        }
+        return $result;
+    }
+
     /**
      * Initialize method for model.
      */

@@ -14,6 +14,7 @@ class TagsPresenter extends \core\myPresenter
     protected $entity;
     public function count()
     {
+        if(property_exists($this->entity,'count')) return $this->entity->count;
         return $this->entity->getTaggedObjects()->count();
     }
     public function title()
