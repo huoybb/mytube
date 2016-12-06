@@ -107,6 +107,13 @@ class Playlists extends \core\myModel
             ->execute();
     }
 
+    public static function getLastes()
+    {
+        return static :: query()
+            ->orderBy('updated_at DESC')
+            ->execute();
+    }
+
     /**
      * Initialize method for model.
      */

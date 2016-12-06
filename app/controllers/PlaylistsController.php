@@ -5,7 +5,7 @@ class PlaylistsController extends ControllerBase
 
     public function indexAction()
     {
-        $this->view->playlists = Playlists::find();
+        $this->view->playlists = Playlists::getLastes();
     }
     public function showAction(Playlists $playlist)
     {
