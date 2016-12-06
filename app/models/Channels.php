@@ -84,6 +84,13 @@ class Channels extends \core\myModel
         return $instance;
     }
 
+    public static function getLatest()
+    {
+        return static::query()
+            ->orderBy('updated_at DESC')
+            ->execute();
+    }
+
     /**
      * Returns table name mapped in the model.
      *

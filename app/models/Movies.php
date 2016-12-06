@@ -133,6 +133,7 @@ class Movies extends \core\myModel
     {
         return static::query()
             ->where('channel_id like :channel:',['channel'=>$channel->id])
+            ->orderBy('updated_at DESC')
             ->execute();
     }
 

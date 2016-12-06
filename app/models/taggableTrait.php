@@ -17,7 +17,7 @@ trait taggableTrait
         $tagged_class = static::class;
         $condition = "taggable.taggable_id = {$tagged_class}.id AND taggable.taggable_type = '{$tagged_class}' ";
         return static :: query()
-            ->rightJoin(Taggables::class,$condition,'taggable')
+            ->leftJoin(Taggables::class,$condition,'taggable')
             ->where("taggable.tag_id = :tag:",['tag'=>$tag->id])
             ->andWhere('taggable.user_id = :user:',['user'=>auth()->user()->id])
             ->execute();

@@ -29,6 +29,12 @@ class PlaylistsController extends ControllerBase
         $playlist->updateFromYoutube();
         return $this->redirectBack();
     }
+    public function addTagAction(Playlists $playlist)
+    {
+        $playlist->addTag($this->request->get('name'));
+        return $this->redirectBack();
+    }
+
 
 
 

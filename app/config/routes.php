@@ -32,6 +32,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addPost('/playlists/{playlist:[0-9]+}/addComment','playlists::addComment')->setName('playlists.addComment')->setMiddlewares([isCommentValid::class]);
     $router->addx('/playlists/{playlist:[0-9]+}/edit','playlists::edit')->setName('playlists.edit');
     $router->addx('/playlists/{playlist:[0-9]+}/updateFromYoutube','playlists::updateFromYoutube')->setName('playlists.updateFromYoutube');
+    $router->addx('/playlists/{playlist:[0-9]+}/addTag','playlists::addTag')->setName('playlists.addTag')->setMiddlewares(isTagValid::class);
 
     $router->addx('/logout','auth::logout')->setName('logout');
     $router->addGet('/myLatestComments','auth::latestComments')->setName('myLatestComments');

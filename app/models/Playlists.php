@@ -6,6 +6,7 @@ class Playlists extends \core\myModel
 {
     use \core\myPresenterTrait;
     use CommentableTrait;
+    use taggableTrait;
 
     /**
      *
@@ -104,6 +105,7 @@ class Playlists extends \core\myModel
     {
         return static :: query()
             ->where('channel_id = :channel:',['channel'=>$channel->id])
+            ->orderBy('updated_at DESC')
             ->execute();
     }
 
@@ -176,6 +178,7 @@ class Playlists extends \core\myModel
             'youtube'=>'Youtube',
             'channel'=>'所属频道',
             'lastUpdated'=>'更新时间',
+            'tags'=>'标签',
             'operation'=>'操作',
         ];
     }

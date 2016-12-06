@@ -5,7 +5,7 @@ class ChannelsController extends ControllerBase
 
     public function indexAction()
     {
-        $this->view->channels = Channels::find();
+        $this->view->channels = Channels::getLatest();
     }
     public function showAction(Channels $channel)
     {

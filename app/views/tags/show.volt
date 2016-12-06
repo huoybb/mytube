@@ -7,8 +7,11 @@
     {% include 'layouts/info' with ['Owner':mytag] %}
 
 
-    <h2>视频 <span class="badge">{{ mytag.getTaggedObjects().count() }}</span></h2>
-    {% include 'index/partials/movielist' with ['movies':mytag.getTaggedObjects()]  %}
+    {% include 'tags/partials/list.volt' %}
+    {% include 'tags/partials/movie.volt' %}
+
+
+
     {% include 'layouts/commentList' with ['commentOwner':mytag,'commentFormUrl':url(['for':'tags.addComment','tag':mytag.id])] %}
 {% endblock %}
 

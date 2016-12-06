@@ -30,8 +30,9 @@ class myRoute
         $this->route->setName($name);
         return $this;
     }
-    public function setMiddlewares(array $middlewares)
+    public function setMiddlewares($middlewares)
     {
+        if(is_string($middlewares)) $middlewares = [$middlewares];
         $this->myRouter->setRouteMiddlewares($this->route,$middlewares);
     }
 
