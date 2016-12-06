@@ -98,6 +98,7 @@ class myRouter extends Router{
             $middleWares = $this->getMiddleWares($route->getRouteId());
             foreach($middleWares as $middleWareString){
                 list($data,$validator) = $this->getValidatorAndData($middleWareString,$dispatcher);
+                if(method_exists($validator,'before') && $validator->before()) return true;
                 if(! $validator->isValid($data)) return false;
             }
         }
@@ -267,5 +268,7 @@ class myRouter extends Router{
         if(!empty($this->stack)) $middleware = array_merge($middleware,$this->stack[0]);
         return $middleware;
     }
+
+
 
 } 

@@ -8,10 +8,14 @@
  */
 class hasAuthority extends \core\myMiddleware
 {
+    public function before()
+    {
+        //管理员有一切权利
+        if(auth()->isAdmin()) return true;
+    }
 
     public function isValid($object): bool
     {
-        if(auth()->isAdmin()) return true;
         if(auth()->owns($object)) return true;
 
         $this->flash->error('你没有权限进行“修改或删除”操作');
