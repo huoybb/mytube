@@ -3,7 +3,7 @@
     我的标签-我的视频
 {% endblock %}
 {% block content %}
-    <h1>我的标签</h1>
+    <h1>我的标签<span class="badge">{{ tags | length }}</span></h1>
     <table class="table table-hover">
         <tr>
             <th>#</th>

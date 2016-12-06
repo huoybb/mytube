@@ -3,7 +3,7 @@
     频道首页-我的视频
 {% endblock %}
 {% block content %}
-    <h1>频道首页</h1>
+    <h1>频道首页<span class="badge">{{ channels | length }}</span></h1>
     <table class="table table-hover">
         <tr>
             <th>#</th>

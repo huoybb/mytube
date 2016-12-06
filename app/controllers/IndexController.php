@@ -16,6 +16,7 @@ class IndexController extends ControllerBase
 //            }
 //        }
         $this->view->movies = Movies::getlatest();
+        $this->view->moviesTotal = Movies::count();
     }
     public function notFoundAction()
     {

@@ -16,6 +16,12 @@ class CommentsController extends ControllerBase
         }
         $this->view->comment = $comment;
     }
+    public function deleteAction(Comments $comment)
+    {
+        $comment->delete();
+        return $this->redirectBack();
+    }
+
 
 }
 
