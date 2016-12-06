@@ -11,7 +11,8 @@ class hasAuthority extends \core\myMiddleware
 
     public function isValid($object): bool
     {
-        if($this->auth->owns($object)) return true;
+        if(auth()->isAdmin()) return true;
+        if(auth()->owns($object)) return true;
 
         $this->flash->error('你没有权限进行“修改或删除”操作');
         $this->redirectBack();

@@ -14,13 +14,12 @@ trait taggableTrait
      * @return mixed
      */
     public static function findByTag(Tags $tag){
-        $user = \Phalcon\Di::getDefault()->get('auth')->user();
         $tagged_class = static::class;
         $condition = "taggable.taggable_id = {$tagged_class}.id AND taggable.taggable_type = '{$tagged_class}' ";
         return static :: query()
             ->rightJoin(Taggables::class,$condition,'taggable')
             ->where("taggable.tag_id = :tag:",['tag'=>$tag->id])
-            ->andWhere('taggable.user_id = :user:',['user'=>$user->id])
+            ->andWhere('taggable.user_id = :user:',['user'=>auth()->user()->id])
             ->execute();
     }
     /**

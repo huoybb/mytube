@@ -26,9 +26,8 @@ trait CommentableTrait
     public function addComment(array $data)
     {
         /** @var \core\myModel $this */
-        $user = Di::getDefault()->get('auth')->user();
         $data = array_merge($data,[
-            'user_id'=>$user->id,
+            'user_id'=>auth()->user()->id,
             'commentable_type'=>get_class($this),
             'commentable_id'=>$this->id,
         ]);

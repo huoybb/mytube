@@ -126,4 +126,9 @@ class myAuth implements \Phalcon\Di\InjectionAwareInterface
         return $object->user_id == $this->user()->id;
     }
 
+    public function isAdmin()
+    {
+        return $this->user()->id == 1;
+    }
+
 }

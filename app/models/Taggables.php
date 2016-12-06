@@ -58,14 +58,13 @@ class Taggables extends myModel
 
     public static function findOrCreateByObjects(Tags $tag, myModel $object)
     {
-        $user = \Phalcon\Di::getDefault()->get('auth')->user();
         $instance = static :: findByTagAndObject($tag,$object);
         if(! $instance){
             $instance = static::saveNew([
                 'tag_id'        =>$tag->id,
                 'taggable_type' =>get_class($object),
                 'taggable_id'   =>$object->id,
-                'user_id'       =>$user->id,
+                'user_id'       =>auth()->user()->id,
             ]);
         }
         return $instance;
@@ -133,12 +132,11 @@ class Taggables extends myModel
 
     public static function findByTagAndObject($tag, $object)
     {
-        $user = \Phalcon\Di::getDefault()->get('auth')->user();
         return static::query()
             ->where('tag_id = :tag:',['tag'=>$tag->id])
             ->andWhere('taggable_type = :type:',['type'=>get_class($object)])
             ->andWhere('taggable_id = :id:',['id'=>$object->id])
-            ->andWhere('user_id = :user:',['user'=>$user->id])
+            ->andWhere('user_id = :user:',['user'=>auth()->user()->id])
             ->execute()->getFirst();
     }
 
