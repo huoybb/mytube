@@ -31,21 +31,31 @@ class Playlistables extends \Phalcon\Mvc\Model
      */
     public $index;
 
-    public static function findOrNewByData(Playlists $playlist,Movies $movie, $index=null)
+    /**
+     * @param $playlist
+     * @param $movie
+     * @return Playlists
+     */
+    public static function findByPlaylistAndMovie($playlist, $movie)
     {
-        $instance = static :: query()
+        return static :: query()
             ->where('playlist_id = :playlist:',['playlist'=>$playlist->id])
             ->andWhere('movie_id = :movie:',['movie'=>$movie->id])
             ->execute()->getFirst();
+    }
+
+    public static function UpdateOrNewByData(Playlists $playlist, Movies $movie, $index=null)
+    {
+
+        $instance = static :: findByPlaylistAndMovie($playlist,$movie);
         if(!$instance){
             $instance = new static([
                 'playlist_id'=>$playlist->id,
                 'movie_id'=>$movie->id,
-                'index'=>$index
             ]);
-            $instance->save();
-
         }
+        $instance->index = $index;
+        $instance->save();
         return $instance;
     }
 
@@ -100,5 +110,7 @@ class Playlistables extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
+
+
 
 }

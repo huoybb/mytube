@@ -24,6 +24,12 @@ class PlaylistsController extends ControllerBase
         }
         $this->view->playlist = $playlist;
     }
+    public function updateFromYoutubeAction(Playlists $playlist)
+    {
+        $playlist->updateFromYoutube();
+        return $this->redirectBack();
+    }
+
 
 
 

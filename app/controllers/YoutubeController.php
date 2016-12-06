@@ -12,7 +12,7 @@ class YoutubeController extends ControllerBase
     public function getListAction($key)
     {
         $playlist = Playlists::findOrDownloadByKey($key);
-        dd($playlist);//后续将列表的视图也要搞出来
+        return $this->redirect(['for'=>'playlists.show','playlist'=>$playlist->id]);
     }
 
 }

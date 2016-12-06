@@ -140,6 +140,7 @@ class Movies extends \core\myModel
     {
         return static::query()
             ->rightJoin(Playlistables::class,'p2m.movie_id = Movies.id','p2m')
+            ->orderBy('p2m.index')
             ->where('p2m.playlist_id = :id:',['id'=>$playlist->id])
             ->execute();
     }

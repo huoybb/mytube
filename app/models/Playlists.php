@@ -68,7 +68,7 @@ class Playlists extends \core\myModel
             //处理列表下的视频关系
             foreach($data['movies'] as $movie_url){
                 list($movie,$index) = static::parseMovieUrl($movie_url);
-                if($movie) Playlistables::findOrNewByData($instance,$movie,$index);
+                if($movie) Playlistables::UpdateOrNewByData($instance,$movie,$index);
             }
         }
         return $instance;
@@ -164,6 +164,17 @@ class Playlists extends \core\myModel
             'lastUpdated'=>'更新时间',
             'operation'=>'操作',
         ];
+    }
+
+    public function updateFromYoutube()
+    {
+        $data =  youtube::getListInfo($this->key);
+        //更新列表下的视频的关系
+        foreach($data['movies'] as $movie_url){
+            list($movie,$index) = static::parseMovieUrl($movie_url);
+            if($movie) Playlistables::UpdateOrNewByData($this,$movie,$index);
+        }
+        return $this;
     }
 
 
