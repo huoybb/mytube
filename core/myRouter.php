@@ -282,15 +282,18 @@ class myRouter extends Router{
 
         if($this->parameterHasClassHint($parameter)){
             $className = $this->getProvider($parameter->getClass()->name);
-            if($objectId){
-                if(is_subclass_of($className,\Phalcon\Mvc\Model::class)) {
-                    return  $className::findFirst($objectId);
-                }
-                return  new $className($objectId);
-            }
+
+            if($objectId) return $this->instantiateClassWithID($className,$objectId);
             return new $className;
         }
         return  $objectId;
+    }
+    private function instantiateClassWithID($className, $objectId)
+    {
+        if(is_subclass_of($className,\Phalcon\Mvc\Model::class)) {
+            return  $className::findFirst($objectId);
+        }
+        return  new $className($objectId);
     }
 
 
