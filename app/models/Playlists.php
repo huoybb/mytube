@@ -100,6 +100,13 @@ class Playlists extends \core\myModel
             ->execute();
     }
 
+    public static function findByChannel(Channels $channel)
+    {
+        return static :: query()
+            ->where('channel_id = :channel:',['channel'=>$channel->id])
+            ->execute();
+    }
+
     /**
      * Initialize method for model.
      */

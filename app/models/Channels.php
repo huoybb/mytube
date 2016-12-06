@@ -126,6 +126,11 @@ class Channels extends \core\myModel
             'operation'=>'操作',
         ];
     }
+    public function playlists()
+    {
+        return Playlists::findByChannel($this);
+    }
+
 
 
 }

@@ -11,6 +11,11 @@ class ChannelsController extends ControllerBase
     {
         $this->view->channel = $channel;
     }
+    public function showplaylistsAction(Channels $channel)
+    {
+        $this->view->channel = $channel;
+    }
+
 
     public function addCommentAction(Channels $channel)
     {
@@ -25,6 +30,7 @@ class ChannelsController extends ControllerBase
         }
         $this->view->channel = $channel;
     }
+
 
 
 }
