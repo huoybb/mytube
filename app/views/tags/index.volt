@@ -1,9 +1,9 @@
 {% extends 'index.volt' %}
 {% block title %}
-    标签首页-我的视频
+    我的标签-我的视频
 {% endblock %}
 {% block content %}
-    <h1>标签首页</h1>
+    <h1>我的标签</h1>
     <table class="table table-hover">
         <tr>
             <th>#</th>

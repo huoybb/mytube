@@ -42,7 +42,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/tags','tags::index')->setName('tags.index');
     $router->addGet('/tags/{tag:[0-9]+}','tags::show')->setName('tags.show');
     $router->addPost('/tags/{tag:[0-9]+}/addComment','tags::addComment')->setName('tags.addComment')->setMiddlewares([isCommentValid::class]);
-    $router->addx('/tags/{tag:[0-9]+}/edit','tags::edit')->setName('tags.edit');
+    $router->addx('/tags/{tag:[0-9]+}/edit','tags::edit')->setName('tags.edit')->setMiddlewares([hasAuthority::over('tag')]);
 });
 
 $router->addGet('/getYoutube/{key}','youtube::getMovie')->setName('youtube.getMovie');
