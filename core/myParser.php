@@ -2,40 +2,38 @@
 /**
  * Created by PhpStorm.
  * User: ThinkPad
- * Date: 2016/5/25
- * Time: 6:59
+ * Date: 2016/6/11
+ * Time: 19:07
  */
 
-namespace webParser;
+namespace core;
 
 use Goutte\Client;
-
-class myParser
+abstract class myParser
 {
-    protected $client;
+    protected $crawler;
 
     /**
-     * myParser constructor.
-     * @param $client
+     * serialParser constructor.
+     * @param $crawler
      */
-    public function __construct(Client $client = null)
+    public function __construct($url)
     {
-        $this->client = $client ?: new Client();
+        $this->crawler = $this->getCrawler($url);
     }
-
+    abstract public function parse();
     /**
      * @param $url
      * @return \Symfony\Component\DomCrawler\Crawler
      */
-    public static function getCrawler($url)
+    public function getCrawler($url)
     {
-        $parser = (new self(new Client()));
-        
+        $client  = new Client();
         //下面两行，避免了SSL的验证，在正式的web环境中已经设置了，但在命令行中可以直接取消掉验证
         $httpClient = new \GuzzleHttp\Client(array( 'curl' => array( CURLOPT_SSL_VERIFYPEER => false, ), ));
-        $parser->client->setClient($httpClient);
+        $client->setClient($httpClient);
 
-        $crawler = $parser->client->request('get',$url);
+        $crawler = $client->request('get',$url);
         return $crawler;
     }
 

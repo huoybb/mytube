@@ -9,9 +9,9 @@
 namespace webParser\youtube;
 
 
-use webParser\_pageParser;
+use core\myParser;
 
-class playlistParser extends _pageParser
+class playlistParser extends myParser
 {
     public function parse()
     {

@@ -106,6 +106,7 @@ class myRouter extends Router{
     }
 
     /**将router中参数，按照controller的中Action的类型参数进行绑定
+     * 基本原理是重新设置Dispatcher的参数，以便能够与Controller中的Action对应上
      * @param Dispatcher $dispatcher
      */
     public function executeModelBinding(Dispatcher $dispatcher)
@@ -113,29 +114,8 @@ class myRouter extends Router{
         $reflection = new ReflectionMethod($dispatcher->getControllerClass(), $dispatcher->getActiveMethod());
         $actionParams = [];
         foreach($reflection->getParameters() as $parameter){
-
-            $objectId = $dispatcher->getParam($parameter->name);
-            if(null == $objectId && $parameter->isDefaultValueAvailable()) $objectId = $parameter->getDefaultValue();
-
-            if($parameter->getClass()){
-                $className = $this->getProvider($parameter->getClass()->name);
-
-                if($objectId){
-                    if(is_subclass_of($className,\Phalcon\Mvc\Model::class)){
-                        /** @var \Phalcon\Mvc\Model $className */
-                        $actionParams[$parameter->name] = $className::findFirst($objectId);
-                    }else{
-                        $actionParams[$parameter->name] = new $className($objectId);
-                    }
-
-                }else{
-                    $actionParams[$parameter->name] = new $className;
-                }
-            }else{
-                $actionParams[$parameter->name] = $objectId;
-            }
+            $actionParams[$parameter->name] = $this->getParameterValue($parameter,$dispatcher);
         }
-
         if(count($actionParams)){
             $dispatcher->setParams($actionParams);
         }
@@ -269,6 +249,49 @@ class myRouter extends Router{
         return $middleware;
     }
 
+    private function getParameterValueFromDispatcher(\ReflectionParameter $parameter, Dispatcher $dispatcher)
+    {
+        return $dispatcher->getParam($parameter->name);;
+    }
+
+    /**
+     * @param $objectId
+     * @param $parameter
+     * @return bool
+     */
+    private function hasNoRouteValueAndHasDefaultParameterValue($objectId, \ReflectionParameter $parameter): bool
+    {
+        return null == $objectId && $parameter->isDefaultValueAvailable();
+    }
+
+    private function getRouteValueOrDefaultValue(\ReflectionParameter $parameter, Dispatcher $dispatcher)
+    {
+        $objectId = $this->getParameterValueFromDispatcher($parameter,$dispatcher);
+        if($this->hasNoRouteValueAndHasDefaultParameterValue($objectId, $parameter)) $objectId = $parameter->getDefaultValue();
+        return $objectId;
+    }
+
+    private function parameterHasClassHint(\ReflectionParameter $parameter)
+    {
+        return $parameter->getClass();
+    }
+
+    private function getParameterValue(\ReflectionParameter $parameter, Dispatcher $dispatcher)
+    {
+        $objectId = $this->getRouteValueOrDefaultValue($parameter,$dispatcher);
+
+        if($this->parameterHasClassHint($parameter)){
+            $className = $this->getProvider($parameter->getClass()->name);
+            if($objectId){
+                if(is_subclass_of($className,\Phalcon\Mvc\Model::class)) {
+                    return  $className::findFirst($objectId);
+                }
+                return  new $className($objectId);
+            }
+            return new $className;
+        }
+        return  $objectId;
+    }
 
 
-} 
+}
