@@ -17,8 +17,7 @@ class gateProvider extends myProvider
     public function register($name)
     {
         $this->di->setShared($name,function(){
-            /** @var myDI $this */
-            return include $this->get('config')->get('configDir').'policyGate.php';
+            return include APP_PATH . "/app/config/policyGate.php";
         });
     }
 }
