@@ -12,6 +12,13 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
 
 /**
+ * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
+ */
+//    $di = new FactoryDefault();
+$di = new \core\myDI();
+
+
+/**
  * Shared configuration service
  */
 $di->setShared('config', function () {
@@ -162,3 +169,5 @@ $di->setShared("crypt",function () {
     $crypt->setKey('%31.1e$i86e$f!8jz');
     return $crypt;
 });
+
+return $di;

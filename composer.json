@@ -13,6 +13,7 @@
         "files": ["app/config/helper.php"],
         "psr-4": {
             "webParser\\": "app/webParser/",
+            "serviceProviders\\": "app/serviceProviders/",
             "core\\":"core/"
         }
     }

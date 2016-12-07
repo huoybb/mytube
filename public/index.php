@@ -1,29 +1,30 @@
 <?php
-use Phalcon\Di\FactoryDefault;
-
 error_reporting(E_ALL);
 
 define('APP_PATH', realpath('..'));
-function getMyEnv(){
-    return 'web';
+/**
+ * 便于区分web，Cli等不同运行环境设置的函数
+ */
+if(! function_exists('getMyEnv')){
+    /**
+     * @return string
+     */
+    function getMyEnv(){
+        return 'web';
+    }
 }
 
 try {
-    /*
+    /**
      * 加载composer
      */
     require APP_PATH .'/vendor/autoload.php';
 
     /**
-     * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
+     * 设置并加载Di服务
      */
-//    $di = new FactoryDefault();
-    $di = new \core\myDI();
 
-    /**
-     * Read services
-     */
-    include APP_PATH . "/app/config/services.php";
+    $di = include APP_PATH . "/app/config/services.php";
 
     /**
      * Call the autoloader service.  We don't need to keep the results.
