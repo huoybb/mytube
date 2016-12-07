@@ -17,7 +17,8 @@ try {
     /**
      * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
      */
-    $di = new FactoryDefault();
+//    $di = new FactoryDefault();
+    $di = new \core\myDI();
 
     /**
      * Read services

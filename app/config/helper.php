@@ -11,5 +11,5 @@
  */
 function auth()
 {
-    return \Phalcon\Di::getDefault()->get('auth');
+    return \core\myDI::getDefault()->get('auth');
 }
