@@ -18,7 +18,7 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     }
     public function channel()
     {
-        $url = $this->url->get(['for'=>'channels.show','channel'=>$this->entity->channel_id]);
+        $url = $this->url(['for'=>'channels.show','channel'=>$this->entity->channel_id]);
         $title = $this->entity->channel_title;
 //        return "<a href='{$url}' target='_blank'>{$title}</a>";
         return $this->createLink($url,$title);
@@ -47,7 +47,7 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     {
         $result = '';
         foreach($this->entity->getTags() as $tag){
-            $url = $this->url->get(['for'=>'tags.show','tag'=>$tag->id]);
+            $url = $this->url(['for'=>'tags.show','tag'=>$tag->id]);
             $result .= ' '.$this->createLink($url,$tag->name."({$tag->count})",'btn btn-primary btn-xs');
         }
         return $result;
@@ -55,12 +55,12 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
 
     public function showLink()
     {
-        $url = $this->url->get(['for'=>'movies.show','movie'=>$this->entity->id]);
+        $url = $this->url(['for'=>'movies.show','movie'=>$this->entity->id]);
         return $this->createLink($url,$this->entity->title);
     }
     public function type()
     {
-        $url = $this->url->get(['for'=>'home']);
+        $url = $this->url(['for'=>'home']);
         return "<a href='{$url}' class='btn btn-danger btn-xs'>视频</a>";
     }
 
@@ -74,9 +74,9 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     public function operation()
     {
         $result = '';
-        $url = $this->url->get(['for'=>'movies.edit','movie'=>$this->entity->id]);
+        $url = $this->url(['for'=>'movies.edit','movie'=>$this->entity->id]);
         $result .= $this->createLink($url,'编辑',"btn btn-warning btn-xs");
-        $url = $this->url->get(['for'=>'movies.delete','movie'=>$this->entity->id]);
+        $url = $this->url(['for'=>'movies.delete','movie'=>$this->entity->id]);
         $result .= ' '.$this->createLink($url,'删除',"btn btn-danger btn-xs");
         return $result;
     }
@@ -84,8 +84,8 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     public function breadcrumbs()
     {
         $nav = [
-            ['url'=>$this->url->get(['for'=>'home']),'value'=>'首页','isActive'=>false],
-            ['url'=>$this->url->get(['for'=>'home']),'value'=>'视频','isActive'=>false],
+            ['url'=>$this->url(['for'=>'home']),'value'=>'首页','isActive'=>false],
+            ['url'=>$this->url(['for'=>'home']),'value'=>'视频','isActive'=>false],
             ['url'=>'','value'=>$this->entity->title,'isActive'=>true],
         ];
         return $this->buildBreadcrumbs($nav);

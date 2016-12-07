@@ -9,7 +9,9 @@
 /**
  * @return \core\myAuth
  */
-function auth()
-{
+function auth(){
     return \core\myDI::getDefault()->get('auth');
+}
+function url(array $routeArray){
+    return \core\myDI::getDefault()->get('url')->get($routeArray);
 }

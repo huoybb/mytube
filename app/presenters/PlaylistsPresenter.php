@@ -14,13 +14,13 @@ class PlaylistsPresenter extends \core\myPresenter implements youtubeLinkInterfa
     protected $entity;
     public function showLink()
     {
-        $url = $this->url->get(['for'=>'playlists.show','playlist'=>$this->entity->id]);
+        $url = $this->url(['for'=>'playlists.show','playlist'=>$this->entity->id]);
         return $this->createLink($url,$this->entity->title);
     }
     public function channel()
     {
         $channel = Channels::findFirst($this->entity->channel_id);
-        $url = $this->url->get(['for'=>'channels.show','channel'=>$channel->id]);
+        $url = $this->url(['for'=>'channels.show','channel'=>$channel->id]);
         return $this->createLink($url,$channel->title);
     }
     public function count()
@@ -33,7 +33,7 @@ class PlaylistsPresenter extends \core\myPresenter implements youtubeLinkInterfa
     }
     public function type()
     {
-        $url = $this->url->get(['for'=>'playlists.index']);
+        $url = $this->url(['for'=>'playlists.index']);
         return "<a href='{$url}' class='btn btn-primary btn-xs'>列表</a>";
     }
 
@@ -45,9 +45,9 @@ class PlaylistsPresenter extends \core\myPresenter implements youtubeLinkInterfa
     }
     public function operation()
     {
-        $url = $this->url->get(['for'=>'playlists.edit','playlist'=>$this->entity->id]);
+        $url = $this->url(['for'=>'playlists.edit','playlist'=>$this->entity->id]);
         $result = $this->createLink($url,'编辑');
-        $url = $this->url->get(['for'=>'playlists.updateFromYoutube','playlist'=>$this->entity->id]);
+        $url = $this->url(['for'=>'playlists.updateFromYoutube','playlist'=>$this->entity->id]);
         $result .= ' '.$this->createLink($url,'更新');
         return $result;
     }
@@ -56,7 +56,7 @@ class PlaylistsPresenter extends \core\myPresenter implements youtubeLinkInterfa
     {
         $result = '';
         foreach($this->entity->getTags() as $tag){
-            $url = $this->url->get(['for'=>'tags.show','tag'=>$tag->id]);
+            $url = $this->url(['for'=>'tags.show','tag'=>$tag->id]);
             $result .= ' '.$this->createLink($url,$tag->name."({$tag->count})",'btn btn-primary btn-xs');
         }
         return $result;
@@ -66,8 +66,8 @@ class PlaylistsPresenter extends \core\myPresenter implements youtubeLinkInterfa
     public function breadcrumbs()
     {
         $nav = [
-            ['url'=>$this->url->get(['for'=>'home']),'value'=>'首页','isActive'=>false],
-            ['url'=>$this->url->get(['for'=>'playlists.index']),'value'=>'列表','isActive'=>false],
+            ['url'=>$this->url(['for'=>'home']),'value'=>'首页','isActive'=>false],
+            ['url'=>$this->url(['for'=>'playlists.index']),'value'=>'列表','isActive'=>false],
             ['url'=>'','value'=>$this->entity->title,'isActive'=>true],
         ];
         return $this->buildBreadcrumbs($nav);

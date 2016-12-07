@@ -30,24 +30,24 @@ class ChannelsPresenter extends \core\myPresenter implements youtubeLinkInterfac
     }
     public function showLink()
     {
-        $url = $this->url->get(['for'=>'channels.show','channel'=>$this->entity->id]);
+        $url = $this->url(['for'=>'channels.show','channel'=>$this->entity->id]);
         return $this->createLink($url,$this->entity->title);
     }
     public function type()
     {
-        $url = $this->url->get(['for'=>'channels.index']);
+        $url = $this->url(['for'=>'channels.index']);
         return "<a href='{$url}' class='btn btn-warning btn-xs'>频道</a>";
     }
     public function operation()
     {
-        $url = $this->url->get(['for'=>'channels.edit','channel'=>$this->entity->id]);
+        $url = $this->url(['for'=>'channels.edit','channel'=>$this->entity->id]);
         return $this->createLink($url,'编辑');
     }
     public function breadcrumbs()
     {
         $nav = [
-            ['url'=>$this->url->get(['for'=>'home']),'value'=>'首页','isActive'=>false],
-            ['url'=>$this->url->get(['for'=>'channels.index']),'value'=>'频道','isActive'=>false],
+            ['url'=>$this->url(['for'=>'home']),'value'=>'首页','isActive'=>false],
+            ['url'=>$this->url(['for'=>'channels.index']),'value'=>'频道','isActive'=>false],
             ['url'=>'','value'=>$this->entity->title,'isActive'=>true],
         ];
         return $this->buildBreadcrumbs($nav);

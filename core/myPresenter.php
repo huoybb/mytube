@@ -82,4 +82,7 @@ abstract class myPresenter
         $result .= '</ol>';
         return $result;
     }
+    protected function url(array $routeArray){
+        return $this->url->get($routeArray);
+    }
 }
