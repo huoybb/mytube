@@ -1,6 +1,6 @@
 <?php
 
-class YoutubeController extends ControllerBase
+class YoutubeController extends \core\myController
 {
 
     public function getMovieAction($key)

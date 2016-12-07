@@ -1,6 +1,6 @@
 <?php
 
-class CommentsController extends ControllerBase
+class CommentsController extends \core\myController
 {
 
     public function showAction(Comments $comment)

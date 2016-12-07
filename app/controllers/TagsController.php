@@ -1,6 +1,6 @@
 <?php
 
-class TagsController extends ControllerBase
+class TagsController extends \core\myController
 {
     public function indexAction()
     {

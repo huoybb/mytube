@@ -1,6 +1,6 @@
 <?php
 
-class MoviesController extends ControllerBase
+class MoviesController extends \core\myController
 {
 
     public function showAction(Movies $movie)

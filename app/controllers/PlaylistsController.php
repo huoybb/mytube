@@ -1,6 +1,6 @@
 <?php
 
-class PlaylistsController extends ControllerBase
+class PlaylistsController extends \core\myController
 {
 
     public function indexAction()

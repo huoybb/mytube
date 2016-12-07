@@ -1,6 +1,6 @@
 <?php
 
-class ChannelsController extends ControllerBase
+class ChannelsController extends \core\myController
 {
 
     public function indexAction()

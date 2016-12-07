@@ -1,6 +1,6 @@
 <?php
 
-class AuthController extends ControllerBase
+class AuthController extends \core\myController
 {
 
     public function registerAction()

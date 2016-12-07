@@ -8,7 +8,6 @@ namespace core;
  */
 use Carbon\Carbon;
 use Closure;
-use Phalcon\Di;
 use Phalcon\Mvc\Model;
 
 abstract class myModel extends Model{
@@ -75,7 +74,7 @@ abstract class myModel extends Model{
      * @return myEventsManager
      */
     protected function getEventsManager() {
-        return Di::getDefault()->get('eventsManager');
+        return myDI::getDefault()->get('eventsManager');
     }
 
 } 

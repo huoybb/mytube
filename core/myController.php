@@ -1,15 +1,18 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: ThinkPad
+ * Date: 2016/12/8
+ * Time: 7:56
+ */
+
+namespace core;
+
 
 use Phalcon\Mvc\Controller;
 
-/**
- * Class ControllerBase
- * * @property \core\myEventsManager $eventsManager
- * * @property \core\myAuth $auth
- */
-class ControllerBase extends Controller
+class myController extends Controller
 {
-
     protected function redirectBack()
     {
         $url = $this->request->getServer('HTTP_REFERER');
