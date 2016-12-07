@@ -5,6 +5,7 @@ $loader = new \Phalcon\Loader();
 /**
  * We're a registering a set of directories taken from the configuration file
  */
+$config = $this->get('config');
 $loader->registerDirs(
     [
         $config->application->controllersDir,
@@ -15,4 +16,5 @@ $loader->registerDirs(
         $config->application->events,
         $config->application->eventsHandlers,
     ]
-)->register();
+);
+return $loader;

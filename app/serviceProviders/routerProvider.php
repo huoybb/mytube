@@ -19,7 +19,7 @@ class routerProvider extends myProvider
     {
         $this->di->setShared($name,function(){
             /** @var myDI $this */
-            return include $this->get('config')->get('configDir').'routes.php';
+            return include APP_PATH . '/app/config/routes.php';
         });
     }
 }

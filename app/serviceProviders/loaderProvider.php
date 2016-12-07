@@ -2,24 +2,22 @@
 /**
  * Created by PhpStorm.
  * User: ThinkPad
- * Date: 2016/6/6
- * Time: 17:08
+ * Date: 2016/12/8
+ * Time: 6:07
  */
 
 namespace serviceProviders;
 
 
-use core\myDI;
 use core\myProvider;
 
-class eventsManagerProvider extends myProvider
+class loaderProvider extends myProvider
 {
 
     public function register($name)
     {
         $this->di->setShared($name,function(){
-            /** @var myDI $this */
-            return include APP_PATH . '/app/config/events.php';
+            return include APP_PATH . '/app/config/loader.php';
         });
     }
 }

@@ -42,3 +42,14 @@ if (! function_exists('dd')) {
         die(1);
     }
 }
+/**
+ * 便于区分web，Cli等不同运行环境设置的函数
+ */
+if(! function_exists('getMyEnv')){
+    /**
+     * @return string
+     */
+    function getMyEnv(){
+        return 'web';
+    }
+}

@@ -25,7 +25,7 @@ class urlProvider extends myProvider
         $this->di->setShared($name, function () {
             /**@var myDI $this */
             $url = new UrlResolver();
-            $url->setBaseUri($this->get('config')->get('baseUri'));
+            $url->setBaseUri($this->get('config')->application->baseUri);
             return $url;
         });
     }
