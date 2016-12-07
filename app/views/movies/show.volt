@@ -9,6 +9,7 @@
     {% endif %}
 
     <div class="row">
+        {{ movie.present('breadcrumbs') }}
         <div class="col-md-10">
             <h1>视频：{{ movie.title }}</h1>
             {% include 'layouts/info' with ['Owner':movie] %}

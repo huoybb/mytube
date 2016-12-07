@@ -6,7 +6,7 @@
  * Date: 2016/12/1
  * Time: 15:42
  */
-class ChannelsPresenter extends \core\myPresenter
+class ChannelsPresenter extends \core\myPresenter implements youtubeLinkInterface, myEntityInterface
 {
     /**
      * @var Channels
@@ -43,8 +43,15 @@ class ChannelsPresenter extends \core\myPresenter
         $url = $this->url->get(['for'=>'channels.edit','channel'=>$this->entity->id]);
         return $this->createLink($url,'编辑');
     }
-
-
-
-
+    public function breadcrumbs()
+    {
+        $result = <<<EOF
+            <ol class="breadcrumb">
+              <li><a href="{$this->url->get(['for'=>'home'])}">首页</a></li>
+              <li><a href="{$this->url->get(['for'=>'channels.index'])}">频道</a></li>
+              <li class="active">{$this->entity->title}</li>
+            </ol>
+EOF;
+        return $result;
+    }
 }

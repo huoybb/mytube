@@ -3,6 +3,10 @@
     我的标签-我的视频
 {% endblock %}
 {% block content %}
+    <ol class="breadcrumb">
+        <li><a href="{{ url(['for':'home']) }}">首页</a></li>
+        <li class="active">标签</li>
+    </ol>
     <h1>我的标签<span class="badge">{{ tags | length }}</span></h1>
     <table class="table table-hover">
         <tr>

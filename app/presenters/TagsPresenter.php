@@ -6,7 +6,7 @@
  * Date: 2016/12/3
  * Time: 18:00
  */
-class TagsPresenter extends \core\myPresenter
+class TagsPresenter extends \core\myPresenter implements  myEntityInterface
 {
     /**
      * @var Tags
@@ -43,5 +43,15 @@ class TagsPresenter extends \core\myPresenter
     }
 
 
-
+    public function breadcrumbs()
+    {
+        $result = <<<EOF
+            <ol class="breadcrumb">
+              <li><a href="{$this->url->get(['for'=>'home'])}">首页</a></li>
+              <li><a href="{$this->url->get(['for'=>'tags.index'])}">标签</a></li>
+              <li class="active">{$this->entity->name}</li>
+            </ol>
+EOF;
+        return $result;
+    }
 }

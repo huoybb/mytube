@@ -3,6 +3,10 @@
     频道首页-我的视频
 {% endblock %}
 {% block content %}
+    <ol class="breadcrumb">
+        <li><a href="{{ url(['for':'home']) }}">首页</a></li>
+        <li class="active">频道</li>
+    </ol>
     <h1>频道首页<span class="badge">{{ channels | length }}</span></h1>
     <table class="table table-hover">
         <tr>

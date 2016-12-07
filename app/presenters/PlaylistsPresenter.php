@@ -6,7 +6,7 @@
  * Date: 2016/12/4
  * Time: 17:42
  */
-class PlaylistsPresenter extends \core\myPresenter
+class PlaylistsPresenter extends \core\myPresenter implements youtubeLinkInterface, myEntityInterface
 {
     /**
      * @var Playlists
@@ -63,8 +63,15 @@ class PlaylistsPresenter extends \core\myPresenter
     }
 
 
-
-
-
-
+    public function breadcrumbs()
+    {
+        $result = <<<EOF
+            <ol class="breadcrumb">
+              <li><a href="{$this->url->get(['for'=>'home'])}">首页</a></li>
+              <li><a href="{$this->url->get(['for'=>'playlists.index'])}">列表</a></li>
+              <li class="active">{$this->entity->title}</li>
+            </ol>
+EOF;
+        return $result;
+    }
 }

@@ -3,6 +3,7 @@
     播放列表：{{ playlist.title }}-我的视频
 {% endblock %}
 {% block content %}
+    {{ playlist.present('breadcrumbs') }}
     <h1>播放列表：{{ playlist.title }}</h1>
     {% include 'layouts/info' with ['Owner':playlist] %}
 

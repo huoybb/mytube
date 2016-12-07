@@ -3,6 +3,7 @@
     频道：{{ channel.title }}-我的视频
 {% endblock %}
 {% block content %}
+    {{ channel.present('breadcrumbs') }}
     <h1>频道：{{ channel.title }}</h1>
     {% include 'layouts/info' with ['Owner':channel] %}
 

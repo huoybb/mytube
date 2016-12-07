@@ -6,7 +6,7 @@
  * Date: 2016/12/5
  * Time: 8:39
  */
-class CommentsPresenter extends \core\myPresenter
+class CommentsPresenter extends \core\myPresenter implements  myEntityInterface
 {
     /**
      * @var Comments
@@ -27,5 +27,23 @@ class CommentsPresenter extends \core\myPresenter
     }
 
 
+    public function showLink()
+    {
+        // TODO: Implement showLink() method.
+    }
 
+    public function type()
+    {
+        // TODO: Implement type() method.
+    }
+
+    public function operation()
+    {
+        // TODO: Implement operation() method.
+    }
+
+    public function breadcrumbs()
+    {
+        // TODO: Implement breadcrumbs() method.
+    }
 }

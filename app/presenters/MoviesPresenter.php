@@ -6,7 +6,7 @@
  * Date: 2016/11/30
  * Time: 19:18
  */
-class MoviesPresenter extends \core\myPresenter
+class MoviesPresenter extends \core\myPresenter implements myEntityInterface
 {
     /**
      * @var Movies
@@ -81,9 +81,15 @@ class MoviesPresenter extends \core\myPresenter
         return $result;
     }
 
-
-
-
-
-
+    public function breadcrumbs()
+    {
+        $result = <<<EOF
+            <ol class="breadcrumb">
+              <li><a href="{$this->url->get(['for'=>'home'])}">首页</a></li>
+              <li><a href="{$this->url->get(['for'=>'home'])}">视频</a></li>
+              <li class="active">{$this->entity->title}</li>
+            </ol>
+EOF;
+        return $result;
+    }
 }

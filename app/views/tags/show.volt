@@ -3,6 +3,7 @@
     标签：{{ mytag.name }}-我的视频
 {% endblock %}
 {% block content %}
+    {{ mytag.present('breadcrumbs') }}
     <h1>标签：{{ mytag.name }}</h1>
     {% include 'layouts/info' with ['Owner':mytag] %}
 
