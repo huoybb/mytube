@@ -20,8 +20,7 @@ class IndexController extends ControllerBase
     }
     public function notFoundAction()
     {
-        dd('没有找到路由');
-
+        dd('"'.$this->router->getRewriteUri().'"不是有效的路由，请检查routes.php文件，确认设置正确');
     }
 
     public function searchAction($search)

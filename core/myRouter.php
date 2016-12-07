@@ -90,8 +90,8 @@ class myRouter extends Router{
     public function executeMiddleWareChecking(Request $request, Response $response, Dispatcher $dispatcher)
     {
         $route = $this->getMatchedRoute();
-        if(null == $route){
-            die('url地址无效，找不到对应的路由设置！');
+        if(null == $route){//没有找到正确的路由，无效路由，可以由notFound函数来处理
+            return true;
         }
 
         if($this->hasMatchedMiddleWares($route->getRouteId())){
