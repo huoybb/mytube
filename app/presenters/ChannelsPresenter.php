@@ -45,13 +45,13 @@ class ChannelsPresenter extends \core\myPresenter implements youtubeLinkInterfac
     }
     public function breadcrumbs()
     {
-        $result = <<<EOF
-            <ol class="breadcrumb">
-              <li><a href="{$this->url->get(['for'=>'home'])}">首页</a></li>
-              <li><a href="{$this->url->get(['for'=>'channels.index'])}">频道</a></li>
-              <li class="active">{$this->entity->title}</li>
-            </ol>
-EOF;
-        return $result;
+        $nav = [
+            ['url'=>$this->url->get(['for'=>'home']),'value'=>'首页','isActive'=>false],
+            ['url'=>$this->url->get(['for'=>'channels.index']),'value'=>'频道','isActive'=>false],
+            ['url'=>'','value'=>$this->entity->title,'isActive'=>true],
+        ];
+        return $this->buildBreadcrumbs($nav);
     }
+
+
 }

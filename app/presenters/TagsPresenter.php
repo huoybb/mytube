@@ -45,13 +45,11 @@ class TagsPresenter extends \core\myPresenter implements  myEntityInterface
 
     public function breadcrumbs()
     {
-        $result = <<<EOF
-            <ol class="breadcrumb">
-              <li><a href="{$this->url->get(['for'=>'home'])}">首页</a></li>
-              <li><a href="{$this->url->get(['for'=>'tags.index'])}">标签</a></li>
-              <li class="active">{$this->entity->name}</li>
-            </ol>
-EOF;
-        return $result;
+        $nav = [
+            ['url'=>$this->url->get(['for'=>'home']),'value'=>'首页','isActive'=>false],
+            ['url'=>$this->url->get(['for'=>'tags.index']),'value'=>'标签','isActive'=>false],
+            ['url'=>'','value'=>$this->entity->name,'isActive'=>true],
+        ];
+        return $this->buildBreadcrumbs($nav);
     }
 }

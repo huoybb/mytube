@@ -64,4 +64,22 @@ abstract class myPresenter
     {
         return 'https://www.youtube.com' . $url;
     }
+
+    /**
+     * @param array $items
+     * $item = ['url','value','isActive']
+     */
+    protected function buildBreadcrumbs(array $items)
+    {
+        $result = '<ol class="breadcrumb">';
+        foreach ($items as $item) {
+            if ($item['isActive']) {
+                $result .= "<li class=\"active\">{$item['value']}</li>";
+            } else {
+                $result .= "<li><a href=\"{$item['url']}\">{$item['value']}</a></li>";
+            }
+        }
+        $result .= '</ol>';
+        return $result;
+    }
 }
