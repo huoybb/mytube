@@ -116,12 +116,16 @@ class Comments extends myModel
 
     public function commentable()
     {
-        $class = $this->commentable_type;
-        return $class::findFirst($this->commentable_id);
+        return $this->make('commentable',function(){
+            $class = $this->commentable_type;
+            return $class::findFirst($this->commentable_id);
+        });
     }
     public function user()
     {
-        return Users::findFirst($this->user_id);
+        return $this->make('user',function(){
+            return Users::findFirst($this->user_id);
+        });
     }
     public function infoArray()
     {

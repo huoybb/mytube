@@ -8,7 +8,9 @@
 
     <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="{{ url(['for':'channels.show','channel':channel.id]) }}">视频 <span class="badge">{{ channel.movies().count() }}</span></a></li>
-        <li role="presentation"><a href="{{ url(['for':'channels.showplaylists','channel':channel.id]) }}">播放列表</a></li>
+        {% if channel.hasAnyPlaylist() %}
+            <li role="presentation"><a href="{{ url(['for':'channels.showplaylists','channel':channel.id]) }}">播放列表</a></li>
+        {% endif %}
     </ul>
 
 

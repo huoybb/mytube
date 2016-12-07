@@ -201,21 +201,26 @@ class Movies extends \core\myModel
         ];
     }
 
-    protected $_file = null;
     public function getVideoFile()
     {
-        if(!$this->_file && $file = FileInfo::findFirstFile($this->title)){
-            $this->_file = str_replace('H:\\YouTubes\\','http://movies.mytube.zhaobing/',$file->getRealPath());
-        }
-        return $this->_file;
+        return $this->make('videoFile',function(){
+            if($file = FileInfo::findFirstFile($this->title)){
+                return str_replace('H:\\YouTubes\\','http://movies.mytube.zhaobing/',$file->getRealPath());
+            }
+            return null;
+        });
     }
     public function channel()
     {
-        return Channels::findFirst($this->channel_id);
+        return $this->make('channel',function(){
+            return Channels::findFirst($this->channel_id);
+        });
     }
     public function playlists()
     {
-        return Playlists::findByMovie($this);
+        return $this->make('playlists',function(){
+            return Playlists::findByMovie($this);
+        });
     }
     public function delete()
     {

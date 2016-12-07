@@ -170,7 +170,9 @@ class Playlists extends \core\myModel
 
     public function movies()
     {
-        return Movies::findByPlaylist($this);
+        return $this->make('movies',function(){
+            return Movies::findByPlaylist($this);
+        });
     }
     public function infoArray()
     {

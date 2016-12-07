@@ -124,7 +124,9 @@ class Channels extends \core\myModel
     }
     public function movies()
     {
-        return Movies::findByChannel($this);
+        return $this->make('movies',function(){
+            return Movies::findByChannel($this);
+        });
     }
     public function infoArray()
     {
@@ -135,8 +137,15 @@ class Channels extends \core\myModel
     }
     public function playlists()
     {
-        return Playlists::findByChannel($this);
+        return $this->make('playlists',function(){
+            return Playlists::findByChannel($this);
+        });
     }
+    public function hasAnyPlaylist()
+    {
+        return $this->playlists()->count() > 0;
+    }
+
 
 
 
