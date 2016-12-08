@@ -66,9 +66,12 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
 
     public function completed()
     {
-        if(!$this->entity->duration) return '0%';
-        $num = floor($this->entity->playtime/$this->entity->duration * 100);
-        return $num.'%';
+        if($this->entity->hasVideoFile){
+            if(!$this->entity->duration) return '0%';
+            $num = floor($this->entity->playtime/$this->entity->duration * 100);
+            return $num.'%';
+        }
+        return null;
     }
 
     public function operation()
