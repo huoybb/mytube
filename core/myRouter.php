@@ -291,10 +291,11 @@ class myRouter extends Router{
     private function instantiateClassWithID($className, $objectId)
     {
         if(is_subclass_of($className,\Phalcon\Mvc\Model::class)) {
-            return  $className::findFirst($objectId);
+            $instance =  $className::findFirst($objectId);
+            if($instance) return $instance;
+            throw new \Exception("你查找的资源{$className}::{$objectId}，不存在");
         }
         return  new $className($objectId);
     }
-
 
 }
