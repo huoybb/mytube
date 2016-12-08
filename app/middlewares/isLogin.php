@@ -15,7 +15,7 @@ class isLogin extends myMiddleware
     public function isValid($object): bool
     {
         if($this->auth->isLogin()) return true;
-
+        $this->session->set('lastUrlBeforeLogin',$this->router->getRewriteUri());
         $this->redirect(['for'=>'login']);
         return false;
     }

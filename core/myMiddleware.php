@@ -14,6 +14,7 @@ use Phalcon\FlashInterface;
 use Phalcon\Http\Request;
 use Phalcon\Http\Response;
 use Phalcon\Mvc\Url;
+use Phalcon\Session\Adapter\Files as SessionAdapter;
 
 abstract class myMiddleware
 {
@@ -42,6 +43,14 @@ abstract class myMiddleware
      * @var FlashInterface
      */
     protected $flash;
+    /**
+     * @var myRouter
+     */
+    protected $router;
+    /**
+     * @var SessionAdapter
+     */
+    protected $session;
     public function __construct($Di = null)
     {
         $this->di = $Di ?: Di::getDefault();
@@ -50,6 +59,9 @@ abstract class myMiddleware
         $this->request = $this->di->get('request');
         $this->response = $this->di->get('response');
         $this->flash = $this->di->get('flash');
+        $this->router = $this->di->get('router');
+        $this->session = $this->di->get('session');
+
     }
     public function redirect($routeArray)
     {

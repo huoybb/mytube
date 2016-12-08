@@ -23,11 +23,13 @@ class dispatcherProvider extends myProvider
         $this->di->setShared($name,function(){
             /** @var myDI $this */
             $eventsManager = $this->get('eventsManager');
-            $eventsManager->attach("dispatch:beforeDispatchLoop", function(Event $event, Dispatcher $dispatcher){
+
+            $eventsManager->attach("dispatch:beforeDispatch", function(Event $event, Dispatcher $dispatcher){
                 /** @var myDI $this */
                 //模型注入的功能，这里可以很方便的进行 model binding,这里基本上实现了Laravel中的模型绑定的功能了
                 return $this->get('router')->executeModelBinding($dispatcher);
             });
+
             $eventsManager->attach('dispatch:beforeExecuteRoute',function(Event $event,Dispatcher $dispatcher){
                 /** @var myDI $this */
                 /** @var \core\myRouter $router */
@@ -35,7 +37,6 @@ class dispatcherProvider extends myProvider
 //                $router->handle();
                 return $router->executeMiddleWareChecking($this->get('request'), $this->get('response'),$dispatcher);
             });
-
             $dispatcher = new Dispatcher();
             $dispatcher->setEventsManager($eventsManager);
             return $dispatcher;

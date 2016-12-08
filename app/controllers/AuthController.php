@@ -33,6 +33,11 @@ class AuthController extends \core\myController
             }
             $this->flash->success("欢迎{$user->name}回来！");
             $this->auth->login($user);
+
+            if($url = $this->session->get('lastUrlBeforeLogin',null)){
+                $this->session->remove('lastUrlBeforeLogin');
+                return $this->response->redirect($url);
+            }
             return $this->redirect(['for'=>'home']);
         }
     }
