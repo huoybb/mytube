@@ -76,8 +76,13 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
         $result = '';
         $url = $this->url(['for'=>'movies.edit','movie'=>$this->entity->id]);
         $result .= $this->createLink($url,'编辑',"btn btn-warning btn-xs");
+
         $url = $this->url(['for'=>'movies.delete','movie'=>$this->entity->id]);
         $result .= ' '.$this->createLink($url,'删除',"btn btn-danger btn-xs");
+        if(!$this->entity->hasVideoFile){
+            $url = $this->url(['for'=>'movies.setFile','movie'=>$this->entity->id]);
+            $result .= ' '.$this->createLink($url,'确认视频文件',"btn btn-danger btn-xs");
+        }
         return $result;
     }
 

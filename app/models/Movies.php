@@ -204,11 +204,29 @@ class Movies extends \core\myModel
     public function getVideoFile()
     {
         return $this->make('videoFile',function(){
-            if($file = FileInfo::findFirstFile($this->title)){
-                return str_replace('H:\\YouTubes\\','http://movies.mytube.zhaobing/',$file->getRealPath());
+            if($this->hasVideoFile) {
+                $file = FileInfo::findFirstFile($this->key);
+            }else{
+                $file = FileInfo::findFirstFile($this->title);
             }
-            return null;
+            if(!$file) return null;
+            return str_replace('H:\\YouTubes\\','http://movies.mytube.zhaobing/',$file->getRealPath());
         });
+    }
+    public function setVideoFile()
+    {
+        if($file = FileInfo::findFirstFile($this->title)){
+//            var_dump($file->getRealPath());
+            $old_name = $file->getBasename();
+//            var_dump($old_name);
+            $new_name = $this->key.'.mp4';
+//            var_dump($new_name);
+            $new_realPath = str_replace($old_name,$new_name,$file->getRealPath());
+            rename($file->getRealPath(),$new_realPath);
+            $this->save(['hasVideoFile'=>true]);
+            return true;
+        }
+        return false;
     }
     public function channel()
     {
@@ -227,5 +245,9 @@ class Movies extends \core\myModel
         $this->getEventsManager()->trigger(new MovieDeleted($this));
         return parent::delete();
     }
+
+
+
+
 
 }

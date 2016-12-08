@@ -20,6 +20,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/movies/{movie:[0-9]+}/updatePlayTime','movies::updatePlayTime','movies.updatePlayTime');
     $router->addx('/movies/{movie:[0-9]+}/edit','movies::edit','movies.edit');
     $router->addx('/movies/{movie:[0-9]+}/delete','movies::delete','movies.delete')->setMiddlewares([hasAuthority::over('movie')]);
+    $router->addx('/movies/{movie:[0-9]+}/setFile','movies::setFile','movies.setFile')->setMiddlewares([hasAuthority::over('movie')]);
 
     $router->addGet('/channels','channels::index','channels.index');
     $router->addGet('/channels/{channel:[0-9]+}','channels::show','channels.show');
@@ -46,10 +47,10 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/tags/{tag:[0-9]+}','tags::show')->setName('tags.show');
     $router->addPost('/tags/{tag:[0-9]+}/addComment','tags::addComment')->setName('tags.addComment')->setMiddlewares([isCommentValid::class]);
     $router->addx('/tags/{tag:[0-9]+}/edit','tags::edit')->setName('tags.edit');
-});
 
-$router->addGet('/getYoutube/{key}','youtube::getMovie')->setName('youtube.getMovie');
-$router->addGet('/getYoutubeList/{key}','youtube::getList')->setName('youtube.getList');
+    $router->addGet('/getYoutube/{key}','youtube::getMovie')->setName('youtube.getMovie');
+    $router->addGet('/getYoutubeList/{key}','youtube::getList')->setName('youtube.getList');
+});
 
 $router->addx('/register','auth::register')->setName('register');
 $router->addx('/login','auth::login')->setName('login');

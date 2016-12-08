@@ -37,6 +37,12 @@ class MoviesController extends \core\myController
         $movie->delete();
         return $this->redirect(['for'=>'home']);
     }
+    public function setFileAction(Movies $movie)
+    {
+        $movie->setVideoFile();
+        return $this->redirectBack();
+    }
+
 
 }
 
