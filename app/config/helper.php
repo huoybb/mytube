@@ -25,6 +25,14 @@ if(! function_exists('url')){
     }
 }
 
+if(! function_exists('flash')){
+    /**
+     * @return \Phalcon\Flash\Session
+     */
+    function flash(){
+        return \core\myDI::getDefault()->get('flash');
+    }
+}
 
 if (! function_exists('dd')) {
     /**
