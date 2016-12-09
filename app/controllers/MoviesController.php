@@ -39,9 +39,7 @@ class MoviesController extends \core\myController
     }
     public function setFileAction(Movies $movie)
     {
-        if($movie->setVideoFile()){
-            $this->flash->success('文件确认成功');
-        }else{
+        if(!$movie->setVideoFile()){
             $this->flash->error('没有找到视频文件');
         }
         return $this->redirectBack();
