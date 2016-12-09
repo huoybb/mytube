@@ -33,6 +33,11 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
         $searchUrl = 'https://www.youtube.com/results?search_query='.urlencode($this->entity->title);
         return $this->createLink($this->entity->getMovieUrl(),'视频链接').' '.$this->createLink($searchUrl,'相似搜索');
     }
+    public function key()
+    {
+        return "<pre>{$this->entity->key}</pre>";
+    }
+
     public function fileName()
     {
         $filename = FileInfo::getFileKey($this->entity->title);

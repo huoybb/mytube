@@ -194,6 +194,7 @@ class Movies extends \core\myModel
             'uploader'=>'上传者',
             'created_at'=>'获取时间',
             'youtubeUrl' => 'YouTube',
+            'key'=>'key',
             'fileName'=>'文件名',
             'downloadLink' => '下载链接',
             'tags'=>'所属标签',
