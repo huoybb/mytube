@@ -12,6 +12,7 @@ $router->removeExtraSlashes(true);
 $router->notFound('index::notFound');
 $router->group([isLogin::class],function() use($router){
     $router->addGet('/','index::index')->setName('home');
+    $router->addGet('/page/{page:[0-9]+}','index::index')->setName('home.page');
     $router->addx('/search/{search}','index::search')->setName('search');
 
     $router->addGet('/movies/{movie:[0-9]+}','movies::show','movies.show');

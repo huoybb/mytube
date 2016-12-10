@@ -5,12 +5,14 @@
         <item url="file://$PROJECT_DIR$/public/js/videoControl.js" />
         <item url="file://$PROJECT_DIR$/public/js/myVideo.js" />
         <item url="file://$PROJECT_DIR$/public/js/search.js" />
+        <item url="file://$PROJECT_DIR$/public/js/navKey.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/public/js/videoControl.js" />
       <root url="file://$PROJECT_DIR$/public/js/myVideo.js" />
       <root url="file://$PROJECT_DIR$/public/js/search.js" />
+      <root url="file://$PROJECT_DIR$/public/js/navKey.js" />
     </CLASSES>
     <SOURCES />
   </library>

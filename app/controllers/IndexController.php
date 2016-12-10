@@ -3,10 +3,12 @@
 class IndexController extends \core\myController
 {
 
-    public function indexAction()
+    public function indexAction($page = 1)
     {
-        $this->view->movies = Movies::getlatest();
-        $this->view->moviesTotal = Movies::count();
+        $page = $this->getPaginatorByQueryBuilder(Movies::getlatest(),50,$page);
+        $this->view->page =$page;
+        $this->view->movies = $page->items;
+        $this->view->moviesTotal = $page->total_items;
     }
     public function notFoundAction()
     {

@@ -107,10 +107,7 @@ class Movies extends \core\myModel
 
     public static function getLatest()
     {
-        return static ::query()
-            ->orderBy('id DESC')
-            ->limit(50)
-            ->execute();
+        return modelsManager()->createBuilder()->from(static::class)->orderBy('id DESC');
     }
 
     public static function search($keywords)

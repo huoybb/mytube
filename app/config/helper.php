@@ -33,6 +33,14 @@ if(! function_exists('flash')){
         return \core\myDI::getDefault()->get('flash');
     }
 }
+if(! function_exists('modelsManager')){
+    /**
+     * @return \Phalcon\Mvc\Model\Manager
+     */
+    function modelsManager(){
+        return \core\myDI::getDefault()->get('modelsManager');
+    }
+}
 
 if (! function_exists('dd')) {
     /**

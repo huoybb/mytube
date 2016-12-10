@@ -46,7 +46,7 @@ class myController extends Controller
      * @param $builder
      * @param $limit
      * @param $page
-     * @return
+     * @return mixed
      */
     protected function getPaginatorByQueryBuilder($builder, $limit, $page)
     {
