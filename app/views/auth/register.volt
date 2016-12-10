@@ -6,6 +6,7 @@
     <h1>用户注册</h1>
 
     {{ form(url(['for':'register','method':'post'])) }}
+    {% include "layouts/csrf.volt" %}
     <div class="control-group">
         <label for="name">Username</label>
         {{ text_field('name', 'class': 'form-control') }}

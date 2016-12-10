@@ -30,7 +30,9 @@ class dispatcherProvider extends myProvider
             $eventsManager->attach("dispatch:beforeDispatchLoop", function(Event $event, Dispatcher $dispatcher){
                 /** @var myDI $this */
                 //模型注入的功能，这里可以很方便的进行 model binding,这里基本上实现了Laravel中的模型绑定的功能了
-                return $this->get('router')->executeModelBinding($dispatcher);
+                /** @var \core\myRouter $router */
+                $router = $this->get('router');
+                return $router->executeModelBinding($dispatcher);
             });
 
             $eventsManager->attach('dispatch:beforeExecuteRoute',function(Event $event,Dispatcher $dispatcher){

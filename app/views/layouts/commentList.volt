@@ -18,6 +18,7 @@
     </ul>
 {% endif %}
 {{ form(commentFormUrl,'method':'post') }}
+    {% include "layouts/csrf.volt" %}
     {{ commentOwner.getcommentForm().render('content',['class':'form-control','rows':6]) }}
     {{ commentOwner.getcommentForm().render('增加',['class':'btn btn-primary form-control']) }}
 {{ endform() }}

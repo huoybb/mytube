@@ -1,6 +1,7 @@
 <div class="container">
     <p>{{ flash.output() }}</p>
     {{ form("method": "post") }}
+    {% include "layouts/csrf.volt" %}
     {% for item in Owner.getForm().fields %}
         <div class="form-group">
             {{ item }}:{{ Owner.getForm().render(item,['class':'form-control']) }}<br/>
