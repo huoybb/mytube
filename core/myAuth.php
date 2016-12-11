@@ -68,6 +68,9 @@ class myAuth implements \Phalcon\Di\InjectionAwareInterface
         return $this;
     }
 
+    /**
+     * @return Users
+     */
     public function user()
     {
         return $this->user;

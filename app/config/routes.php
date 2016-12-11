@@ -59,6 +59,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/getYoutubeWithList/{movieKey}/{listKey}/{index}','youtube::getMovieWithList')->setName('youtube.getMovieWithList');
     $router->addGet('/getYoutubeList/{key}','youtube::getList')->setName('youtube.getList');
 
+    $router->addGet('/videotags','videotags::index')->setName('videotags.index');
     $router->addGet('/videotags/{videotag:[0-9]+}/delete','videotags::delete')->setName('videotags.delete');
 });
 

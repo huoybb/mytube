@@ -43,14 +43,14 @@ class Videotags extends \core\myModel
 
     /**
      *
-     * @var string
+     * @var \Carbon\Carbon
      * @Column(type="string", nullable=true)
      */
     public $created_at;
 
     /**
      *
-     * @var string
+     * @var \Carbon\Carbon
      * @Column(type="string", nullable=true)
      */
     public $updated_at;
@@ -61,6 +61,15 @@ class Videotags extends \core\myModel
             ->where('movie_id = :movie:',['movie'=>$movie->id])
             ->andWhere('user_id = :user:',['user'=>auth()->user()->id])
             ->orderBy('time ASC')
+            ->execute();
+    }
+
+    public static function getLatest()
+    {
+        return static :: query()
+            ->where('user_id = :user:',['user'=>auth()->user()->id])
+            ->orderBy('updated_at DESC')
+            ->limit(10)
             ->execute();
     }
 
@@ -103,5 +112,11 @@ class Videotags extends \core\myModel
     {
         return parent::findFirst($parameters);
     }
+
+    public function movie()
+    {
+        return Movies::findFirst($this->movie_id);
+    }
+
 
 }

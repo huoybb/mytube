@@ -15,6 +15,7 @@
                 <li><a href="{{ url(['for':'channels.index']) }}">频道</a></li>
                 <li><a href="{{ url(['for':'playlists.index']) }}">列表</a></li>
                 <li><a href="{{ url(['for':'tags.index']) }}">我的标签</a></li>
+                <li><a href="{{ url(['for':'videotags.index']) }}">我的标注</a></li>
             </ul>
             {#<ul class="nav navbar-nav navbar-right">#}
                 {#<li><a href="#">标记</a></li>#}

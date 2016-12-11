@@ -30,5 +30,15 @@ class VideotagsPresenter extends \core\myPresenter
         if(!$hour) return "{$minute}:{$second}";
         return "{$hour}:{$minute}:{$second}";
     }
+    public function movie()
+    {
+        return $this->entity->movie()->present('showLink');
+    }
+    public function updated_at()
+    {
+        return $this->entity->updated_at->diffForHumans();
+    }
+
+
 
 }

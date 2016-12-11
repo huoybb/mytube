@@ -120,4 +120,9 @@ class Users extends \core\myModel
         return parent::findFirst($parameters);
     }
 
+    public function getLatestVideoTagedMovies()
+    {
+        return Movies::findByUserAndLatestVideoTags();
+    }
+
 }

@@ -143,6 +143,16 @@ class Movies extends \core\myModel
             ->execute();
     }
 
+    public static function findByUserAndLatestVideoTags()
+    {
+        return static::query()
+            ->rightJoin(Videotags::class,'vtags.movie_id = Movies.id','vtags')
+            ->where('vtags.user_id = :user:',['user'=>auth()->user()->id])
+            ->orderBy('vtags.updated_at DESC')
+            ->groupBy('Movies.id')
+            ->execute();
+    }
+
     /**
      * Returns table name mapped in the model.
      *
