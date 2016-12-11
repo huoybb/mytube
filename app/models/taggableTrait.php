@@ -35,7 +35,7 @@ trait taggableTrait
     }
     public function hasTags()
     {
-        return $this->getTags()->count();
+        return count($this->getTags());
     }
     public function addTag(string $tagname)
     {
