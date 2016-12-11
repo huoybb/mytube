@@ -244,6 +244,23 @@ class Movies extends \core\myModel
         return parent::delete();
     }
 
+    public function addMovieTag($data)
+    {
+        $data['user_id'] = auth()->user()->id;
+        $data['movie_id'] = $this->id;
+        Videotags::saveNew($data);
+        return $this;
+    }
+    public function getVideoTags()
+    {
+        return $this->make('videoTags',function(){
+            return Videotags::findByMovie($this);
+        });
+    }
+    public function hasVideoTags()
+    {
+        return count($this->getVideoTags());
+    }
 
 
 

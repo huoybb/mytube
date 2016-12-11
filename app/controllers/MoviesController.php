@@ -44,6 +44,17 @@ class MoviesController extends \core\myController
         }
         return $this->redirectBack();
     }
+    public function addVideoTagAction(Movies $movie)
+    {
+        $movie->addMovieTag($this->request->getPost());
+        return false;
+    }
+    public function editMovietagsAction(Movies $movie)
+    {
+        $this->view->movie = $movie;
+    }
+
+
 
 
 }

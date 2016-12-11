@@ -23,6 +23,8 @@ $router->group([isLogin::class],function() use($router){
     $router->addPost('/movies/{movie:[0-9]+}/edit','movies::edit','movies.edit')->setMiddlewares([checkToken::class,hasAuthority::class]);
     $router->addx('/movies/{movie:[0-9]+}/delete','movies::delete','movies.delete')->setMiddlewares([hasAuthority::over('movie')]);
     $router->addx('/movies/{movie:[0-9]+}/setFile','movies::setFile','movies.setFile')->setMiddlewares([hasAuthority::over('movie')]);
+    $router->addPost('/movies/{movie:[0-9]+}/addVideoTag','movies::addVideoTag','movies.addVideoTag');
+    $router->addx('/movies/{movie:[0-9]+}/editMovietags','movies::editMovietags','movies.editMovietags');
 
     $router->addGet('/channels','channels::index','channels.index');
     $router->addGet('/channels/{channel:[0-9]+}','channels::show','channels.show');
@@ -56,6 +58,8 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/getYoutube/{key}','youtube::getMovie')->setName('youtube.getMovie');
     $router->addGet('/getYoutubeWithList/{movieKey}/{listKey}/{index}','youtube::getMovieWithList')->setName('youtube.getMovieWithList');
     $router->addGet('/getYoutubeList/{key}','youtube::getList')->setName('youtube.getList');
+
+    $router->addGet('/videotags/{videotag:[0-9]+}/delete','videotags::delete')->setName('videotags.delete');
 });
 
 $router->addGet('/register','auth::register')->setName('register');

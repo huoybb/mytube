@@ -4,8 +4,15 @@
 {% endblock %}
 {% block content %}
     {% if movie.getVideoFile() %}
-        {% include 'layouts/videojsBody.volt' %}
-        {% include 'layouts/videojsHeader.volt' %}
+        <div class="container">
+            <div class="col-md-7">
+                {% include 'layouts/videojsBody.volt' %}
+                {% include 'layouts/videojsHeader.volt' %}
+            </div>
+            <div class="col-md-5">
+                {% include 'layouts/videotags.volt' %}
+            </div>
+        </div>
     {% endif %}
 
     <div class="row">

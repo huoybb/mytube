@@ -3,7 +3,7 @@
         class="video-js"
         controls
         preload="auto"
-        width="1119" height="700"
+        width="630" height="400"
         {#poster="http://video-js.zencoder.com/oceans-clip.png"#}
         data-setup='{"example_option":true}'
 >
