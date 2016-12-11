@@ -10,59 +10,77 @@ namespace core;
 
 
 use Phalcon\Di;
+use Phalcon\DiInterface;
 use Phalcon\FlashInterface;
 use Phalcon\Http\Request;
 use Phalcon\Http\Response;
 use Phalcon\Mvc\Url;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 
-abstract class myMiddleware
+abstract class myMiddleware implements Di\InjectionAwareInterface
 {
 
-    /**
-     * @var \Phalcon\DiInterface
-     */
-    protected $di;
-    /**
-     * @var myAuth
-     */
-    protected $auth;
-    /**
-     * @var Request
-     */
-    protected $request;
-    /**
-     * @var Response
-     */
-    protected $response;
-    /**
-     * @var Url
-     */
-    protected $url;
-    /**
-     * @var FlashInterface
-     */
-    protected $flash;
-    /**
-     * @var myRouter
-     */
-    protected $router;
-    /**
-     * @var SessionAdapter
-     */
-    protected $session;
-    public function __construct($Di = null)
-    {
-        $this->di = $Di ?: Di::getDefault();
-        $this->auth = $this->di->get('auth');
-        $this->url = $this->di->get('url');
-        $this->request = $this->di->get('request');
-        $this->response = $this->di->get('response');
-        $this->flash = $this->di->get('flash');
-        $this->router = $this->di->get('router');
-        $this->session = $this->di->get('session');
 
+    /**
+     * @return myAuth
+     */
+    public function auth()
+    {
+        return $this->getDI()->get('auth');
     }
+
+    /**
+     * @return Url
+     */
+    public function url()
+    {
+        return $this->getDI()->get('url');
+    }
+
+    /**
+     * @return Request
+     */
+    public function request()
+    {
+        return $this->getDI()->get('request');
+    }
+
+    /**
+     * @return Response
+     */
+    public function response()
+    {
+        return $this->getDI()->get('response');
+    }
+
+    /**
+     * @return myRouter
+     */
+    public function router()
+    {
+        return $this->getDI()->get('router');
+    }
+
+    /**
+     * @return SessionAdapter
+     */
+    public function session()
+    {
+        return $this->getDI()->get('session');
+    }
+
+    /**
+     * @return FlashInterface
+     */
+    public function flash()
+    {
+        return $this->getDI()->get('flash');
+    }
+
+
+
+
+
     public function redirect($routeArray)
     {
         $url = $this->url->get($routeArray);
@@ -77,4 +95,29 @@ abstract class myMiddleware
 
     abstract  public function isValid($object):bool;
 
-}
+     /**
+      * Sets the dependency injector
+      *
+      * @param DiInterface $di
+      */
+     public function setDI(DiInterface $di)
+     {
+         $this->di = $di;
+     }
+
+     /**
+      * Returns the internal dependency injector
+      *
+      * @return DiInterface
+      */
+     public function getDI()
+     {
+         return $this->di;
+     }
+     public function __get($proptery)
+     {
+         if(method_exists($this,$proptery)) return call_user_func([$this,$proptery]);
+         return $this->getDI()->get($proptery);
+     }
+
+ }

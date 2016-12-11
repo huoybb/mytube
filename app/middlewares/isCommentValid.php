@@ -11,9 +11,9 @@ class isCommentValid extends \core\myMiddleware
 
     public function isValid($object): bool
     {
-        $content = trim($this->request->getPost('content'));
+        $content = trim($this->request()->getPost('content'));
         if(!$content){
-            $this->flash->error('评论不能为空，请重新填写评论');
+            $this->flash()->error('评论不能为空，请重新填写评论');
             $this->redirectBack();
             return false;
         }

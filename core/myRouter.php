@@ -239,7 +239,7 @@ class myRouter extends Router{
             $data = $dispatcher->getParam($data);
         }
         /** @var myMiddleware $validator */
-        $validator = new $validator;
+        $validator = $this->getDI()->get($validator);
         return [$data,$validator];
     }
 

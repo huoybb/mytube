@@ -27,4 +27,7 @@ class myDI extends FactoryDefault
             $provider->register($name);
         }
     }
+    public static function make($serviceName){
+        return static::getDefault()->get($serviceName);
+    }
 }

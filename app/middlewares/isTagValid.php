@@ -11,9 +11,9 @@ class isTagValid extends \core\myMiddleware
 
     public function isValid($object): bool
     {
-        $tag = trim($this->request->getPost('name'));
+        $tag = trim($this->request()->getPost('name'));
         if(!$tag) {
-            $this->flash->error('标签不能为空，请重新填写');
+            $this->flash()->error('标签不能为空，请重新填写');
             $this->redirectBack();
             return false;
         }

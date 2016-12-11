@@ -18,7 +18,7 @@ class hasAuthority extends \core\myMiddleware
     {
         if(auth()->owns($object)) return true;
 
-        $this->flash->error('你没有权限进行“修改或删除”操作');
+        $this->flash()->error('你没有权限进行“修改或删除”操作');
         $this->redirectBack();
         return false;
     }
