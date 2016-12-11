@@ -54,6 +54,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addPost('/tags/{tag:[0-9]+}/edit','tags::edit')->setName('tags.edit')->setMiddlewares([checkToken::class]);
 
     $router->addGet('/getYoutube/{key}','youtube::getMovie')->setName('youtube.getMovie');
+    $router->addGet('/getYoutubeWithList/{movieKey}/{listKey}/{index}','youtube::getMovieWithList')->setName('youtube.getMovieWithList');
     $router->addGet('/getYoutubeList/{key}','youtube::getList')->setName('youtube.getList');
 });
 

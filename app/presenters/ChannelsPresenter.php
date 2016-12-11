@@ -26,6 +26,7 @@ class ChannelsPresenter extends \core\myPresenter implements youtubeLinkInterfac
     public function youtube()
     {
         $url = $this->youtubePrefix($this->entity->url);
+        if(!$this->entity->url) $url = $this->youtubePrefix($this->entity->uploader_url);
         return $this->createLink($url,'频道链接');
     }
     public function showLink()
