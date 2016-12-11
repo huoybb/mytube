@@ -7,6 +7,13 @@ video.on 'play',-> this.status = 'play'
 video.on 'pause',->this.status = 'pause'
 
 video.ready ->
+# todo 为什么这个不工作呢？
+#  this.hotkeys({
+#    volumeStep: 0.1,
+#    seekStep: 5,
+#    enableModifiersForNumbers: false,
+#    alwaysCaptureHotkeys: true
+#  })
   this.currentTime(movie.playtime)
   this.setInterval =>
     url = location.href + '/updatePlayTime'
