@@ -6,7 +6,7 @@
     <div class="list-group">
         <a href="#" class="list-group-item" @click.prevent="setVideoCurrentTime('head')">片头 </a>
         {% for vidoeTag in movie.getVideoTags() if movie.hasVideoTags() %}
-            <a href="#" class="list-group-item" @click.prevent="setVideoCurrentTime({{ vidoeTag.time }})">{{ vidoeTag.title }} </a>
+            <a href="#" class="list-group-item" @click.prevent="setVideoCurrentTime({{ vidoeTag.time }})" title="{{ vidoeTag.present('time') }}"> {{ vidoeTag.title }} </a>
         {% endfor %}
     </div>
 </div>

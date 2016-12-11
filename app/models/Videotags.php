@@ -2,6 +2,7 @@
 
 class Videotags extends \core\myModel
 {
+    use \core\myPresenterTrait;
 
     /**
      *

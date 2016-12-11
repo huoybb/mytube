@@ -18,7 +18,7 @@
                     <tr>
                         <td>{{ videoTag.id }}</td>
                         <td>{{ videoTag.title }}</td>
-                        <td>{{ videoTag.time }}</td>
+                        <td>{{ videoTag.present('time') }}</td>
                         <td><a href="{{ url(['for':'videotags.delete','videotag':videoTag.id]) }}">删除</a> <a href="#">修改</a></td>
                     </tr>
                 {% endfor %}
