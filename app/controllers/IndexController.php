@@ -5,10 +5,7 @@ class IndexController extends \core\myController
 
     public function indexAction($page = 1)
     {
-        $page = $this->getPaginatorByQueryBuilder(Movies::getlatest(),50,$page);
-        $this->view->page =$page;
-        $this->view->movies = $page->items;
-        $this->view->moviesTotal = $page->total_items;
+        $this->view->page = $this->getPaginatorByQueryBuilder(Movies::getlatest(),50,$page);
     }
     public function notFoundAction()
     {
