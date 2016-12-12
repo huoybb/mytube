@@ -55,10 +55,15 @@ trait taggableTrait
     }
 
 
-
     public function getTagForm()
     {
         return (new Tags)->getForm();
+    }
+
+    public function deleteTag(Tags $tag)
+    {
+        $taggables = Taggables::findByTagAndObject($tag,$this);
+        return $taggables->delete();
     }
 
 

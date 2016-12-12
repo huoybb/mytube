@@ -103,4 +103,16 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
         ];
         return $this->buildBreadcrumbs($nav);
     }
+
+    public function editTagUrl()
+    {
+        return $this->url(['for'=>'movies.editTag','movie'=>$this->entity->id]);
+    }
+    public function deleteTag(Tags $tag)
+    {
+        $url = $this->url->get(['for'=>'movies.deleteTag','movie'=>$this->entity->id,'tag'=>$tag->id]);
+        return $this->createLink($url,'删除');
+    }
+
+
 }

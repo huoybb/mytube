@@ -27,6 +27,8 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/movies/{movie:[0-9]+}/setFile','movies::setFile','movies.setFile')->setMiddlewares([hasAuthority::over('movie')]);
     $router->addPost('/movies/{movie:[0-9]+}/addVideoTag','movies::addVideoTag','movies.addVideoTag');
     $router->addx('/movies/{movie:[0-9]+}/editMovietags','movies::editMovietags','movies.editMovietags');
+    $router->addx('/movies/{movie:[0-9]+}/editTag','movies::editTag','movies.editTag');
+    $router->addx('/movies/{movie:[0-9]+}/deleteTag/{tag:[0-9]+}','movies::deleteTag','movies.deleteTag');
 
     $router->addGet('/channels','channels::index','channels.index');
     $router->addGet('/channels/{channel:[0-9]+}','channels::show','channels.show');
@@ -42,6 +44,8 @@ $router->group([isLogin::class],function() use($router){
     $router->addPost('/playlists/{playlist:[0-9]+}/edit','playlists::edit')->setName('playlists.edit')->setMiddlewares([checkToken::class]);
     $router->addx('/playlists/{playlist:[0-9]+}/updateFromYoutube','playlists::updateFromYoutube')->setName('playlists.updateFromYoutube');
     $router->addPost('/playlists/{playlist:[0-9]+}/addTag','playlists::addTag')->setName('playlists.addTag')->setMiddlewares([checkToken::class,isTagValid::class]);
+    $router->addGet('/playlists/{playlist:[0-9]+}/editTag','playlists::editTag')->setName('playlists.editTag');
+    $router->addx('/playlists/{playlist:[0-9]+}/deleteTag/{tag:[0-9]+}','playlists::deleteTag')->setName('playlists.deleteTag');
 
     $router->addx('/logout','auth::logout')->setName('logout');
     $router->addGet('/myLatestComments','auth::latestComments')->setName('myLatestComments');

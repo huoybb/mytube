@@ -58,6 +58,17 @@ class MoviesController extends \core\myController
     {
         $this->view->page = $this->getPaginatorByQueryBuilder(Movies::getlatestWithVideos(),50,$page);
     }
+    public function editTagAction(Movies $movie)
+    {
+        $this->view->movie = $movie;
+    }
+    public function deleteTagAction(Movies $movie, Tags $tag)
+    {
+        $movie->deleteTag($tag);
+        return $this->redirectBack();
+    }
+
+
 
 
 

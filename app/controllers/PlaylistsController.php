@@ -34,6 +34,17 @@ class PlaylistsController extends \core\myController
         $playlist->addTag($this->request->get('name'));
         return $this->redirectBack();
     }
+    public function editTagAction(Playlists $playlist)
+    {
+        $this->view->playlist = $playlist;
+    }
+    public function deleteTagAction(Playlists $playlist,Tags $tag)
+    {
+        $playlist->deleteTag($tag);
+        return $this->redirectBack();
+    }
+
+
 
 
 

@@ -72,4 +72,13 @@ class PlaylistsPresenter extends \core\myPresenter implements youtubeLinkInterfa
         ];
         return $this->buildBreadcrumbs($nav);
     }
+    public function editTagUrl()
+    {
+        return $this->url(['for'=>'playlists.editTag','playlist'=>$this->entity->id]);
+    }
+    public function deleteTag(Tags $tag)
+    {
+        $url = $this->url->get(['for'=>'playlists.deleteTag','playlist'=>$this->entity->id,'tag'=>$tag->id]);
+        return $this->createLink($url,'删除');
+    }
 }
