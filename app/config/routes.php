@@ -15,6 +15,8 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/page/{page:[0-9]+}','index::index')->setName('home.page');
     $router->addx('/search/{search}','index::search')->setName('search');
 
+    $router->addGet('/movies/withVideos','movies::withVideos','movies.index.withVideos');
+    $router->addGet('/movies/withVideos/{page:[0-9]+}','movies::withVideos','movies.index.withVideos.page');
     $router->addGet('/movies/{movie:[0-9]+}','movies::show','movies.show');
     $router->addPost('/movies/{movie:[0-9]+}/addComment','movies::addComment','movies.addComment')->setMiddlewares([checkToken::class,isCommentValid::class]);
     $router->addPost('/movies/{movie:[0-9]+}/addTag','movies::addTag','movies.addTag')->setMiddlewares([checkToken::class,isTagValid::class]);

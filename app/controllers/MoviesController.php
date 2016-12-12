@@ -54,6 +54,15 @@ class MoviesController extends \core\myController
         $this->view->movie = $movie;
     }
 
+    public function withVideosAction($page = 1)
+    {
+        $page = $this->getPaginatorByQueryBuilder(Movies::getlatestWithVideos(),50,$page);
+        $this->view->page =$page;
+        $this->view->movies = $page->items;
+        $this->view->moviesTotal = $page->total_items;
+    }
+
+
 
 
 

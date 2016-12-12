@@ -153,6 +153,11 @@ class Movies extends \core\myModel
             ->execute();
     }
 
+    public static function getlatestWithVideos()
+    {
+        return static :: getLatest()->andWhere('hasVideoFile = 1');
+    }
+
     /**
      * Returns table name mapped in the model.
      *

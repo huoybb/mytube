@@ -7,8 +7,8 @@
         <li><a href="{{ url(['for':'home']) }}">首页</a></li>
         <li class="active">视频</li>
     </ol>
-    <h1>视频<span class="badge">{{ moviesTotal }}</span> <a href="{{ url(['for':'movies.index.withVideos']) }}">含视频</a></h1>
-    {% include "layouts/nav" with ['next':url(['for':'home.page','page':page.next]),'previous':url(['for':'home.page','page':page.before])] %}
+    <h1><a href="{{ url(['for':'home']) }}">视频</a> 含视频<span class="badge">{{ moviesTotal }}</span></h1>
+    {% include "layouts/nav" with ['next':url(['for':'movies.index.withVideos.page','page':page.next]),'previous':url(['for':'movies.index.withVideos.page','page':page.before])] %}
     {% include "index/partials/movielist.volt" %}
 {% endblock %}
 
