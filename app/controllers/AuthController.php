@@ -23,7 +23,10 @@ class AuthController extends \core\myController
     }
     public function loginAction()
     {
-        if($this->auth->isLogin()) return $this->redirect(['for'=>'home']);
+        if($this->auth->isLogin()) {
+            $this->flash->notice('您已经登录过，不需要再重新登录，或者请先logout！');
+            return $this->redirect(['for'=>'home']);
+        }
         if($this->request->isPost()){
             $data = $this->request->getPost();
             $user = Users::findByEmail($data['email']);

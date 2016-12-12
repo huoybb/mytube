@@ -28,7 +28,7 @@ CREATE TABLE `channels` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `comments` */
 
@@ -43,7 +43,7 @@ CREATE TABLE `comments` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `user_id` int(10) DEFAULT NULL COMMENT '谁做的评论',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `movies` */
 
@@ -62,8 +62,9 @@ CREATE TABLE `movies` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `playtime` varchar(100) DEFAULT '0' COMMENT '当前播放时间，播放时每一秒更新一次',
   `duration` varchar(100) DEFAULT '1' COMMENT '视频的长度，这个需要计算',
+  `hasVideoFile` tinyint(1) DEFAULT '0' COMMENT '状态：是否具有视频文件',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=429 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `playlistables` */
 
@@ -75,7 +76,7 @@ CREATE TABLE `playlistables` (
   `movie_id` int(10) DEFAULT NULL COMMENT '视频id',
   `index` int(10) DEFAULT NULL COMMENT '视频在列表中的位置',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=269 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `playlists` */
 
@@ -90,7 +91,7 @@ CREATE TABLE `playlists` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `taggables` */
 
@@ -105,7 +106,7 @@ CREATE TABLE `taggables` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tags` */
 
@@ -119,7 +120,7 @@ CREATE TABLE `tags` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `users` */
 
@@ -135,7 +136,22 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `notes` tinytext COMMENT '注释说明',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Table structure for table `videotags` */
+
+DROP TABLE IF EXISTS `videotags`;
+
+CREATE TABLE `videotags` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) DEFAULT NULL COMMENT '标签标题',
+  `time` float(9,4) DEFAULT NULL COMMENT '时间点',
+  `user_id` int(10) DEFAULT NULL COMMENT '用户ID',
+  `movie_id` int(10) DEFAULT NULL COMMENT '视频ID',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=102 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

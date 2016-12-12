@@ -21,17 +21,6 @@ class IndexController extends \core\myController
         $this->view->search = $search;
     }
 
-    private function fixChannelsData()
-    {
-        foreach(Channels::find() as $channel){
-            $uploader_url = $channel->movies()->getFirst()->uploader_url;
-            if(preg_match('%/user/([^/]+)%sim', $uploader_url)){
-                $channel->save(['uploader_url'=>$uploader_url]);
-            }
-            var_dump($uploader_url);
-        }
-    }
-
     private function isMatchedForYoutubeKey(&$key)
     {
         if(strlen($key) == 11) return true;
