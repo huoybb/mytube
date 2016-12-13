@@ -18,5 +18,12 @@
         <div class="container">
             {% block content %}{% endblock %}
         </div>
+        {% block footer %}
+            <div class="container">
+                <div class="row">
+                    <?php echo xdebug_time_index();?>
+                </div>
+            </div>
+        {% endblock %}
     </body>
 </html>
