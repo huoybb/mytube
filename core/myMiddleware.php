@@ -11,76 +11,24 @@ namespace core;
 
 use Phalcon\Di;
 use Phalcon\DiInterface;
-use Phalcon\FlashInterface;
-use Phalcon\Http\Request;
-use Phalcon\Http\Response;
-use Phalcon\Mvc\Url;
-use Phalcon\Session\Adapter\Files as SessionAdapter;
 
+
+/**
+ * Class myMiddleware
+ * @package core
+ *
+ * @property \Phalcon\Mvc\Router|\Phalcon\Mvc\RouterInterface $router
+ * @property \Phalcon\Mvc\Url|\Phalcon\Mvc\UrlInterface $url
+ * @property \Phalcon\Http\Request|\Phalcon\Http\RequestInterface $request
+ * @property \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface $response
+ * @property \Phalcon\Http\Response\Cookies|\Phalcon\Http\Response\CookiesInterface $cookies
+ * @property \Phalcon\Security $security
+ * @property \Phalcon\Flash\Session $flash
+ * @property \Phalcon\Session\Adapter\Files|\Phalcon\Session\Adapter|\Phalcon\Session\AdapterInterface $session
+ * @property myAuth auth
+ */
 abstract class myMiddleware implements Di\InjectionAwareInterface
 {
-
-
-    /**
-     * @return myAuth
-     */
-    public function auth()
-    {
-        return $this->getDI()->get('auth');
-    }
-
-    /**
-     * @return Url
-     */
-    public function url()
-    {
-        return $this->getDI()->get('url');
-    }
-
-    /**
-     * @return Request
-     */
-    public function request()
-    {
-        return $this->getDI()->get('request');
-    }
-
-    /**
-     * @return Response
-     */
-    public function response()
-    {
-        return $this->getDI()->get('response');
-    }
-
-    /**
-     * @return myRouter
-     */
-    public function router()
-    {
-        return $this->getDI()->get('router');
-    }
-
-    /**
-     * @return SessionAdapter
-     */
-    public function session()
-    {
-        return $this->getDI()->get('session');
-    }
-
-    /**
-     * @return FlashInterface
-     */
-    public function flash()
-    {
-        return $this->getDI()->get('flash');
-    }
-
-
-
-
-
     public function redirect($routeArray)
     {
         $url = $this->url->get($routeArray);
@@ -116,8 +64,6 @@ abstract class myMiddleware implements Di\InjectionAwareInterface
      }
      public function __get($proptery)
      {
-         if(method_exists($this,$proptery)) return call_user_func([$this,$proptery]);
          return $this->getDI()->get($proptery);
      }
-
- }
+}
