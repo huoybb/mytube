@@ -7,6 +7,7 @@ class VideotagsController extends \core\myController
     {
         $this->view->videotags = Videotags::getLatest();
         $this->view->movies = auth()->user()->getLatestVideoTagedMovies();
+//        dd($this->view->movies->toArray());
     }
 
     public function deleteAction(Videotags $videotag)

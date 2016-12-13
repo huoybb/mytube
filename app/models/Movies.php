@@ -145,12 +145,18 @@ class Movies extends \core\myModel
 
     public static function findByUserAndLatestVideoTags()
     {
-        return static::query()
+        $rows =  static::query()
             ->rightJoin(Videotags::class,'vtags.movie_id = Movies.id','vtags')
             ->where('vtags.user_id = :user:',['user'=>auth()->user()->id])
-            ->orderBy('vtags.updated_at DESC')
             ->groupBy('Movies.id')
+            ->columns(['Movies.*','MAX(vtags.updated_at) AS time'])
+            ->orderBy('time DESC')
             ->execute();
+        $result = [];
+        foreach($rows as $row){
+            $result[]=$row->movies;
+        }
+        return $result;
     }
 
     public static function getlatestWithVideos()
