@@ -9,12 +9,14 @@
             <table class="table table-hover">
                 <tr>
                     <td>#</td>
-                    <td>title</td>
+                    <td>视频标题</td>
+                    <td>最后更新</td>
                 </tr>
                 {% for movie in movies %}
                     <tr>
                         <td>{{ movie.id }}</td>
                         <td>{{ movie.present('showLink') }}</td>
+                        <td>{{ movie.time }}</td>
                     </tr>
                 {% endfor %}
             </table>

@@ -145,7 +145,7 @@ class Movies extends \core\myModel
 
     public static function findByUserAndLatestVideoTags()
     {
-        $rows =  static::query()
+        $rowsets =  static::query()
             ->rightJoin(Videotags::class,'vtags.movie_id = Movies.id','vtags')
             ->where('vtags.user_id = :user:',['user'=>auth()->user()->id])
             ->groupBy('Movies.id')
@@ -153,7 +153,8 @@ class Movies extends \core\myModel
             ->orderBy('time DESC')
             ->execute();
         $result = [];
-        foreach($rows as $row){
+        foreach($rowsets as $row){
+            $row->movies->time = $row->time;
             $result[]=$row->movies;
         }
         return $result;
