@@ -9,7 +9,7 @@
     {% for movie in movies %}
         <tr>
             <td>{{ movie.id }}</td>
-            <td><a href="{{ url(['for':'movies.show','movie':movie.id]) }}">{{ movie.title }}</a></td>
+            <td><a href="{{ url(['for':'movies.show','movie':movie.id]) }}" title="{{ movie.title }}">{{ myTools.cut(movie.title) }}</a></td>
             <td><a href="{{ url(['for':'channels.show','channel':movie.channel_id]) }}">{{ movie.channel_title }}</a></td>
             <td>{{ movie.created_at.diffForhumans() }}</td>
             <td>{{ movie.present('completed') }}</td>
