@@ -10,6 +10,8 @@ namespace serviceProviders;
 
 
 use core\myDI;
+use core\myMiddleWareChecking;
+use core\myModelBinding;
 use core\myProvider;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
@@ -29,18 +31,12 @@ class dispatcherProvider extends myProvider
 
             $eventsManager->attach("dispatch:beforeDispatchLoop", function(Event $event, Dispatcher $dispatcher){
                 /** @var myDI $this */
-                //模型注入的功能，这里可以很方便的进行 model binding,这里基本上实现了Laravel中的模型绑定的功能了
-                /** @var \core\myRouter $router */
-                $router = $this->get('router');
-                return $router->executeModelBinding($dispatcher);
+                return $this->get(myModelBinding::class)->handle();
             });
 
             $eventsManager->attach('dispatch:beforeExecuteRoute',function(Event $event,Dispatcher $dispatcher){
                 /** @var myDI $this */
-                /** @var \core\myRouter $router */
-                $router = $this->get('router');
-//                $router->handle();
-                return $router->executeMiddleWareChecking($this->get('request'), $this->get('response'),$dispatcher);
+                return $this->get(myMiddleWareChecking::class)->handle();
             });
             $dispatcher = new Dispatcher();
             $dispatcher->setEventsManager($eventsManager);

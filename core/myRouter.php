@@ -78,48 +78,6 @@ class myRouter extends Router{
         $this->popMiddlewareFromStack();
     }
 
-    /**中间件过滤检查：
-     * 1、识别出适用所有路由的中间件，
-     * 2、允许设置排除的几个典型路由的检查，特别是针对所有路由都适用的中间件，对login等几个路由应该可以排除
-     * 3、针对当前路由，识别有哪些中间件适用；
-     * 4、如果没有通过中间件的检查，则根据中间件提供的redirectUrl进行路由跳转
-     * @param Request $request
-     * @param Response $response
-     * @return bool
-     */
-    public function executeMiddleWareChecking(Request $request, Response $response, Dispatcher $dispatcher)
-    {
-        $route = $this->getMatchedRoute();
-        if(null == $route){//没有找到正确的路由，无效路由，可以由notFound函数来处理
-            return true;
-        }
-
-        if($this->hasMatchedMiddleWares($route->getRouteId())){
-            $middleWares = $this->getMiddleWares($route->getRouteId());
-            foreach($middleWares as $middleWareString){
-                list($data,$validator) = $this->getValidatorAndData($middleWareString,$dispatcher);
-                if(method_exists($validator,'before') && $validator->before()) return true;
-                if(! $validator->isValid($data)) return false;
-            }
-        }
-        return true;
-    }
-
-    /**将router中参数，按照controller的中Action的类型参数进行绑定
-     * 基本原理是重新设置Dispatcher的参数，以便能够与Controller中的Action对应上
-     * @param Dispatcher $dispatcher
-     */
-    public function executeModelBinding(Dispatcher $dispatcher)
-    {
-        $reflection = new ReflectionMethod($dispatcher->getControllerClass(), $dispatcher->getActiveMethod());
-        $actionParams = [];
-        foreach($reflection->getParameters() as $parameter){
-            $actionParams[$parameter->name] = $this->getParameterValue($parameter,$dispatcher);
-        }
-        if(count($actionParams)){
-            $dispatcher->setParams($actionParams);
-        }
-    }
 
 
 // ----------   提供接口绑定, 从interface 到class的绑定----------
@@ -175,14 +133,7 @@ class myRouter extends Router{
     }
 //--------------helper functions for Middleware-----------------------------------------
 
-    /**判断是否存在对应的中间件
-     * @param $route_id
-     * @return bool
-     */
-    private function hasMatchedMiddleWares($route_id)
-    {
-        return isset($this->middlewares[$route_id]);
-    }
+
 
     /**获得指定的中间件字符串
      * @param $route_id
@@ -190,7 +141,7 @@ class myRouter extends Router{
      *
      *
      */
-    private function getMiddleWares($route_id)
+    public function getMiddleWares($route_id)
     {
         if(isset($this->middlewares[$route_id])) return $this->middlewares[$route_id];
         return null;
@@ -231,17 +182,7 @@ class myRouter extends Router{
         return $this;
     }
 
-    private function getValidatorAndData($validator,Dispatcher $dispatcher)
-    {
-        $data = null;
-        if(preg_match('|.*:.*|',$validator)) {//此处设置了可以带中间件参数
-            list($validator,$data) = explode(':',$validator);
-            $data = $dispatcher->getParam($data);
-        }
-        /** @var myMiddleware $validator */
-        $validator = $this->getDI()->get($validator);
-        return [$data,$validator];
-    }
+
 
     private function mergeStackedMiddlewares($middleware)
     {
@@ -249,53 +190,10 @@ class myRouter extends Router{
         return $middleware;
     }
 
-    private function getParameterValueFromDispatcher(\ReflectionParameter $parameter, Dispatcher $dispatcher)
+    public function hasMatchedMiddleWares($route_id)
     {
-        return $dispatcher->getParam($parameter->name);;
+        return isset($this->middlewares[$route_id]);
     }
 
-    /**
-     * @param $objectId
-     * @param $parameter
-     * @return bool
-     */
-    private function hasNoRouteValueAndHasDefaultParameterValue($objectId, \ReflectionParameter $parameter): bool
-    {
-        return null == $objectId && $parameter->isDefaultValueAvailable();
-    }
-
-    private function getRouteValueOrDefaultValue(\ReflectionParameter $parameter, Dispatcher $dispatcher)
-    {
-        $objectId = $this->getParameterValueFromDispatcher($parameter,$dispatcher);
-        if($this->hasNoRouteValueAndHasDefaultParameterValue($objectId, $parameter)) $objectId = $parameter->getDefaultValue();
-        return $objectId;
-    }
-
-    private function parameterHasClassHint(\ReflectionParameter $parameter)
-    {
-        return $parameter->getClass();
-    }
-
-    private function getParameterValue(\ReflectionParameter $parameter, Dispatcher $dispatcher)
-    {
-        $objectId = $this->getRouteValueOrDefaultValue($parameter,$dispatcher);
-
-        if($this->parameterHasClassHint($parameter)){
-            $className = $this->getProvider($parameter->getClass()->name);
-
-            if($objectId) return $this->instantiateClassWithID($className,$objectId);
-            return new $className;
-        }
-        return  $objectId;
-    }
-    private function instantiateClassWithID($className, $objectId)
-    {
-        if(is_subclass_of($className,\Phalcon\Mvc\Model::class)) {
-            $instance =  $className::findFirst($objectId);
-            if($instance) return $instance;
-            throw new \Exception("你查找的资源{$className}::{$objectId}，不存在");
-        }
-        return  new $className($objectId);
-    }
 
 }
