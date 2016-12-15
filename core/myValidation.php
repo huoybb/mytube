@@ -10,15 +10,24 @@ namespace core;
 
 
 use Exception;
+use Phalcon\Validation\Validator\Between;
+use Phalcon\Validation\Validator\Date;
+use Phalcon\Validation\Validator\Digit;
 use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\StringLength;
 
 abstract  class myValidation extends myMiddleware
 {
 
+    protected $rules = [];
     protected $validatorMapper = [
         'email' => Email::class,
         'required' => PresenceOf::class,
+        'digit'=>Digit::class,
+        'date'=>Date::class,
+        'length'=>StringLength::class,
+        'between'=>Between::class,
     ];
 
     public function isValid($object): bool
@@ -43,9 +52,19 @@ abstract  class myValidation extends myMiddleware
     {
         $validation = new \Phalcon\Validation();
         foreach ($this->rules as $field => $validationExpression) {
-            foreach ($this->getValidatorClass($validationExpression) as $validatorClass) {
-                $validation->add($field, new $validatorClass);
+            if(is_string($validationExpression)){
+                foreach ($this->getValidatorClass($validationExpression) as $validatorClass) {
+                    $validation->add($field, new $validatorClass);
+                }
             }
+            if(is_array($validationExpression)){
+                foreach($validationExpression as $validator=>$message){
+                    $this->checkValidatorExistance($validator);
+                    $validatorClass = $this->validatorMapper[$validator];
+                    $validation->add($field,new $validatorClass(['message'=>$message]));
+                }
+            }
+
         }
         return $validation;
     }
@@ -56,9 +75,18 @@ abstract  class myValidation extends myMiddleware
         foreach ($results as $key => $value) {
             $value = trim($value);
             if(!$value) throw new Exception('please check your rule definition:'.$validationExpression);
-            if (!isset($this->validatorMapper[$value])) throw new Exception("validator:{$value} is not defined!");
+            $this->checkValidatorExistance($value);
             $results[$key] = $this->validatorMapper[$value];
         }
         return $results;
+    }
+
+    /**
+     * @param $value
+     * @throws Exception
+     */
+    protected function checkValidatorExistance($value)
+    {
+        if (!isset($this->validatorMapper[$value])) throw new Exception("validator:{$value} is not defined!");
     }
 }

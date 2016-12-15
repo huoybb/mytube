@@ -6,12 +6,10 @@
  * Date: 2016/12/6
  * Time: 4:55
  */
-class isMovieValid extends \core\myMiddleware
+class isMovieValid extends \core\myValidation
 {
 
-    public function isValid($movie): bool
-    {
-        if(!$movie->title) return false;
-        return true;
-    }
+    protected $rules = [
+        'title'=>'required'
+    ];
 }

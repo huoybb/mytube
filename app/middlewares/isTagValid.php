@@ -6,17 +6,7 @@
  * Date: 2016/12/3
  * Time: 17:03
  */
-class isTagValid extends \core\myMiddleware
+class isTagValid extends \core\myValidation
 {
-
-    public function isValid($object): bool
-    {
-        $tag = trim($this->request->getPost('name'));
-        if(!$tag) {
-            $this->flash->error('标签不能为空，请重新填写');
-            $this->redirectBack();
-            return false;
-        }
-        return true;
-    }
+    protected $rules = ['name'=>'required'];
 }
