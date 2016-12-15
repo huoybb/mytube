@@ -29,6 +29,11 @@ use Phalcon\DiInterface;
  */
 abstract class myMiddleware implements Di\InjectionAwareInterface
 {
+    public static function over($objectstring)
+    {
+        return static::class . ':' . $objectstring;
+    }
+
     public function redirect($routeArray)
     {
         $url = $this->url->get($routeArray);

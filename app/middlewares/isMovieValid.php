@@ -9,9 +9,9 @@
 class isMovieValid extends \core\myMiddleware
 {
 
-    public function isValid($object): bool
+    public function isValid($movie): bool
     {
-        // TODO: Implement isValid() method.
+        if(!$movie->title) return false;
         return true;
     }
 }

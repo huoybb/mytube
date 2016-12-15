@@ -35,7 +35,7 @@ class myMiddleWareChecking implements InjectionAwareInterface
         if($middleWares = $this->router->getMiddleWares($route->getRouteId())){
             foreach($middleWares as $middleWareString){
                 list($data,$validator) = $this->getValidatorAndData($middleWareString,$dispatcher);
-                if(method_exists($validator,'before') && $validator->before()) return true;
+                if(method_exists($validator,'before') && $validator->before()) continue;
                 if(! $validator->isValid($data)) return false;
             }
         }

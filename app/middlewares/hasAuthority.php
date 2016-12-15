@@ -22,7 +22,4 @@ class hasAuthority extends \core\myMiddleware
         $this->redirectBack();
         return false;
     }
-    public static function over($objectstring){
-        return static::class.':'.$objectstring;
-    }
 }
