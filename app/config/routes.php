@@ -65,7 +65,7 @@ $router->group([isLogin::class],function() use($router){
 });
 
 $router->addGet('/register','auth::register')->setName('register');
-$router->addPost('/register','auth::register')->setName('register')->setMiddlewares([checkToken::class]);
+$router->addPost('/register','auth::register')->setName('register')->setMiddlewares([checkToken::class,isRegisterValid::class]);
 $router->addGet('/login','auth::login')->setName('login');
 $router->addPost('/login','auth::login')->setName('login')->setMiddlewares([checkToken::class]);
 
