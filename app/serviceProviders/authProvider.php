@@ -18,6 +18,7 @@ class authProvider extends myProvider
     {
         return function(){
             //奇怪，这里的this是Di这个对象，看看怎么回事，也类似javascript一样吗？
+            //估计这种方式的调用是用：call_user_function([$this,callback])的形式调用的，所以这里的$this指向Di
             $auth = (new myAuth())->setDI($this)->init();
             return $auth;
         };

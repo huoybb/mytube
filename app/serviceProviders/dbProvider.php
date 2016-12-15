@@ -9,6 +9,7 @@
 namespace serviceProviders;
 
 
+use core\myDI;
 use core\myProvider;
 
 class dbProvider extends myProvider
@@ -16,6 +17,7 @@ class dbProvider extends myProvider
     public function setService()
     {
         return function () {
+            /** @var myDI $this */
             $config = $this->get('config');
             $dbConfig = $config->database->toArray();
             $adapter = $dbConfig['adapter'];
