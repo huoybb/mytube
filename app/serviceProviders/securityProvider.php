@@ -15,14 +15,13 @@ use Phalcon\Security;
 
 class securityProvider extends myProvider
 {
-    //需要注意，password的位数至少是60位，否则mysql容易出现截断的
-    public function register($name)
+    public function setService()
     {
-        $this->di->setShared($name,function(){
+        return function(){
             $security = new Security();
             // Set the password hashing factor to 12 rounds
             $security->setWorkFactor(12);
             return $security;
-        });
+        };
     }
 }

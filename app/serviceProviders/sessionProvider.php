@@ -15,17 +15,13 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 
 class sessionProvider extends myProvider
 {
-
-    public function register($name)
+    public function setService()
     {
-        /**
-         * Start the session the first time some component request the session service
-         */
-        $this->di->setShared($name, function () {
+        return function () {
             $session = new SessionAdapter();
             $session->start();
 
             return $session;
-        });
+        };
     }
 }

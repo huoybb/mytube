@@ -13,11 +13,10 @@ use core\myProvider;
 
 class configProvider extends myProvider
 {
-
-    public function register($name)
+    public function setService()
     {
-        $this->di->setShared($name,function(){
+        return function(){
             return include APP_PATH . "/app/config/config.php";
-        });
+        };
     }
 }

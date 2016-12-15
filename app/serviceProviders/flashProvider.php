@@ -14,19 +14,15 @@ use Phalcon\Flash\Session as Flash;
 
 class flashProvider extends myProvider
 {
-
-    public function register($name)
+    public function setService()
     {
-        /**
-         * Register the session flash service with the Twitter Bootstrap classes
-         */
-        $this->di->set($name, function () {
+        return function () {
             return new Flash(array(
                 'error'   => 'alert alert-danger',
                 'success' => 'alert alert-success',
                 'notice'  => 'alert alert-info',
                 'warning' => 'alert alert-warning'
             ));
-        });
+        };
     }
 }

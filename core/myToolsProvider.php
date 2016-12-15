@@ -11,12 +11,12 @@ namespace core;
 
 class myToolsProvider extends myProvider
 {
-
-    public function register($name)
+    public function setService()
     {
-        $this->di->setShared($name,function(){
+        return function(){
             $mytools = new myTools();
             return $mytools;
-        });
+        };
     }
+
 }

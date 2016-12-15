@@ -15,11 +15,11 @@ use core\myProvider;
 class eventsManagerProvider extends myProvider
 {
 
-    public function register($name)
+    public function setService()
     {
-        $this->di->setShared($name,function(){
+        return function(){
             /** @var myDI $this */
             return include APP_PATH . '/app/config/events.php';
-        });
+        };
     }
 }

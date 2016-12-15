@@ -16,17 +16,13 @@ use Phalcon\Mvc\Url as UrlResolver;
 
 class urlProvider extends myProvider
 {
-
-    public function register($name)
+    public function setService()
     {
-        /**
-         * The URL component is used to generate all kind of urls in the application
-         */
-        $this->di->setShared($name, function () {
+        return function () {
             /**@var myDI $this */
             $url = new UrlResolver();
             $url->setBaseUri($this->get('config')->application->baseUri);
             return $url;
-        });
+        };
     }
 }

@@ -14,13 +14,12 @@ use core\myAuth;
 
 class authProvider extends myProvider
 {
-
-    public function register($name)
+    public function setService()
     {
-        $this->di->setShared($name,function(){
+        return function(){
             //奇怪，这里的this是Di这个对象，看看怎么回事，也类似javascript一样吗？
             $auth = (new myAuth())->setDI($this)->init();
             return $auth;
-        });
+        };
     }
 }

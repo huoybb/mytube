@@ -14,13 +14,12 @@ use Phalcon\Http\Response\Cookies;
 
 class cookiesProvider  extends myProvider
 {
-
-    public function register($name)
+    public function setService()
     {
-        $this->di->setShared($name,function(){
+        return function(){
             $cookies = new Cookies();
 //            $cookies->useEncryption(false);
             return $cookies;
-        });
+        };
     }
 }

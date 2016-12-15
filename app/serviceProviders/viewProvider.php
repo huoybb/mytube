@@ -15,11 +15,10 @@ use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 class viewProvider extends myProvider
 {
-
-    public function register($name)
+    public function setService()
     {
         $viewProvider = $this;
-        $this->di->setShared($name, function () use($viewProvider){
+        return function () use($viewProvider){
 
             /** @var myDI $this */
             $config = $this->get('config');
@@ -44,7 +43,7 @@ class viewProvider extends myProvider
             $view->search = $this->get('request')->get('search');//设置每个页面的search变量，这个应该是一个全局的变量
 
             return $view;
-        });
+        };
     }
     public function getVolt($view,$di,$config)
     {
@@ -61,5 +60,4 @@ class viewProvider extends myProvider
         $compiler->addFilter('basename','basename');
         return $volt;
     }
-
 }

@@ -18,6 +18,10 @@ abstract class myProvider
     {
         $this->di = $di;
     }
-    abstract public function register($name);
+    public function register($name)
+    {
+        $this->di->setShared($name,$this->setService());
+    }
+    abstract public function setService();
 
 }
