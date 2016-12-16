@@ -10,5 +10,6 @@ $eventsManager->register($eventsManager->getEventPrefix(),[
     CommentsEventsHandler::class,
     TaggablesEventsHandler::class,
     PlaylistablesEventsHandler::class,
+    FileInfoEventsHandler::class,
 ]);
 return $eventsManager;
