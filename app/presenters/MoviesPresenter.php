@@ -60,8 +60,11 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
 
     public function showLink()
     {
+        $myTools = $this->di->get('myTools');
         $url = $this->url(['for'=>'movies.show','movie'=>$this->entity->id]);
-        return $this->createLink($url,$this->entity->title);
+        $title = $myTools->cut($this->entity->title);
+
+        return "<a href='$url' title='{$this->entity->title}'>{$title}</a>";
     }
     public function type()
     {
