@@ -62,6 +62,10 @@ $router->group([isLogin::class],function() use($router){
 
     $router->addGet('/videotags','videotags::index')->setName('videotags.index');
     $router->addGet('/videotags/{videotag:[0-9]+}/delete','videotags::delete')->setName('videotags.delete');
+
+    $router->addx('/watchlists/want/{movie:[0-9]+}','watchlists::addToWantList')->setName('watchlists.want.add');
+    $router->addx('/watchlists/doing/{movie:[0-9]+}','watchlists::addToDoingList')->setName('watchlists.doing.add');
+    $router->addx('/watchlists/done/{movie:[0-9]+}','watchlists::addToDoneList')->setName('watchlists.done.add');
 });
 
 $router->addGet('/register','auth::register')->setName('register');
