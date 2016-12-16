@@ -25,7 +25,7 @@ use Phalcon\Di\InjectionAwareInterface;
  * @property \Phalcon\Session\Adapter\Files|\Phalcon\Session\Adapter|\Phalcon\Session\AdapterInterface $session
  * @property myAuth auth
  */
-abstract class myDiAwareClass implements InjectionAwareInterface
+abstract class myDIAwareClass implements InjectionAwareInterface
 {
 
     protected $di;

@@ -12,7 +12,7 @@ namespace core;
 use Phalcon\Di;
 use Phalcon\DiInterface;
 
-abstract class myMiddleware extends myDiAwareClass
+abstract class myMiddleware extends myDIAwareClass
 {
     public static function over($objectstring)
     {

@@ -19,7 +19,7 @@ use Phalcon\Mvc\Dispatcher;
  * @property myRouter $router
  */
 
-class myMiddleWareChecking extends myDiAwareClass
+class myMiddleWareChecking extends myDIAwareClass
 {
 
     public function handle(Dispatcher $dispatcher = null)

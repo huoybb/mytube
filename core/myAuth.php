@@ -9,7 +9,7 @@ use Users;
  * Date: 2016/6/26
  * Time: 23:14
  */
-class myAuth extends myDiAwareClass
+class myAuth extends myDIAwareClass
 {
 
     /**

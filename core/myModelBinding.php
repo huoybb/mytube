@@ -13,7 +13,7 @@ use Phalcon\Di\InjectionAwareInterface;
 use Phalcon\Mvc\Dispatcher;
 use ReflectionMethod;
 
-class myModelBinding extends myDiAwareClass
+class myModelBinding extends myDIAwareClass
 {
     public function handle(Dispatcher $dispatcher = null)
     {
