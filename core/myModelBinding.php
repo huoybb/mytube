@@ -13,12 +13,8 @@ use Phalcon\Di\InjectionAwareInterface;
 use Phalcon\Mvc\Dispatcher;
 use ReflectionMethod;
 
-class myModelBinding implements InjectionAwareInterface
+class myModelBinding extends myDiAwareClass
 {
-    /**
-     * @var myDI
-     */
-    protected $di;
     public function handle(Dispatcher $dispatcher = null)
     {
         $dispatcher = $dispatcher ?: $this->getDi()->get('dispatcher');
@@ -64,25 +60,5 @@ class myModelBinding implements InjectionAwareInterface
             throw new \Exception("你查找的资源{$className}::{$objectId}，不存在");
         }
         return  new $className($objectId);
-    }
-
-    /**
-     * Sets the dependency injector
-     *
-     * @param \Phalcon\DiInterface $dependencyInjector
-     */
-    public function setDI(\Phalcon\DiInterface $dependencyInjector)
-    {
-        $this->di = $dependencyInjector;
-    }
-
-    /**
-     * Returns the internal dependency injector
-     *
-     * @return \Phalcon\DiInterface
-     */
-    public function getDI()
-    {
-        return $this->di;
     }
 }

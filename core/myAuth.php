@@ -9,20 +9,9 @@ use Users;
  * Date: 2016/6/26
  * Time: 23:14
  */
-class myAuth implements \Phalcon\Di\InjectionAwareInterface
+class myAuth extends myDiAwareClass
 {
-    /**
-     * @var Di
-     */
-    protected $di;
-    /**
-     * @var \Phalcon\Session\Adapter\Files
-     */
-    protected $session;
-    /**
-     * @var \Phalcon\Http\Response\Cookies
-     */
-    protected $cookies;
+
     /**
      * @var Users;
      */
@@ -34,8 +23,6 @@ class myAuth implements \Phalcon\Di\InjectionAwareInterface
      */
     public function init()
     {
-        $this->session = $this->di->get('session');
-        $this->cookies = $this->di->get('cookies');
         if($this->session->has('auth')){
             $this->loginByUserId($this->session->get('auth'));
         }else{
@@ -96,27 +83,6 @@ class myAuth implements \Phalcon\Di\InjectionAwareInterface
     {
         if($this->cookies->has('auth')) $this->cookies->get('auth')->delete();
         if($this->session->has('auth')) $this->session->remove('auth');
-    }
-
-    /**
-     * Sets the dependency injector
-     *
-     * @param mixed $dependencyInjector
-     */
-    public function setDI(\Phalcon\DiInterface $dependencyInjector)
-    {
-        $this->di = $dependencyInjector;
-        return $this;
-    }
-
-    /**
-     * Returns the internal dependency injector
-     *
-     * @return \Phalcon\DiInterface
-     */
-    public function getDI()
-    {
-        return $this->di;
     }
 
     /**

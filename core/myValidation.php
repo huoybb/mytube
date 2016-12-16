@@ -35,8 +35,7 @@ abstract  class myValidation extends myMiddleware
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
 //            dd($data);
-            $validation = $this->getValidator();
-            $messages = $validation->validate($data);
+            $messages = $this->getValidator()->validate($data);
             if (count($messages)) {
                 foreach ($messages as $message) {
                     $this->flash->error($message);
@@ -48,10 +47,11 @@ abstract  class myValidation extends myMiddleware
         return true;
     }
 
-    protected function getValidator()
+    protected function getValidator($rules = null)
     {
+        $rules = $rules ?: $this->rules;
         $validation = new \Phalcon\Validation();
-        foreach ($this->rules as $field => $validationExpression) {
+        foreach ($rules as $field => $validationExpression) {
             if(is_string($validationExpression)){
                 foreach ($this->getValidatorClass($validationExpression) as $validatorClass) {
                     $validation->add($field, new $validatorClass);

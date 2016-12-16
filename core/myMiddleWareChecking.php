@@ -19,10 +19,8 @@ use Phalcon\Mvc\Dispatcher;
  * @property myRouter $router
  */
 
-class myMiddleWareChecking implements InjectionAwareInterface
+class myMiddleWareChecking extends myDiAwareClass
 {
-
-    protected $di;
 
     public function handle(Dispatcher $dispatcher = null)
     {
@@ -54,29 +52,4 @@ class myMiddleWareChecking implements InjectionAwareInterface
         $validator = $this->getDI()->get($validator);
         return [$data,$validator];
     }
-
-    /**
-     * Sets the dependency injector
-     *
-     * @param \Phalcon\DiInterface $dependencyInjector
-     */
-    public function setDI(\Phalcon\DiInterface $dependencyInjector)
-    {
-        $this->di = $dependencyInjector;
-    }
-
-    /**
-     * Returns the internal dependency injector
-     *
-     * @return \Phalcon\DiInterface
-     */
-    public function getDI()
-    {
-        return $this->di;
-    }
-    public function __get($property)
-    {
-        return $this->getDI()->get($property);
-    }
-
 }
