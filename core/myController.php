@@ -11,6 +11,7 @@ namespace core;
 
 use Phalcon\Mvc\Controller;
 use Phalcon\Paginator\Adapter\Model;
+use Phalcon\Paginator\Adapter\NativeArray;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
 class myController extends Controller
@@ -40,6 +41,14 @@ class myController extends Controller
             'page'=>$page
         ]);
         return $this->cyclingPage($paginator->getPaginate());
+    }
+    protected function getPaginatorByArray($array,$limit,$page){
+        $paginator = new NativeArray([
+            'data'=>$array,
+            'limit'=>$limit,
+            'page'=>$page
+        ]);
+        return $paginator->getPaginate();
     }
 
     /**

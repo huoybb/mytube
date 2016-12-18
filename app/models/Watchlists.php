@@ -92,6 +92,37 @@ class Watchlists extends \core\myModel
         return self::addToWatchlist($movie,'done');
     }
 
+    public static function getWantListByUser(Users $user)
+    {
+        return self::getListByUserAndStatus($user,'want');
+    }
+
+    private static function getListByUserAndStatus($user, $status)
+    {
+        $lists =  modelsManager()->createBuilder()
+            ->from('Movies')
+            ->rightJoin('Watchlists','wlist.movie_id = Movies.id','wlist')
+            ->where('wlist.user_id = :user:',['user'=>$user->id])
+            ->groupBy('wlist.movie_id')
+            ->orderBy('max(wlist.updated_at) DESC')
+            ->columns(['Movies.*','wlist.status'])
+            ->getQuery()->execute();
+        $lists = $lists->filter(function($row) use($status) {
+            if($row->status == $status) return $row->movies;
+        });
+        return $lists;
+    }
+
+    public static function getDoingListByUser($user)
+    {
+        return self::getListByUserAndStatus($user,'doing');
+    }
+    public static function getDoneListByUser($user)
+    {
+        return self::getListByUserAndStatus($user,'done');
+    }
+
+
     /**
      * Initialize method for model.
      */

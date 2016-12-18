@@ -17,6 +17,9 @@
                     <li><a href="{{ url(['for':'playlists.index']) }}">列表</a></li>
                     <li><a href="{{ url(['for':'tags.index']) }}">我的标签</a></li>
                     <li><a href="{{ url(['for':'videotags.index']) }}">我的标注</a></li>
+                    <li><a href="{{ url(['for':'watchlists.want']) }}">想看</a></li>
+                    <li><a href="{{ url(['for':'watchlists.doing']) }}">在看</a></li>
+                    <li><a href="{{ url(['for':'watchlists.done']) }}">看过</a></li>
                 </ul>
             {% endif %}
             {#<ul class="nav navbar-nav navbar-right">#}

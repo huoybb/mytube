@@ -63,8 +63,17 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/videotags','videotags::index')->setName('videotags.index');
     $router->addGet('/videotags/{videotag:[0-9]+}/delete','videotags::delete')->setName('videotags.delete');
 
+
+    $router->addx('/watchlists/want','watchlists::want')->setName('watchlists.want');
+    $router->addx('/watchlists/want/page/{page:[0-9]+}','watchlists::want')->setName('watchlists.want.page');
     $router->addx('/watchlists/want/{movie:[0-9]+}','watchlists::addToWantList')->setName('watchlists.want.add');
+
+    $router->addx('/watchlists/doing','watchlists::doing')->setName('watchlists.doing');
+    $router->addx('/watchlists/doing/page/{page:[0-9]+}','watchlists::doing')->setName('watchlists.doing.page');
     $router->addx('/watchlists/doing/{movie:[0-9]+}','watchlists::addToDoingList')->setName('watchlists.doing.add');
+
+    $router->addx('/watchlists/done','watchlists::done')->setName('watchlists.done');
+    $router->addx('/watchlists/done/page/{page:[0-9]+}','watchlists::done')->setName('watchlists.done.page');
     $router->addx('/watchlists/done/{movie:[0-9]+}','watchlists::addToDoneList')->setName('watchlists.done.add');
 });
 

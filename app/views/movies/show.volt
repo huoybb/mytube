@@ -5,11 +5,11 @@
 {% block content %}
     {% if movie.getVideoFile() %}
         <div class="container">
-            <div class="col-md-7">
+            <div class="col-md-9">
                 {% include 'layouts/videojsBody.volt' %}
                 {% include 'layouts/videojsHeader.volt' %}
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
                 {% include 'layouts/videotags.volt' %}
             </div>
         </div>
