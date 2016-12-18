@@ -300,7 +300,7 @@ class Movies extends \core\myModel
         return $watch;
     }
 
-    private function getLastWatch()
+    public function getLastWatch()
     {
         return Watchlists::findLastWatchByMovie($this);
     }

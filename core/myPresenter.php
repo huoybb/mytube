@@ -52,12 +52,11 @@ abstract class myPresenter
      * @param $title
      * @return string
      */
-    protected function createLink($url, $title,$class = null):string
+    protected function createLink($url, $title,$class = null,$disabled = null):string
     {
-        if($class) {
-            return "<a href='{$url}' class='{$class}'>$title</a>";
-        }
-        return "<a href='{$url}'>$title</a>";
+        if($disabled == "disabled") $disabled = "disabled='{$disabled}'";
+        if($class)  $class = "class='{$class}'";
+        return "<a href='{$url}' {$class} {$disabled} >$title</a>";
     }
 
     protected function youtubePrefix($url)
@@ -94,6 +93,7 @@ abstract class myPresenter
     protected function buildArrayOfLinkButtons(array $items): string
     {
         return collect($items)->map(function ($item) {
+            if(isset($item['disabled'])) return $this->createLink($item['url'], $item['title'], $item['class'],$item['disabled']);
             return $this->createLink($item['url'], $item['title'], $item['class']);
         })->implode(' ');
     }

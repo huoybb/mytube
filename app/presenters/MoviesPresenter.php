@@ -100,10 +100,12 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
 
     public function addToWatchlistLinks()
     {
+        $lastWatch = Watchlists::findLastWatchByMovie($this->entity);
+//        dd($lastWatch->toArray());
         $urls = [
-            ['url'=>$this->url(['for'=>'watchlists.want.add','movie'=>$this->entity->id]),'title'=>'想看','class'=>"btn btn-warning btn-xs"],
-            ['url'=>$this->url(['for'=>'watchlists.doing.add','movie'=>$this->entity->id]),'title'=>'在看','class'=>"btn btn-warning btn-xs"],
-            ['url'=>$this->url(['for'=>'watchlists.done.add','movie'=>$this->entity->id]),'title'=>'看过','class'=>"btn btn-warning btn-xs"],
+            ['url'=>$this->url(['for'=>'watchlists.want.add','movie'=>$this->entity->id]),'title'=>'想看','class'=>"btn btn-warning btn-xs",'disabled'=>$this->lastWatchStatusIs('want')],
+            ['url'=>$this->url(['for'=>'watchlists.doing.add','movie'=>$this->entity->id]),'title'=>'在看','class'=>"btn btn-warning btn-xs",'disabled'=>$this->lastWatchStatusIs('doing')],
+            ['url'=>$this->url(['for'=>'watchlists.done.add','movie'=>$this->entity->id]),'title'=>'看过','class'=>"btn btn-warning btn-xs",'disabled'=>$this->lastWatchStatusIs('done')],
         ];
         return $this->insertButtonsToGroup($this->buildArrayOfLinkButtons($urls));
     }
@@ -127,6 +129,13 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     {
         $url = $this->url->get(['for'=>'movies.deleteTag','movie'=>$this->entity->id,'tag'=>$tag->id]);
         return $this->createLink($url,'删除');
+    }
+
+    private function lastWatchStatusIs($status)
+    {
+        $lastWatch = $this->entity->getLastWatch();
+        if($lastWatch && $lastWatch->status == $status) return 'disabled';
+        return null;
     }
 
 }
