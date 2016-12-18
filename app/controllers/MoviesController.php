@@ -68,6 +68,14 @@ class MoviesController extends \core\myController
         return $this->redirectBack();
     }
 
+    public function addAttachmentAction(Movies $movie)
+    {
+        if($this->request->isAjax() && $this->request->hasFiles()){
+            $movie->uploadAndStoreAttachments($this->request);
+        }
+    }
+
+
 
 
 

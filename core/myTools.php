@@ -33,4 +33,68 @@ class myTools
         if(mb_strlen($string) > $maxLength) $result .= ' ...';
         return $result;
     }
+    public function storeAttachment(\Phalcon\Http\Request\File $attachment)
+    {
+        $uploadDir = 'files'; //上传路径的设置
+        $time = time();
+        $path = $this->makePath($uploadDir,$time);
+
+        $ext = preg_replace('%^.*?(\.[\w]+)$%', "$1", $attachment->getName()); //获取文件的后缀
+        $url = md5($attachment->getName());
+
+        $filename = $path . $time . $url . $ext;
+
+        $attachment->moveTo($filename);
+
+        return $filename;
+    }
+
+    public function makePath($uploaddir, $time)
+    {
+        $year = date('Y', $time);
+        $month = date('m', $time);
+        $day = date('d', $time);
+
+        $path = $this->isDirOrMkdir($uploaddir . '/');
+        $path = $this->isDirOrMkdir($path . $year . '/');
+        $path = $this->isDirOrMkdir($path . $month . '/') ;
+        $path = $this->isDirOrMkdir($path . $day . '/') ;
+        return $path;
+    }
+    public function isDirOrMkdir($path)
+    {
+        if (! is_dir($path)) mkdir($path);
+        return $path;
+    }
+
+    public function formatSizeUnits($bytes)
+    {
+        if ($bytes >= 1073741824)
+        {
+            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+        }
+        elseif ($bytes >= 1048576)
+        {
+            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+        }
+        elseif ($bytes >= 1024)
+        {
+            $bytes = number_format($bytes / 1024, 2) . ' KB';
+        }
+        elseif ($bytes > 1)
+        {
+            $bytes = $bytes . ' bytes';
+        }
+        elseif ($bytes == 1)
+        {
+            $bytes = $bytes . ' byte';
+        }
+        else
+        {
+            $bytes = '0 bytes';
+        }
+
+        return $bytes;
+    }
+
 }

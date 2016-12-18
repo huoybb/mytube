@@ -28,6 +28,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/movies/{movie:[0-9]+}/editMovietags','movies::editMovietags','movies.editMovietags');
     $router->addx('/movies/{movie:[0-9]+}/editTag','movies::editTag','movies.editTag');
     $router->addx('/movies/{movie:[0-9]+}/deleteTag/{tag:[0-9]+}','movies::deleteTag','movies.deleteTag');
+    $router->addx('/movies/{movie:[0-9]+}/addAttachment','movies::addAttachment','movies.addAttachment');
 
     $router->addGet('/channels','channels::index','channels.index');
     $router->addGet('/channels/{channel:[0-9]+}','channels::show','channels.show');

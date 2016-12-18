@@ -9,6 +9,8 @@ class Movies extends \core\myModel
     use myPresenterTrait;
     use CommentableTrait;
     use taggableTrait;
+    use WatchlistableTrait;
+    use AttachmentableTrait;
 
     /**
      *
@@ -283,34 +285,6 @@ class Movies extends \core\myModel
     public function hasVideoTags()
     {
         return count($this->getVideoTags());
-    }
-
-    public function addToWantList()
-    {
-        $watch = $this->getLastWatch();
-        if($watch && $watch->status == 'want') return $watch;
-        return Watchlists::addToWantList($this);
-    }
-
-    public function addToDoingList()
-    {
-        $watch = $this->getLastWatch();
-        if(!$watch) $watch = Watchlists::addToDoingList($this);
-        $watch->save(['status'=>'doing']);
-        return $watch;
-    }
-
-    public function getLastWatch()
-    {
-        return Watchlists::findLastWatchByMovie($this);
-    }
-
-    public function addToDoneList()
-    {
-        $watch = $this->getLastWatch();
-        if(!$watch) $watch = Watchlists::addToDoneList($this);
-        $watch->save(['status'=>'done']);
-        return $watch;
     }
 
 

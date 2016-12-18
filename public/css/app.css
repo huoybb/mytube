@@ -6927,3 +6927,12 @@ pre {
   white-space: pre-wrap;
   /* css-3 */
 }
+.fileUpload {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  min-height: 30px;
+  background-color: #FFFF00;
+  color: #000;
+  text-align: center;
+  display: block;
+}
