@@ -11,7 +11,7 @@
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/public/js/videoControl.js" />
-      <root url="file://$PROJECT_DIR$/public/js/movie.js" />
+      <root url="file://$PROJECT_DIR$/public/js/uploadFile.js" />
       <root url="file://$PROJECT_DIR$/public/js/myVideo.js" />
       <root url="file://$PROJECT_DIR$/public/js/search.js" />
       <root url="file://$PROJECT_DIR$/public/js/navKey.js" />

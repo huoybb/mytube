@@ -1,8 +1,8 @@
 <hr>
-{% if movie.hasAttachments() %}
+{% if attachmentsOwner.hasAttachments() %}
     <h2><a href="#">Attachments</a></h2>
     <div id="attachments">
-        {% for attachment in movie.attachments() %}
+        {% for attachment in attachmentsOwner.attachments() %}
             <table width="100%" border="1" cellpadding="0" cellspacing="0">
                 <tbody><tr>
                     <td bgcolor="#FFFF33">id</td>
@@ -26,10 +26,10 @@
     </div>
 {% endif %}
 <div class="fileUpload" id="fileUpload">
-    <form action="{{ url(['for':'movies.addAttachment','movie':movie.id]) }}"
+    <form action="{{ attachmentsOwner.present('addAttachmentUrl') }}"
           id="my-awesome-dropzone">
         文件上传:<br>请将文件拖拽到这里
     </form>
 </div>
 <script src="/js/dropzone.js"></script>
-<script src="/js/movie.js"></script>
+<script src="/js/uploadFile.js"></script>

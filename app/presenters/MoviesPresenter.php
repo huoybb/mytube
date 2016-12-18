@@ -109,8 +109,6 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
         ];
         return $this->insertButtonsToGroup($this->buildArrayOfLinkButtons($urls));
     }
-
-
     public function breadcrumbs()
     {
         $nav = [
@@ -137,5 +135,8 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
         if($lastWatch && $lastWatch->status == $status) return 'disabled';
         return null;
     }
-
+    public function addAttachmentUrl()
+    {
+        return $this->url->get(['for'=>'movies.addAttachment','movie'=>$this->entity->id]);
+    }
 }

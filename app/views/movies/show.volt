@@ -20,7 +20,7 @@
         <div class="col-md-10">
             <h1>视频：{{ movie.title }}</h1>
             {% include 'layouts/info' with ['Owner':movie] %}
-            {% include 'movies/partials/attachments.volt' %}
+            {% include 'layouts/attachments' with ['attachmentsOwner':movie] %}
             {% include 'layouts/commentList' with ['commentOwner':movie,'commentFormUrl':url(['for':'movies.addComment','movie':movie.id])] %}
         </div>
         <div class="col-md-2">
