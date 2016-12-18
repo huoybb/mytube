@@ -84,19 +84,30 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
 
     public function operation()
     {
-        $result = '';
-        $url = $this->url(['for'=>'movies.edit','movie'=>$this->entity->id]);
-        $result .= $this->createLink($url,'编辑',"btn btn-warning btn-xs");
+        $movieButtons = [
+            ['url'=>$this->url(['for'=>'movies.edit','movie'=>$this->entity->id]),'title'=>'编辑','class'=>"btn btn-warning btn-xs"],
+            ['url'=>$this->url(['for'=>'movies.delete','movie'=>$this->entity->id]),'title'=>'删除','class'=>"btn btn-danger btn-xs"],
+        ];
 
-        $url = $this->url(['for'=>'movies.delete','movie'=>$this->entity->id]);
-        $result .= ' '.$this->createLink($url,'删除',"btn btn-danger btn-xs");
-
+        $result = $this->insertButtonsToGroup($this->buildArrayOfLinkButtons($movieButtons));
         if(!$this->entity->hasVideoFile && $this->entity->getVideoFile()){
-            $url = $this->url(['for'=>'movies.setFile','movie'=>$this->entity->id]);
-            $result .= ' '.$this->createLink($url,'确认视频文件',"btn btn-danger btn-xs");
+            $setFileButton=['url'=>$this->url(['for'=>'movies.setFile','movie'=>$this->entity->id]),'title'=>'确认视频文件','class'=>"btn btn-danger btn-xs"];
+            $result .= ' '.$this->createLink($setFileButton['url'],$setFileButton['title'],$setFileButton['class']);
         }
+        $result .= ' '.$this->addToWatchlistLinks();
         return $result;
     }
+
+    public function addToWatchlistLinks()
+    {
+        $urls = [
+            ['url'=>$this->url(['for'=>'watchlists.want.add','movie'=>$this->entity->id]),'title'=>'想看','class'=>"btn btn-warning btn-xs"],
+            ['url'=>$this->url(['for'=>'watchlists.doing.add','movie'=>$this->entity->id]),'title'=>'在看','class'=>"btn btn-warning btn-xs"],
+            ['url'=>$this->url(['for'=>'watchlists.done.add','movie'=>$this->entity->id]),'title'=>'看过','class'=>"btn btn-warning btn-xs"],
+        ];
+        return $this->insertButtonsToGroup($this->buildArrayOfLinkButtons($urls));
+    }
+
 
     public function breadcrumbs()
     {
@@ -117,6 +128,5 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
         $url = $this->url->get(['for'=>'movies.deleteTag','movie'=>$this->entity->id,'tag'=>$tag->id]);
         return $this->createLink($url,'删除');
     }
-
 
 }

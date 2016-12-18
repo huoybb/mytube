@@ -69,7 +69,7 @@ abstract class myPresenter
      * @param array $items
      * $item = ['url','value','isActive']
      */
-    protected function buildBreadcrumbs(array $items)
+    protected function buildBreadcrumbs(array $items): string
     {
         $result = '<ol class="breadcrumb">';
         foreach ($items as $item) {
@@ -84,5 +84,27 @@ abstract class myPresenter
     }
     protected function url(array $routeArray){
         return $this->url->get($routeArray);
+    }
+
+    /**
+     * @param $items
+     * $items = [['url'=>'xxx.url','title'=>'想看']]
+     * @return string
+     */
+    protected function buildArrayOfLinkButtons(array $items): string
+    {
+        return collect($items)->map(function ($item) {
+            return $this->createLink($item['url'], $item['title'], $item['class']);
+        })->implode(' ');
+    }
+
+    /**
+     * 将上面这个一组buttons变成一个group，更加容易管理和查看
+     * @param $ArrayOfLinkButtonsString
+     * @return string
+     */
+    protected function insertButtonsToGroup($ArrayOfLinkButtonsString)
+    {
+        return "<div class='btn-group'>{$ArrayOfLinkButtonsString}</div>";
     }
 }
