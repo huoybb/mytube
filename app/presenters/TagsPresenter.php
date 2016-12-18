@@ -51,4 +51,8 @@ class TagsPresenter extends \core\myPresenter implements  myEntityInterface
         ];
         return $this->buildBreadcrumbs($nav);
     }
+    public function addAttachmentUrl()
+    {
+        return $this->url->get(['for'=>'tags.addAttachment','tag'=>$this->entity->id]);
+    }
 }

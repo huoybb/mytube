@@ -6,6 +6,7 @@ class Tags extends myModel
 {
     use \core\myPresenterTrait;
     use CommentableTrait;
+    use AttachmentableTrait;
     /**
      *
      * @var integer

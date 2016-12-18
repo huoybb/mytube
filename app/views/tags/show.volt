@@ -7,6 +7,8 @@
     <h1>标签：{{ mytag.name }}</h1>
     {% include 'layouts/info' with ['Owner':mytag] %}
 
+    {% include 'layouts/attachments' with ['attachmentsOwner':mytag] %}
+
 
     {% include 'tags/partials/list.volt' %}
     {% include 'tags/partials/movie.volt' %}

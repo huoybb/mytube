@@ -56,6 +56,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addGet('/tags/{tag:[0-9]+}','tags::show')->setName('tags.show');
     $router->addPost('/tags/{tag:[0-9]+}/addComment','tags::addComment')->setName('tags.addComment')->setMiddlewares([checkToken::class,isCommentValid::class]);
     $router->addx('/tags/{tag:[0-9]+}/edit','tags::edit')->setName('tags.edit')->setMiddlewares([checkToken::class,isTagValid::class]);
+    $router->addx('/tags/{tag:[0-9]+}/addAttachment','tags::addAttachment','tags.addAttachment');
 
     $router->addGet('/getYoutube/{key}','youtube::getMovie')->setName('youtube.getMovie');
     $router->addGet('/getYoutubeWithList/{movieKey}/{listKey}/{index}','youtube::getMovieWithList')->setName('youtube.getMovieWithList');

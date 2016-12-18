@@ -25,5 +25,11 @@ class TagsController extends \core\myController
         }
         $this->view->mytag = $tag;
     }
+    public function addAttachmentAction(Tags $tag)
+    {
+        if($this->request->isAjax() && $this->request->hasFiles()){
+            $tag->uploadAndStoreAttachments($this->request);
+        }
+    }
 }
 
