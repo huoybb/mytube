@@ -1,5 +1,5 @@
 <div id="root">
-    <h2>视频标签 <a href="{{ url(['for':'movies.editMovietags','movie':movie.id]) }}">修改</a></h2>
+    <h2><a href="{{ url(['for':'movies.editMovietags','movie':movie.id]) }}">视频标签</a></h2>
     <form @submit.prevent="addVideoTag">
         <input type="text" id="input" v-model="videoTag">
     </form>

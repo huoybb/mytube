@@ -1,4 +1,4 @@
-<h2>Tags <a href="{{ tagOwner.present('editTagUrl') }}">修改</a></h2>
+<h2><a href="{{ tagOwner.present('editTagUrl') }}">Tags</a></h2>
 
 {{ form(tagFormUrl,'method':'post') }}
     {% include "layouts/csrf.volt" %}
