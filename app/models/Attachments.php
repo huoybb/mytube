@@ -70,6 +70,12 @@ class Attachments extends \core\myModel
             ->execute();
     }
 
+    public static function getLatestQuery()
+    {
+        return modelsManager()->createBuilder()->from(static::class)
+            ->orderBy('created_at DESC');
+    }
+
     /**
      * Initialize method for model.
      */
@@ -116,4 +122,10 @@ class Attachments extends \core\myModel
             return filesize($this->url);
         });
     }
+    public function attachmentable()
+    {
+        $className = $this->attachmentable_type;
+        return $className::findFirst($this->attachmentable_id);
+    }
+
 }
