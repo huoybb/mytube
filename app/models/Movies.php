@@ -231,6 +231,7 @@ class Movies extends \core\myModel
                 $file = FileInfo::findFirstFile($this->key);
             }else{
                 $file = FileInfo::findFirstFile($this->title);
+                if(!$file) $file = FileInfo::findFirstFile($this->key);
             }
             if(!$file) return null;
             return str_replace('H:\\YouTubes\\','http://movies.mytube.zhaobing/',$file->getRealPath());
@@ -238,14 +239,19 @@ class Movies extends \core\myModel
     }
     public function setVideoFile()
     {
+        //将视频文件放在指定目录下后，能够根据文件名识别出来的请款
         if($file = FileInfo::findFirstFile($this->title)){
-//            var_dump($file->getRealPath());
             $old_name = $file->getBasename();
-//            var_dump($old_name);
             $new_name = $this->key.'.mp4';
-//            var_dump($new_name);
             $new_realPath = str_replace($old_name,$new_name,$file->getRealPath());
+
             rename($file->getRealPath(),$new_realPath);
+
+            $this->save(['hasVideoFile'=>true]);
+            return true;
+        }
+        //当已经手动将文件名按照key修改后的请款
+        if($file = FileInfo::findFirstFile($this->key)){
             $this->save(['hasVideoFile'=>true]);
             return true;
         }
