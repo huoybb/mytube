@@ -11,7 +11,7 @@ class ChannelsPresenter extends \core\myPresenter implements youtubeLinkInterfac
     /**
      * @var Channels
      */
-    protected $entity;
+    public $entity;
 
     public function moviesCount()
     {

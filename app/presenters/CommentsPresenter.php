@@ -11,7 +11,7 @@ class CommentsPresenter extends \core\myPresenter
     /**
      * @var Comments
      */
-    protected $entity;
+    public $entity;
     public function content()
     {
         return "<pre>{$this->entity->content}</pre>";

@@ -8,10 +8,11 @@
  */
 class PlaylistsPresenter extends \core\myPresenter implements youtubeLinkInterface, myEntityInterface
 {
+    use taggablePresenterTrait;
     /**
      * @var Playlists
      */
-    protected $entity;
+    public $entity;
     public function showLink()
     {
         $url = $this->url(['for'=>'playlists.show','playlist'=>$this->entity->id]);
@@ -51,16 +52,7 @@ class PlaylistsPresenter extends \core\myPresenter implements youtubeLinkInterfa
         $result .= ' '.$this->createLink($url,'更新');
         return $result;
     }
-    // todo 需要与moviespresenter一起提取出trait来使用
-    public function tags()
-    {
-        $result = '';
-        foreach($this->entity->getTags() as $tag){
-            $url = $this->url(['for'=>'tags.show','tag'=>$tag->id]);
-            $result .= ' '.$this->createLink($url,$tag->name."({$tag->count})",'btn btn-primary btn-xs');
-        }
-        return $result;
-    }
+
 
 
     public function breadcrumbs()

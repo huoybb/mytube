@@ -14,7 +14,7 @@ use Phalcon\Mvc\Url;
 
 abstract class myPresenter
 {
-    protected $entity;
+    public $entity;
     protected $di;
     /**
      * @var Url
@@ -52,7 +52,7 @@ abstract class myPresenter
      * @param $title
      * @return string
      */
-    protected function createLink($url, $title,$class = null,$disabled = null):string
+    public function createLink($url, $title,$class = null,$disabled = null):string
     {
         if($disabled == "disabled") $disabled = "disabled='{$disabled}'";
         if($class)  $class = "class='{$class}'";
@@ -81,7 +81,7 @@ abstract class myPresenter
         $result .= '</ol>';
         return $result;
     }
-    protected function url(array $routeArray){
+    public function url(array $routeArray){
         return $this->url->get($routeArray);
     }
 

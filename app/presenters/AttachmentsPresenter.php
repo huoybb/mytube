@@ -9,7 +9,7 @@
 class AttachmentsPresenter extends \core\myPresenter
 {
     /** @var  Attachments */
-    protected $entity;
+    public $entity;
     public function getFileSize()
     {
         /** @var \core\myTools $myTools */

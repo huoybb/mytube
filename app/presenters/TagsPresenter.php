@@ -11,7 +11,7 @@ class TagsPresenter extends \core\myPresenter implements  myEntityInterface
     /**
      * @var Tags
      */
-    protected $entity;
+    public $entity;
     public function count()
     {
         if(property_exists($this->entity,'count')) return $this->entity->count;

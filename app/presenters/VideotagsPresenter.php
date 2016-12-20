@@ -11,7 +11,7 @@ class VideotagsPresenter extends \core\myPresenter
     /**
      * @var Videotags
      */
-    protected $entity;
+    public $entity;
     public function time()
     {
         return $this->toTimeString($this->entity->time);

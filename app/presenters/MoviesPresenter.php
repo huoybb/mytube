@@ -8,10 +8,11 @@
  */
 class MoviesPresenter extends \core\myPresenter implements myEntityInterface
 {
+    use taggablePresenterTrait;
     /**
      * @var Movies
      */
-    protected $entity;
+    public $entity;
     public function description()
     {
         return "<pre>{$this->entity->description}</pre>";
@@ -47,15 +48,6 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     {
         $url =  'http://en.savefrom.net/#url=' . $this->entity->getMovieUrl();
         return $this->createLink($url,'En.SaveFrom.Net','btn btn-info btn-xs');
-    }
-    public function tags()
-    {
-        $result = '';
-        foreach($this->entity->getTags() as $tag){
-            $url = $this->url(['for'=>'tags.show','tag'=>$tag->id]);
-            $result .= ' '.$this->createLink($url,$tag->name."({$tag->count})",'btn btn-primary btn-xs');
-        }
-        return $result;
     }
 
     public function showLink()
