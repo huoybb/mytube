@@ -8,12 +8,13 @@
  */
 class FileInfo
 {
-    public static function findFirstFile($fileKeyWords)
+    public static function findFirstFile($fileKeyWords,$path = null)
     {
+        $path = $path ?: 'H:\YouTubes\*';
         $fileKeyWords = static::getFileKey($fileKeyWords);
         $files = \Symfony\Component\Finder\Finder::create()
             ->files()
-            ->in('H:\YouTubes\*')
+            ->in($path)
             ->name('/'.$fileKeyWords.'.+?/im');
         if($files->count() > 0){
             foreach ($files as $file){
@@ -28,5 +29,18 @@ class FileInfo
         $filename = preg_replace('/\'|’|:|—|–|-|\(|\)|"|&|•|\/|,|\||#/im', '.*', $keywords);
         $filename = preg_replace('/[\s]+/im', ' ', $filename);
         return $filename;
+    }
+
+    public static function getFilePathFromAttachment(Attachments $attachment)
+    {
+        $file_path = APP_PATH.'/public/'.$attachment->url;
+        if(is_file($file_path)) return $file_path;
+        return null;
+    }
+
+    public static function getFilePathFromMovie(Movies $movie)
+    {
+        if($file = FileInfo::findFirstFile($movie->key)) return $file;
+        return null;
     }
 }

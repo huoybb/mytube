@@ -7,6 +7,12 @@ class AttachmentsController extends \core\myController
     {
         $this->view->page = $this->getPaginatorByQueryBuilder(Attachments::getLatestQuery(),10,$page);
     }
+    public function deleteAction(Attachments $attachment)
+    {
+        $this->eventsManager->trigger(new AttachmentDeleted($attachment));
+        $attachment->delete();
+        return $this->redirectBack();
+    }
 
 }
 

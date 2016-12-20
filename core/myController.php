@@ -14,6 +14,11 @@ use Phalcon\Paginator\Adapter\Model;
 use Phalcon\Paginator\Adapter\NativeArray;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
+/**
+ * Class myController
+ * @package core
+ * @property myEventsManager|\Phalcon\Events\ManagerInterface $eventsManager
+ */
 class myController extends Controller
 {
     protected function redirectBack()

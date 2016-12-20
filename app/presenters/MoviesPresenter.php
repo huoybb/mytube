@@ -137,4 +137,9 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     {
         return $this->url->get(['for'=>'movies.addAttachment','movie'=>$this->entity->id]);
     }
+    public function attachmentListUrl()
+    {
+        return $this->url->get(['for'=>'movies.attachments.index','movie'=>$this->entity->id]);
+    }
+
 }

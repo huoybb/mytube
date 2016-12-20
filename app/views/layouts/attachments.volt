@@ -1,6 +1,6 @@
 <hr>
 {% if attachmentsOwner.hasAttachments() %}
-    <h2><a href="#">Attachments</a></h2>
+    <h2><a href="{{ attachmentsOwner.present('attachmentListUrl') }}">Attachments</a></h2>
     <div id="attachments">
         {% for attachment in attachmentsOwner.attachments() %}
             <table width="100%" border="1" cellpadding="0" cellspacing="0">

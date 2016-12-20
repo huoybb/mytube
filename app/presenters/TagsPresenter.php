@@ -55,4 +55,8 @@ class TagsPresenter extends \core\myPresenter implements  myEntityInterface
     {
         return $this->url->get(['for'=>'tags.addAttachment','tag'=>$this->entity->id]);
     }
+    public function attachmentListUrl()
+    {
+        return $this->url->get(['for'=>'tags.attachments','tag'=>$this->entity->id]);
+    }
 }

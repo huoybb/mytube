@@ -10,9 +10,11 @@ class FileInfoEventsHandler
 {
     public function whenMovieDeleted(MovieDeleted $event)
     {
-        if($file = FileInfo::findFirstFile($event->movie->key)){
-            unlink($file->getRealPath());
-        }
+        if($file = FileInfo::getFilePathFromMovie($event->movie)) unlink($file);
+    }
+    public function whenAttachmentDeleted(AttachmentDeleted $event)
+    {
+        if($file = FileInfo::getFilePathFromAttachment($event->attachment)) unlink($file);
     }
 
 }

@@ -75,6 +75,12 @@ class MoviesController extends \core\myController
         }
     }
 
+    public function attachmentListAction(Movies $movie)
+    {
+        $this->view->movie = $movie;
+    }
+
+
 
 
 

@@ -29,6 +29,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/movies/{movie:[0-9]+}/editTag','movies::editTag','movies.editTag');
     $router->addx('/movies/{movie:[0-9]+}/deleteTag/{tag:[0-9]+}','movies::deleteTag','movies.deleteTag');
     $router->addx('/movies/{movie:[0-9]+}/addAttachment','movies::addAttachment','movies.addAttachment');
+    $router->addx('/movies/{movie:[0-9]+}/attachments','movies::attachmentList','movies.attachments.index');
 
     $router->addGet('/channels','channels::index','channels.index');
     $router->addGet('/channels/{channel:[0-9]+}','channels::show','channels.show');
@@ -57,6 +58,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addPost('/tags/{tag:[0-9]+}/addComment','tags::addComment')->setName('tags.addComment')->setMiddlewares([checkToken::class,isCommentValid::class]);
     $router->addx('/tags/{tag:[0-9]+}/edit','tags::edit')->setName('tags.edit')->setMiddlewares([checkToken::class,isTagValid::class]);
     $router->addx('/tags/{tag:[0-9]+}/addAttachment','tags::addAttachment','tags.addAttachment');
+    $router->addx('/tags/{tag:[0-9]+}/attachments','tags::attachments','tags.attachments');
 
     $router->addGet('/getYoutube/{key}','youtube::getMovie')->setName('youtube.getMovie');
     $router->addGet('/getYoutubeWithList/{movieKey}/{listKey}/{index}','youtube::getMovieWithList')->setName('youtube.getMovieWithList');
@@ -79,6 +81,7 @@ $router->group([isLogin::class],function() use($router){
 
     $router->addGet('/attachments','attachments::index')->setName('attachments.index');
     $router->addGet('/attachments/page/{page:[0-9]+}','attachments::index')->setName('attachments.index.page');
+    $router->addx('/attachments/{attachment:[0-9]+}/delete','attachments::delete')->setName('attachments.delete');
 });
 
 $router->addGet('/register','auth::register')->setName('register');

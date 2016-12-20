@@ -20,6 +20,23 @@ class AttachmentsPresenter extends \core\myPresenter
     {
         return basename($this->entity->url);
     }
+    public function operation()
+    {
+        $links = [
+            [
+                'url'=>"#",
+                'title'=>'编辑',
+                'class'=>'btn btn-warning btn-xs'
+            ],
+            [
+                'url'=>$this->url(['for'=>'attachments.delete','attachment'=>$this->entity->id]),
+                'title'=>'删除',
+                'class'=>'btn btn-danger btn-xs'
+            ],
+        ];
+        return $this->buildArrayOfLinkButtons($links);
+    }
+
 
 
 

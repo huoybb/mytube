@@ -31,5 +31,10 @@ class TagsController extends \core\myController
             $tag->uploadAndStoreAttachments($this->request);
         }
     }
+    public function attachmentsAction(Tags $tag)
+    {
+        $this->view->mytag = $tag;
+    }
+
 }
 
