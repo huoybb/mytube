@@ -51,9 +51,9 @@ $router->group([isLogin::class],function() use($router){
 
     $router->addx('/comments/{comment:[0-9]+}','comments::show')->setName('comments.show');
     $router->addx('/comments/{comment:[0-9]+}/delete','comments::delete')->setName('comments.delete')->setMiddlewares([hasAuthority::over('comment')]);
-    $router->addx('/comments/{comment:[0-9]+}/edit','comments::edit')->setName('comments.edit')->setMiddlewares([checkToken::class,hasAuthority::over('comment'),isCommentValid::class]);
+    $router->addx('/comments/{comment:[0-9]+}/edit','comments::edit','comments.edit')->setMiddlewares([checkToken::class,hasAuthority::over('comment'),isCommentValid::class]);
 
-    $router->addGet('/tags','tags::index')->setName('tags.index');
+    $router->addGet('/tags','tags::index','tags.index');
     $router->addGet('/tags/{tag:[0-9]+}','tags::show')->setName('tags.show');
     $router->addPost('/tags/{tag:[0-9]+}/addComment','tags::addComment')->setName('tags.addComment')->setMiddlewares([checkToken::class,isCommentValid::class]);
     $router->addx('/tags/{tag:[0-9]+}/edit','tags::edit')->setName('tags.edit')->setMiddlewares([checkToken::class,isTagValid::class]);

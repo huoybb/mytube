@@ -109,7 +109,11 @@ class Movies extends \core\myModel
 
     public static function getLatest()
     {
-        return modelsManager()->createBuilder()->from(static::class)->orderBy('id DESC');
+        return modelsManager()->createBuilder()
+            ->addFrom(static::class,'m')
+            ->leftJoin(Comments::class,'comment.commentable_id = m.id AND comment.commentable_type="Movies"','comment')
+            ->groupBy('m.id')
+            ->orderBy('m.id DESC');
     }
 
     public static function search($keywords)
