@@ -9,6 +9,6 @@
     </ol>
     <h1>视频<span class="badge">{{ page.total_items }}</span> <a href="{{ url(['for':'movies.index.withVideos']) }}">含视频</a></h1>
     {% include "layouts/nav" with ['next':url(['for':'home.page','page':page.next]),'previous':url(['for':'home.page','page':page.before])] %}
-    {% include "index/partials/movielist" with ['movies':page.items] %}
+    {% include "index/partials/movielistWithComments" with ['movies':page.items] %}
 {% endblock %}
 

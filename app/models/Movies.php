@@ -11,6 +11,7 @@ class Movies extends \core\myModel
     use taggableTrait;
     use WatchlistableTrait;
     use AttachmentableTrait;
+    use videoTagsTrait;
 
     /**
      *
@@ -111,11 +112,14 @@ class Movies extends \core\myModel
     {
         return modelsManager()->createBuilder()
             ->addFrom(static::class,'m')
-            ->leftJoin(Comments::class,'comment.commentable_id = m.id AND comment.commentable_type="Movies"','comment')
-            ->groupBy('m.id')
             ->orderBy('m.id DESC');
     }
-
+    public static function getLatestWithComments(){
+        return static::getLatest()
+            ->leftJoin(Comments::class,'c.commentable_id = m.id AND c.commentable_type="Movies"','c')
+            ->columns(['m.id','m.title','m.channel_id','m.channel_title','m.created_at','COUNT(c.id) AS commentCounts'])
+            ->groupBy('m.id');
+    }
     public static function search($keywords)
     {
         $query = static::query();
@@ -228,39 +232,7 @@ class Movies extends \core\myModel
         ];
     }
 
-    public function getVideoFile()
-    {
-        return $this->make('videoFile',function(){
-            if($this->hasVideoFile) {
-                $file = FileInfo::findFirstFile($this->key);
-            }else{
-                $file = FileInfo::findFirstFile($this->title);
-                if(!$file) $file = FileInfo::findFirstFile($this->key);
-            }
-            if(!$file) return null;
-            return str_replace('H:\\YouTubes\\','http://movies.mytube.zhaobing/',$file->getRealPath());
-        });
-    }
-    public function setVideoFile()
-    {
-        //将视频文件放在指定目录下后，能够根据文件名识别出来的请款
-        if($file = FileInfo::findFirstFile($this->title)){
-            $old_name = $file->getBasename();
-            $new_name = $this->key.'.mp4';
-            $new_realPath = str_replace($old_name,$new_name,$file->getRealPath());
 
-            rename($file->getRealPath(),$new_realPath);
-
-            $this->save(['hasVideoFile'=>true]);
-            return true;
-        }
-        //当已经手动将文件名按照key修改后的请款
-        if($file = FileInfo::findFirstFile($this->key)){
-            $this->save(['hasVideoFile'=>true]);
-            return true;
-        }
-        return false;
-    }
     public function channel()
     {
         return $this->make('channel',function(){
@@ -278,24 +250,4 @@ class Movies extends \core\myModel
         $this->getEventsManager()->trigger(new MovieDeleted($this));
         return parent::delete();
     }
-
-    public function addMovieTag($data)
-    {
-        $data['user_id'] = auth()->user()->id;
-        $data['movie_id'] = $this->id;
-        Videotags::saveNew($data);
-        return $this;
-    }
-    public function getVideoTags()
-    {
-        return $this->make('videoTags',function(){
-            return Videotags::findByMovie($this);
-        });
-    }
-    public function hasVideoTags()
-    {
-        return count($this->getVideoTags());
-    }
-
-
 }
