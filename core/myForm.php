@@ -18,14 +18,17 @@ class myForm extends Form
 {
     protected $exludedFields = [];
     protected $only = [];
+    public $rules;
 
     /**
      * @param null $model
      */
-    public function __construct(myModel $model)
+    public function __construct(myModel $model=null)
     {
-        parent::__construct($model);
-        $this->initialize($model);
+        if($model){
+            parent::__construct($model);
+            $this->initialize($model);
+        }
     }
 
     protected function initialize(myModel $model)

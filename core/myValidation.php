@@ -17,7 +17,7 @@ use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\StringLength;
 
-abstract  class myValidation extends myMiddleware
+class myValidation extends myMiddleware
 {
 
     protected $rules = [];
@@ -29,8 +29,14 @@ abstract  class myValidation extends myMiddleware
         'length'=>StringLength::class,
         'between'=>Between::class,
     ];
+    public function setRules(array $rules)
+    {
+        $this->rules = $rules;
+        return $this;
+    }
 
-    public function isValid($object): bool
+
+    public function isValid($object=null): bool
     {
         if ($this->request->isPost()) {
             $data = $this->request->getPost();

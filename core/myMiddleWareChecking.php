@@ -50,6 +50,11 @@ class myMiddleWareChecking extends myDIAwareClass
         }
         /** @var myMiddleware $validator */
         $validator = $this->getDI()->get($validator);
+
+        if(is_a($validator,myForm::class)){//如果中间件是form的话，则通过下面进行转换
+            $validator = $this->getDI()->get(myValidation::class)->setRules($validator->rules);
+        }
+
         return [$data,$validator];
     }
 }
