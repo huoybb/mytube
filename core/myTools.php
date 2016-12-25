@@ -96,5 +96,15 @@ class myTools
 
         return $bytes;
     }
+    public function transformTo($className,$dataObject)
+    {
+        $object = new $className;
+        foreach($dataObject as $key=>$value){
+                $object->{$key} = $value;
+        }
+        $object->afterFetch();
+        return $object;
+    }
+
 
 }

@@ -133,5 +133,10 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     {
         return $this->url->get(['for'=>'movies.attachments.index','movie'=>$this->entity->id]);
     }
+    public function created_at()
+    {
+        return $this->entity->created_at->diffForHumans();
+    }
+
 
 }
