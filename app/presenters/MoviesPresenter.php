@@ -137,6 +137,12 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     {
         return $this->entity->created_at->diffForHumans();
     }
+    public function commentCounts()
+    {
+        if($this->entity->commentCounts) return $this->entity->commentCounts;
+        return null;
+    }
+
 
 
 }

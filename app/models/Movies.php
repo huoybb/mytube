@@ -117,7 +117,17 @@ class Movies extends \core\myModel
     public static function getLatestWithComments(){
         return static::getLatest()
             ->leftJoin(Comments::class,'c.commentable_id = m.id AND c.commentable_type="Movies"','c')
-            ->columns(['m.id','m.title','m.channel_id','m.channel_title','m.created_at','COUNT(c.id) AS commentCounts'])
+            ->columns([
+                'm.id',
+                'm.title',
+                'm.channel_id',
+                'm.channel_title',
+                'm.hasVideoFile',
+                'm.duration',
+                'm.playtime',
+                'm.created_at',
+                'COUNT(c.id) AS commentCounts'
+            ])
             ->groupBy('m.id');
     }
     public static function search($keywords)
