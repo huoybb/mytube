@@ -23,12 +23,6 @@ try {
      */
     $application = new \Phalcon\Mvc\Application($di);
 
-    /**
-     * add phalcon-debugbar
-     */
-//    $di['app'] = $application; //  Important
-//    (new Snowair\Debugbar\ServiceProvider(APP_PATH."/app/config/debugbar.php"))->start();
-
     echo $application->handle()->getContent();
 
 } catch (\Exception $e) {
