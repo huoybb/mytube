@@ -7,22 +7,7 @@ class MoviesController extends \core\myController
     {
         $this->view->movie = $movie;
     }
-    public function addCommentAction(Movies $movie)
-    {
-        $movie->addComment($this->request->getPost());
-        return $this->redirect(['for'=>'movies.show','movie'=>$movie->id]);
-    }
 
-    public function addTagAction(Movies $movie)
-    {
-        $movie->addTag($this->request->getPost('name'));
-        return $this->redirect(['for'=>'movies.show','movie'=>$movie->id]);
-    }
-    public function updatePlayTimeAction(Movies $movie)
-    {
-        $movie->save($this->request->getPost());
-        return false;
-    }
 
     public function editAction(Movies $movie)
     {
@@ -37,6 +22,35 @@ class MoviesController extends \core\myController
         $movie->delete();
         return $this->redirect(['for'=>'home']);
     }
+
+
+    public function addCommentAction(Movies $movie)
+    {
+        $movie->addComment($this->request->getPost());
+        return $this->redirect(['for'=>'movies.show','movie'=>$movie->id]);
+    }
+
+    public function tagsAction(Movies $movie)
+    {
+        $this->view->movie = $movie;
+    }
+    public function addTagAction(Movies $movie)
+    {
+        $movie->addTag($this->request->getPost('name'));
+        return $this->redirect(['for'=>'movies.show','movie'=>$movie->id]);
+    }
+    public function deleteTagAction(Movies $movie, Tags $tag)
+    {
+        $movie->deleteTag($tag);
+        return $this->redirectBack();
+    }
+
+
+    public function updatePlayTimeAction(Movies $movie)
+    {
+        $movie->save($this->request->getPost());
+        return false;
+    }
     public function setFileAction(Movies $movie)
     {
         if(!$movie->setVideoFile()){
@@ -44,6 +58,7 @@ class MoviesController extends \core\myController
         }
         return $this->redirectBack();
     }
+
     public function addVideoTagAction(Movies $movie)
     {
         $movie->addMovieTag($this->request->getPost());
@@ -54,19 +69,13 @@ class MoviesController extends \core\myController
         $this->view->movie = $movie;
     }
 
+
     public function withVideosAction($page = 1)
     {
         $this->view->page = $this->getPaginatorByQueryBuilder(Movies::getlatestWithVideos(),50,$page);
     }
-    public function editTagAction(Movies $movie)
-    {
-        $this->view->movie = $movie;
-    }
-    public function deleteTagAction(Movies $movie, Tags $tag)
-    {
-        $movie->deleteTag($tag);
-        return $this->redirectBack();
-    }
+
+
 
     public function addAttachmentAction(Movies $movie)
     {
