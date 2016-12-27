@@ -11,11 +11,7 @@ namespace serviceProviders;
 
 use core\myDI;
 use core\myDispatcherEventsHandler;
-use core\myExceptionHandler;
-use core\myMiddleWareChecking;
-use core\myModelBinding;
 use core\myProvider;
-use Phalcon\Events\Event;
 use Phalcon\Mvc\Dispatcher;
 
 class dispatcherProvider extends myProvider

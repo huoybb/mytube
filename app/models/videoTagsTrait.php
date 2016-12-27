@@ -41,7 +41,7 @@ trait videoTagsTrait
     }
     public function setVideoFile()
     {
-        //将视频文件放在指定目录下后，能够根据文件名识别出来的请款
+        //将视频文件放在指定目录下后，能够根据文件名识别出来的情况
         if($file = FileInfo::findFirstFile($this->title)){
             $old_name = $file->getBasename();
             $new_name = $this->key.'.mp4';
@@ -52,7 +52,7 @@ trait videoTagsTrait
             $this->save(['hasVideoFile'=>true]);
             return true;
         }
-        //当已经手动将文件名按照key修改后的请款
+        //当已经手动将文件名按照key修改后的情况
         if($file = FileInfo::findFirstFile($this->key)){
             $this->save(['hasVideoFile'=>true]);
             return true;

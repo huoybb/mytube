@@ -15,6 +15,7 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     public $entity;
     public function description()
     {
+        if(!$this->entity->description) return null;
         return "<pre>{$this->entity->description}</pre>";
     }
     public function channel()

@@ -39,6 +39,7 @@ class TagsPresenter extends \core\myPresenter implements  myEntityInterface
     }
     public function description()
     {
+        if(! $this->entity->description) return null;
         return "<pre>{$this->entity->description}</pre>";
     }
 

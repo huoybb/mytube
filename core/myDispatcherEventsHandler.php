@@ -44,7 +44,7 @@ class myDispatcherEventsHandler extends Plugin
             'action' => 'resourceNotFound',
         ]);
         $dispatcher->setParam('message', $exception->getMessage());
-        $dispatcher->dispatch();
+        $dispatcher->dispatch();//由于异常处理时中断了正常的引导过程，需要单独来重新dispatch
     }
 
 
