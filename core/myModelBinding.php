@@ -9,6 +9,7 @@
 namespace core;
 
 
+use core\Exceptions\ModelBindingNotFoundException;
 use Phalcon\Di\InjectionAwareInterface;
 use Phalcon\Mvc\Dispatcher;
 use ReflectionMethod;
@@ -57,7 +58,7 @@ class myModelBinding extends myDIAwareClass
         if(is_subclass_of($className,\Phalcon\Mvc\Model::class)) {
             $instance =  $className::findFirst($objectId);
             if($instance) return $instance;
-            throw new \Exception("你查找的资源{$className}::{$objectId}，不存在");
+            throw new ModelBindingNotFoundException("{$className}::{$objectId}");
         }
         return  new $className($objectId);
     }

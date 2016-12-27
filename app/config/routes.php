@@ -9,7 +9,7 @@ use core\myRouter;
 
 $router = new myRouter();
 $router->removeExtraSlashes(true);
-$router->notFound('index::notFound');
+$router->notFound('error::notFound');
 $router->group([isLogin::class],function() use($router){
     $router->addGet('/','index::index','home');
     $router->addGet('/page/{page:[0-9]+}','index::index','home.page');

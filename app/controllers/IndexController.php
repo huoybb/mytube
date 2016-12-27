@@ -7,10 +7,6 @@ class IndexController extends \core\myController
     {
         $this->view->page = $this->getPaginatorByQueryBuilder(Movies::getLatestWithComments(),50,$page);
     }
-    public function notFoundAction()
-    {
-        dd('"'.$this->router->getRewriteUri().'"不是有效的路由，请检查routes.php文件，确认设置正确');
-    }
 
     public function searchAction($search)
     {

@@ -10,6 +10,7 @@ namespace serviceProviders;
 
 
 use core\myDI;
+use core\myException;
 use core\myMiddleWareChecking;
 use core\myModelBinding;
 use core\myProvider;
@@ -35,6 +36,8 @@ class dispatcherProvider extends myProvider
                 /** @var myDI $this */
                 return $this->get(myMiddleWareChecking::class)->handle();
             });
+
+            $eventsManager->attach('dispatch:beforeException',new myException());
 
             $dispatcher->setEventsManager($eventsManager);
             return $dispatcher;
