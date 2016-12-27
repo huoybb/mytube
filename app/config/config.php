@@ -26,5 +26,6 @@ return new \Phalcon\Config([
         'eventPrefix'    => 'my',
         'events'         => APP_PATH . '/app/events/',
         'eventsHandlers' => APP_PATH . '/app/eventsHandlers/',
+        'voltCompileAlways'=> true,
     ]
 ]);

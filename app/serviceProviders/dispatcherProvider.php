@@ -10,7 +10,8 @@ namespace serviceProviders;
 
 
 use core\myDI;
-use core\myException;
+use core\myDispatcherEventsHandler;
+use core\myExceptionHandler;
 use core\myMiddleWareChecking;
 use core\myModelBinding;
 use core\myProvider;
@@ -23,22 +24,9 @@ class dispatcherProvider extends myProvider
     {
         return function(){
             $dispatcher = new Dispatcher();
-
             /** @var myDI $this */
             $eventsManager = $this->get('eventsManager');
-
-            $eventsManager->attach("dispatch:beforeDispatchLoop", function(Event $event, Dispatcher $dispatcher){
-                /** @var myDI $this */
-                return $this->get(myModelBinding::class)->handle();
-            });
-
-            $eventsManager->attach('dispatch:beforeExecuteRoute',function(Event $event,Dispatcher $dispatcher){
-                /** @var myDI $this */
-                return $this->get(myMiddleWareChecking::class)->handle();
-            });
-
-            $eventsManager->attach('dispatch:beforeException',new myException());
-
+            $eventsManager->attach('dispatch',$this->get(myDispatcherEventsHandler::class));
             $dispatcher->setEventsManager($eventsManager);
             return $dispatcher;
         };

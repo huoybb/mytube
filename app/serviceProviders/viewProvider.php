@@ -52,7 +52,7 @@ class viewProvider extends myProvider
         $volt->setOptions([
             'compiledPath' => $config->application->cacheDir,
             'compiledSeparator' => '_',
-            'compileAlways'=> true,//修改view的时候用这个
+            'compileAlways'=> $config->application->voltCompileAlways,//修改view的时候用这个
         ]);
         $compiler = $volt->getCompiler();
         $compiler->addFunction('get_class','get_class');
