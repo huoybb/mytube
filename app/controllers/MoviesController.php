@@ -5,6 +5,9 @@ class MoviesController extends \core\myController
 
     public function showAction(Movies $movie)
     {
+        $this->view->cache([
+            'key'=>$movie->getCacheKey(),
+        ]);
         $this->view->movie = $movie;
     }
 
@@ -27,6 +30,7 @@ class MoviesController extends \core\myController
     public function addCommentAction(Movies $movie)
     {
         $movie->addComment($this->request->getPost());
+        $this->view->getCache()->delete($movie->getCacheKey());
         return $this->redirect(['for'=>'movies.show','movie'=>$movie->id]);
     }
 

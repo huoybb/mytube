@@ -21,7 +21,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/movies/{movie:[0-9]+}/edit','movies::edit','movies.edit')->setMiddlewares([checkToken::class,hasAuthority::over('movie'),MoviesForm::class]);
     $router->addx('/movies/{movie:[0-9]+}/delete','movies::delete','movies.delete')->setMiddlewares([hasAuthority::over('movie')]);
 
-    $router->addPost('/movies/{movie:[0-9]+}/addComment','movies::addComment','movies.addComment')->setMiddlewares([checkToken::class,CommentsForm::class]);
+    $router->addPost('/movies/{movie:[0-9]+}/addComment','movies::addComment','movies.addComment')->setMiddlewares([deleteMovieCache::over('movie'),CommentsForm::class]);
 
     $router->addx('/movies/{movie:[0-9]+}/setFile','movies::setFile','movies.setFile')->setMiddlewares([hasAuthority::over('movie')]);
     $router->addx('/movies/{movie:[0-9]+}/updatePlayTime','movies::updatePlayTime','movies.updatePlayTime');
@@ -29,7 +29,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/movies/{movie:[0-9]+}/editMovietags','movies::editMovietags','movies.editMovietags');
 
     $router->addx('/movies/{movie:[0-9]+}/tags','movies::tags','movies.tags');
-    $router->addPost('/movies/{movie:[0-9]+}/tags/add','movies::addTag','movies.addTag')->setMiddlewares([checkToken::class,TagsForm::class]);
+    $router->addPost('/movies/{movie:[0-9]+}/tags/add','movies::addTag','movies.addTag')->setMiddlewares([TagsForm::class]);
     $router->addx('/movies/{movie:[0-9]+}/tags/{tag:[0-9]+}/delete','movies::deleteTag','movies.tags.delete');
 
     $router->addx('/movies/{movie:[0-9]+}/addAttachment','movies::addAttachment','movies.addAttachment');

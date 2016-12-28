@@ -260,4 +260,5 @@ class Movies extends \core\myModel
         $this->getEventsManager()->trigger(new MovieDeleted($this));
         return parent::delete();
     }
+
 }

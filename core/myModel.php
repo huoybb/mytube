@@ -68,6 +68,12 @@ abstract class myModel extends Model{
         if (!$this->_form) $this->_form = new $formClass($this);
         return $this->_form;
     }
+
+    public function getCacheKey()
+    {
+        return ':'.get_class($this) . ':show:' . $this->id;
+    }
+
     /**
      * Returns the custom events manager
      *

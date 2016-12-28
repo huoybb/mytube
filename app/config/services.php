@@ -13,6 +13,7 @@ $providers = [
     'router'            =>\serviceProviders\routerProvider::class,
     'dispatcher'        =>\serviceProviders\dispatcherProvider::class,
     'view'              =>\serviceProviders\viewProvider::class,
+    'viewCache'         =>\serviceProviders\viewCacheProvider::class,
     'db'                =>\serviceProviders\dbProvider::class,
     'modelsMetadata'    =>\serviceProviders\modelsMetadataProvider::class,
     'flash'             =>\serviceProviders\flashProvider::class,

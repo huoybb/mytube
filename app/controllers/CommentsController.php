@@ -18,8 +18,20 @@ class CommentsController extends \core\myController
     }
     public function deleteAction(Comments $comment)
     {
+        $this->handleCommentableCache($comment);
         $comment->delete();
         return $this->redirectBack();
+    }
+
+    /**
+     * @param Comments $comment
+     */
+    protected function handleCommentableCache(Comments $comment)
+    {
+        $commentable = $comment->commentable();
+        if ($this->view->getCache()->exists($commentable->getCacheKey())) {
+            $this->view->getCache()->delete($commentable->getCacheKey());
+        }
     }
 
 

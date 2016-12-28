@@ -19,11 +19,19 @@ class myDispatcherEventsHandler extends Plugin
 {
     public function beforeDispatchLoop(Event $event, Dispatcher $dispatcher)
     {
-        return $this->getDI()->get(myModelBinding::class)->handle();
+//        dd($this->router->getRewriteUri());
+        return true;
+    }
+
+    public function beforeDispatch(Event $event, Dispatcher $dispatcher)
+    {
+        $this->getDI()->get(myModelBinding::class)->handle();
+        return true;
     }
     public function beforeExecuteRoute(Event $event,Dispatcher $dispatcher)
     {
-        return $this->getDI()->get(myMiddleWareChecking::class)->handle();
+        if(!$this->getDI()->get(myMiddleWareChecking::class)->handle()) return false;
+        return true;
     }
     public function beforeException(Event $event, Dispatcher $dispatcher, Exception $exception)
     {
