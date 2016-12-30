@@ -21,6 +21,7 @@ $router->group([isLogin::class],function() use($router){
     $router->addx('/movies/{movie:[0-9]+}/edit','movies::edit','movies.edit')->setMiddlewares([checkToken::class,hasAuthority::over('movie'),MoviesForm::class]);
     $router->addx('/movies/{movie:[0-9]+}/delete','movies::delete','movies.delete')->setMiddlewares([hasAuthority::over('movie')]);
 
+    $router->addGet('/movies/{movie:[0-9]+}/refreshCache','movies::refreshCache','movies.refreshCache');
     $router->addPost('/movies/{movie:[0-9]+}/addComment','movies::addComment','movies.addComment')->setMiddlewares([deleteMovieCache::over('movie'),CommentsForm::class]);
 
     $router->addx('/movies/{movie:[0-9]+}/setFile','movies::setFile','movies.setFile')->setMiddlewares([hasAuthority::over('movie')]);

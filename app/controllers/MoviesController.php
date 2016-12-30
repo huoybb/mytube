@@ -26,6 +26,13 @@ class MoviesController extends \core\myController
         return $this->redirect(['for'=>'home']);
     }
 
+    public function refreshCacheAction(Movies $movie)
+    {
+        $this->eventsManager->trigger(new MoviesChanged($movie));
+        return $this->redirectBack();
+    }
+
+
 
     public function addCommentAction(Movies $movie)
     {

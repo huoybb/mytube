@@ -78,6 +78,7 @@ class MoviesPresenter extends \core\myPresenter implements myEntityInterface
     public function operation()
     {
         $movieButtons = [
+            ['url'=>$this->url(['for'=>'movies.refreshCache','movie'=>$this->entity->id]),'title'=>'更新缓存','class'=>"btn btn-info btn-xs"],
             ['url'=>$this->url(['for'=>'movies.edit','movie'=>$this->entity->id]),'title'=>'编辑','class'=>"btn btn-warning btn-xs"],
             ['url'=>$this->url(['for'=>'movies.delete','movie'=>$this->entity->id]),'title'=>'删除','class'=>"btn btn-danger btn-xs"],
         ];

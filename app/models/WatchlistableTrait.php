@@ -13,6 +13,8 @@ trait WatchlistableTrait
     {
         $watch = $this->getLastWatch();
         if($watch && $watch->status == 'want') return $watch;
+        /** @var Movies $this */
+        $this->getEventsManager()->trigger(new MoviesChanged($this));
         return Watchlists::addToWantList($this);
     }
 
@@ -21,6 +23,8 @@ trait WatchlistableTrait
         $watch = $this->getLastWatch();
         if(!$watch) $watch = Watchlists::addToDoingList($this);
         $watch->save(['status'=>'doing']);
+        /** @var Movies $this */
+        $this->getEventsManager()->trigger(new MoviesChanged($this));
         return $watch;
     }
 
@@ -34,6 +38,8 @@ trait WatchlistableTrait
         $watch = $this->getLastWatch();
         if(!$watch) $watch = Watchlists::addToDoneList($this);
         $watch->save(['status'=>'done']);
+        /** @var Movies $this */
+        $this->getEventsManager()->trigger(new MoviesChanged($this));
         return $watch;
     }
 }
