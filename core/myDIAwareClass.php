@@ -15,7 +15,7 @@ use Phalcon\Di\InjectionAwareInterface;
  * Class myDiAwareClass
  * @package core
  *
- * @property \Phalcon\Mvc\Router|\Phalcon\Mvc\RouterInterface $router
+ * @property myRouter | \Phalcon\Mvc\Router|\Phalcon\Mvc\RouterInterface $router
  * @property \Phalcon\Mvc\Url|\Phalcon\Mvc\UrlInterface $url
  * @property \Phalcon\Http\Request|\Phalcon\Http\RequestInterface $request
  * @property \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface $response
@@ -23,6 +23,7 @@ use Phalcon\Di\InjectionAwareInterface;
  * @property \Phalcon\Security $security
  * @property \Phalcon\Flash\Session $flash
  * @property \Phalcon\Session\Adapter\Files|\Phalcon\Session\Adapter|\Phalcon\Session\AdapterInterface $session
+ * @property \Phalcon\Cache\BackendInterface $viewCache
  * @property myAuth auth
  */
 abstract class myDIAwareClass implements InjectionAwareInterface

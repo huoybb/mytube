@@ -14,6 +14,7 @@ trait videoTagsTrait
         $data['user_id'] = auth()->user()->id;
         $data['movie_id'] = $this->id;
         Videotags::saveNew($data);
+        if($this instanceof Movies) $this->getEventsManager()->trigger(new MoviesVideotagAdded($this));
         return $this;
     }
     public function getVideoTags()

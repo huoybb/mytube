@@ -16,7 +16,6 @@ use Phalcon\Mvc\Dispatcher;
  * Class myMiddleWareChecking
  * @package core
  *
- * @property myRouter $router
  */
 
 class myMiddleWareChecking extends myDIAwareClass

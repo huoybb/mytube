@@ -43,6 +43,8 @@ trait taggableTrait
         if(! is_a($tag,Tags::class)) throw new Exception('taggableTrait::addTag有问题，应该传入Tags对象类型参数');
         /** @var myModel $this*/
         Taggables::findOrCreateByObjects($tag,$this);
+
+        if($this instanceof Movies) $this->getEventsManager()->trigger(new MoviesTagAdded($this));
         return $this;
     }
     public function addMultTags(string $tagsString)
@@ -62,6 +64,7 @@ trait taggableTrait
 
     public function deleteTag(Tags $tag)
     {
+        if($this instanceof Movies) $this->getEventsManager()->trigger(new MoviesTagAdded($this));
         $taggables = Taggables::findByTagAndObject($tag,$this);
         return $taggables->delete();
     }

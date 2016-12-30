@@ -11,5 +11,6 @@ $eventsManager->register($eventsManager->getEventPrefix(),[
     TaggablesEventsHandler::class,
     PlaylistablesEventsHandler::class,
     FileInfoEventsHandler::class,
+    RedisCacheEventsHandler::class,
 ]);
 return $eventsManager;

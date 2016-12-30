@@ -71,7 +71,7 @@ abstract class myModel extends Model{
 
     public function getCacheKey()
     {
-        return ':'.get_class($this) . ':show:' . $this->id;
+        return ':mytube:'.get_class($this) . ':show:' . $this->id;
     }
 
     /**
@@ -79,7 +79,7 @@ abstract class myModel extends Model{
      *
      * @return myEventsManager
      */
-    protected function getEventsManager() {
+    public function getEventsManager() {
         return myDI::getDefault()->get('eventsManager');
     }
 

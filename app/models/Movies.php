@@ -261,4 +261,17 @@ class Movies extends \core\myModel
         return parent::delete();
     }
 
+    /**
+     * @param array | null $data
+     * @param array | null $whiteList
+     */
+    public function save($data = null, $whiteList = null )
+    {
+        if(!parent::save($data,$whiteList)){
+            return false;
+        }
+        $this->getEventsManager()->trigger(new MoviesChanged($this));
+        return true;
+    }
+
 }

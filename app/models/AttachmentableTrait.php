@@ -10,6 +10,8 @@ trait AttachmentableTrait
 {
     public function uploadAndStoreAttachments(\Phalcon\Http\Request $request)
     {
+        /** @var Movies $this */
+        $this->getEventsManager()->trigger(new MoviesAttachmentAdded($this));
         /** @var \core\myTools $myTools */
         $myTools = \core\myDI::make('myTools');
         $files = [];

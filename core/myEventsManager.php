@@ -33,7 +33,7 @@ class myEventsManager extends \Phalcon\Events\Manager
 //                $this->attach($eventDomain,new $handler);
             $this->attach($eventDomain,function($e,$eventObject)use($handler){
                 $actionName = 'when'.get_class($eventObject);
-                $handler = new $handler();
+                $handler = myDI::getDefault()->get($handler);
                 if(method_exists($handler,$actionName)){
                     $handler->$actionName($eventObject);
                 }

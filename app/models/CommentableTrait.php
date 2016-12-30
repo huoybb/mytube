@@ -32,6 +32,7 @@ trait CommentableTrait
             'commentable_id'=>$this->id,
         ]);
         Comments::saveNew($data);
+        if($this instanceof Movies) $this->getEventsManager()->trigger(new MoviesCommentAdded($this));
         return $this;
     }
     public function getCommentForm()
