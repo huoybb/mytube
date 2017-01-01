@@ -14,9 +14,11 @@ video.ready ->
 #    enableModifiersForNumbers: false,
 #    alwaysCaptureHotkeys: true
 #  })
-  this.currentTime(movie.playtime)
-  this.setInterval =>
-    url = location.href + '/updatePlayTime'
-    data = {'playtime':this.currentTime(),'duration':this.duration()}
-    $.post url,data if this.status is 'play'
-  , 5000
+  url = location.href + '/getPlaytime'
+  $.getJSON url,(playtime)=>
+    this.currentTime(playtime)
+    this.setInterval =>
+      url = location.href + '/updatePlayTime'
+      data = {'playtime':this.currentTime(),'duration':this.duration()}
+      $.post url,data if this.status is 'play'
+    , 5000

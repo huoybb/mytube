@@ -30,7 +30,7 @@ trait WatchlistableTrait
 
     public function getLastWatch()
     {
-        return Watchlists::findLastWatchByMovie($this);
+        return Watchlists::findOrCreateLastWatchByMovie($this);
     }
 
     public function addToDoneList()

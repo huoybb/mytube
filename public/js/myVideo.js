@@ -15,20 +15,24 @@
   });
 
   video.ready(function() {
-    this.currentTime(movie.playtime);
-    return this.setInterval((function(_this) {
-      return function() {
-        var data, url;
-        url = location.href + '/updatePlayTime';
-        data = {
-          'playtime': _this.currentTime(),
-          'duration': _this.duration()
-        };
-        if (_this.status === 'play') {
-          return $.post(url, data);
-        }
+    var url;
+    url = location.href + '/getPlaytime';
+    return $.getJSON(url, (function(_this) {
+      return function(playtime) {
+        _this.currentTime(playtime);
+        return _this.setInterval(function() {
+          var data;
+          url = location.href + '/updatePlayTime';
+          data = {
+            'playtime': _this.currentTime(),
+            'duration': _this.duration()
+          };
+          if (_this.status === 'play') {
+            return $.post(url, data);
+          }
+        }, 5000);
       };
-    })(this), 5000);
+    })(this));
   });
 
 }).call(this);

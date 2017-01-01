@@ -54,13 +54,22 @@ class Watchlists extends \core\myModel
      */
     public $updated_at;
 
-    public static function findLastWatchByMovie(Movies $movie)
+    /**
+     * @param Movies $movie
+     * @return \Phalcon\Mvc\ModelInterface | Watchlists
+     */
+    public static function findOrCreateLastWatchByMovie(Movies $movie)
     {
-        return static :: query()
+        $instance =  static :: query()
             ->where('movie_id = :movie:',['movie'=>$movie->id])
             ->andWhere('user_id = :user:',['user'=>auth()->user()->id])
             ->orderBy('created_at DESC')
             ->execute()->getFirst();
+        if(!$instance) $instance = static :: saveNew([
+            'movie_id'=>$movie->id,
+            'user_id'=>auth()->user()->id,
+        ]);
+        return $instance;
     }
 
     /**
@@ -120,6 +129,18 @@ class Watchlists extends \core\myModel
     public static function getDoneListByUser($user)
     {
         return self::getListByUserAndStatus($user,'done');
+    }
+
+    public static function updatePlaytimeFor($movie,$playtime)
+    {
+        $watchlist = static::findOrCreateLastWatchByMovie($movie);
+        $watchlist->save(['playtime'=>$playtime]);
+    }
+
+    public static function getPlaytimeFor(Movies $movie)
+    {
+        $instance  = static :: findOrCreateLastWatchByMovie($movie);
+        return $instance->playtime;
     }
 
 

@@ -86,7 +86,7 @@ class Movies extends \core\myModel
      *
      * @var string
      */
-    public $playtime;
+    public $duration;
 
     public static function findOrDownloadByKey($key)
     {
@@ -273,5 +273,4 @@ class Movies extends \core\myModel
         $this->getEventsManager()->trigger(new MoviesChanged($this));
         return true;
     }
-
 }

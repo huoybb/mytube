@@ -60,4 +60,9 @@ trait videoTagsTrait
         }
         return false;
     }
+    // 更新视频文件的时间
+    public function updateDuration($duration)
+    {
+        return $this->save(['duration'=>$duration]);
+    }
 }

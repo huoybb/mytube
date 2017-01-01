@@ -58,9 +58,16 @@ class MoviesController extends \core\myController
 
     public function updatePlayTimeAction(Movies $movie)
     {
-        $movie->save($this->request->getPost());
+        Watchlists::updatePlaytimeFor($movie,$this->request->get('playtime'));
+        if(! $movie->duration) $movie->updateDuration($this->request->get('duration'));
         return false;
     }
+    public function getPlayTimeAction(Movies $movie)
+    {
+        $playtime = Watchlists::getPlaytimeFor($movie);
+        return json_encode(compact($playtime));
+    }
+
     public function setFileAction(Movies $movie)
     {
         if(!$movie->setVideoFile()){

@@ -26,6 +26,7 @@ $router->group([isLogin::class],function() use($router){
 
     $router->addx('/movies/{movie:[0-9]+}/setFile','movies::setFile','movies.setFile')->setMiddlewares([hasAuthority::over('movie')]);
     $router->addx('/movies/{movie:[0-9]+}/updatePlayTime','movies::updatePlayTime','movies.updatePlayTime');
+    $router->addx('/movies/{movie:[0-9]+}/getPlayTime','movies::getPlayTime','movies.getPlayTime');
     $router->addPost('/movies/{movie:[0-9]+}/addVideoTag','movies::addVideoTag','movies.addVideoTag');
     $router->addx('/movies/{movie:[0-9]+}/editMovietags','movies::editMovietags','movies.editMovietags');
 
